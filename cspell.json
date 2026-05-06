@@ -1,0 +1,46 @@
+{
+  "version": "0.2",
+  "language": "es,en",
+  "dictionaries": ["es_ES", "en_US"],
+  "ignorePaths": [
+    "*.png",
+    "*.jpg",
+    "*.mp4",
+    "*.docx",
+    "*.pdf",
+    "*.zip",
+    "_storyboard_b64.txt"
+  ],
+  "words": [
+    "InnovaSalud",
+    "ThyroSense",
+    "LiminaSense",
+    "LIMINASENSE",
+    "Animatic",
+    "topbar",
+    "Juanma",
+    "Bauty",
+    "Bautista",
+    "NICU",
+    "SCIG",
+    "IPOPI",
+    "LASID",
+    "Takeda",
+    "Merck",
+    "AbbVie",
+    "Bezrodnik",
+    "CGRP",
+    "gepant",
+    "Kirkpatrick"
+  ],
+  "languageSettings": [
+    {
+      "languageId": "html",
+      "locale": "es,en"
+    },
+    {
+      "languageId": "markdown",
+      "locale": "es,en"
+    }
+  ]
+}

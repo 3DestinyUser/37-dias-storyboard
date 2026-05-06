@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "name": "historias-que-se-sienten",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "s-maxage=3600, stale-while-revalidate" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/thyrosense",              "destination": "/thyrosense/index.html" },
+    { "source": "/37dias",                  "destination": "/37dias/index.html" },
+    { "source": "/liminasense",             "destination": "/liminasense/index.html" },
+    { "source": "/igneasense",              "destination": "/igneasense/index.html" },
+
+    { "source": "/flow",                    "destination": "/flow.html" },
+    { "source": "/storyboard",              "destination": "/storyboard.html" },
+    { "source": "/pitch-deck",              "destination": "/pitch-deck.html" },
+    { "source": "/email-simulacion",        "destination": "/email-simulacion.html" },
+
+    { "source": "/flow/ThyroSense",         "destination": "/flow/ThyroSense/index.html" },
+    { "source": "/flow/liminasense",        "destination": "/flow/liminasense/index.html" },
+    { "source": "/flow/igneasense",         "destination": "/flow/igneasense/index.html" },
+
+    { "source": "/storyboard/ThyroSense",   "destination": "/storyboard/ThyroSense/index.html" },
+    { "source": "/storyboard/liminasense",  "destination": "/storyboard/liminasense/index.html" },
+    { "source": "/storyboard/igneasense",   "destination": "/storyboard/igneasense/index.html" },
+
+    { "source": "/pitch-deck/ThyroSense",   "destination": "/pitch-deck/ThyroSense/index.html" },
+    { "source": "/pitch-deck/liminasense",  "destination": "/pitch-deck/liminasense/index.html" },
+    { "source": "/pitch-deck/igneasense",   "destination": "/pitch-deck/igneasense/index.html" },
+
+    { "source": "/email-simulacion/ThyroSense",   "destination": "/email-simulacion/ThyroSense/index.html" },
+    { "source": "/email-simulacion/liminasense",   "destination": "/email-simulacion/liminasense/index.html" },
+    { "source": "/email-simulacion/igneasense",    "destination": "/email-simulacion/igneasense/index.html" }
+  ]
+}

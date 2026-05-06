@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGNEASENSE® — Hub · La Vida de Maria Elena · InnovaSalud</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--flame:#e8601c;--amber:#c8841a;--dark:#090400}
+body{background:var(--dark);color:#fff;font-family:"Inter",sans-serif;min-height:100vh;overflow-x:hidden}
+.bg-g{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 20% 50%,rgba(232,96,28,0.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(200,132,26,0.05) 0%,transparent 50%)}
+.dot-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,0.025) 1px,transparent 1px);background-size:36px 36px}
+.content{position:relative;z-index:1}
+nav{padding:26px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-back{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s}
+.nav-back:hover{color:rgba(255,255,255,0.7)}
+.nav-logo{font-family:"Playfair Display",serif;font-size:20px;font-weight:700;letter-spacing:0.06em}
+.nav-logo sup{font-size:12px;vertical-align:super}
+.nav-tag{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--flame);border:1px solid rgba(232,96,28,0.3);padding:4px 12px;border-radius:100px}
+.hero{padding:80px 60px 60px;text-align:center;position:relative}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--flame);margin-bottom:24px}
+.hero-title{font-family:"Playfair Display",serif;font-size:clamp(52px,8vw,100px);font-weight:700;line-height:0.95;letter-spacing:0.04em;margin-bottom:16px}
+.hero-title sup{font-size:clamp(20px,3vw,38px);vertical-align:super}
+.hero-sub{font-size:18px;font-style:italic;color:rgba(255,255,255,0.35);letter-spacing:0.06em;margin-bottom:28px}
+.hero-desc{font-size:15px;color:rgba(255,255,255,0.42);max-width:640px;margin:0 auto 48px;line-height:1.76}
+.flame-hero{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);pointer-events:none;z-index:-1;opacity:0.08;font-size:300px;animation:fh 4s ease-in-out infinite}
+@keyframes fh{0%,100%{transform:translate(-50%,-55%) scale(0.95)}50%{transform:translate(-50%,-55%) scale(1.05)}}
+.meta-pills{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.pill{padding:8px 20px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.06em;background:rgba(255,255,255,0.03)}
+.pill-a{border-color:rgba(232,96,28,0.3);color:var(--flame);background:rgba(232,96,28,0.06)}
+.highlights{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:14px;margin-bottom:60px;padding:0 60px;max-width:1300px;margin-left:auto;margin-right:auto}
+.hb{padding:22px;border-radius:12px;background:rgba(232,96,28,0.04);border:1px solid rgba(232,96,28,0.12);text-align:center}
+.hn{font-family:"Playfair Display",serif;font-size:clamp(26px,4vw,42px);font-weight:700;color:var(--flame);line-height:1;margin-bottom:6px}
+.hl{font-size:11px;color:rgba(255,255,255,0.32);letter-spacing:0.08em;text-transform:uppercase;line-height:1.4}
+.section{padding:0 60px 80px;max-width:1300px;margin:0 auto}
+.sl{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:8px}
+.sd{height:1px;background:linear-gradient(90deg,rgba(232,96,28,0.2),transparent);margin-bottom:28px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+.card{border-radius:16px;overflow:hidden;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;text-decoration:none;display:block;color:#fff}
+.card:hover{transform:translateY(-5px);border-color:rgba(232,96,28,0.35);box-shadow:0 20px 50px rgba(232,96,28,0.12)}
+.card-hero{grid-column:1/-1}
+.cv{height:180px;position:relative;overflow:hidden}
+.card-hero .cv{height:260px}
+.cv-flow{background:linear-gradient(135deg,#180600,#3e1000,#1a0800)}
+.cv-sb{background:linear-gradient(135deg,#120400,#2c0c00)}
+.cv-pitch{background:linear-gradient(135deg,#0e0300,#240a00)}
+.cv-email{background:linear-gradient(135deg,#100400,#200800)}
+.cv-flow::after{content:"FLOW";font-family:"Playfair Display",serif;font-size:90px;font-weight:700;color:rgba(232,96,28,0.08);position:absolute;bottom:-10px;right:20px}
+.cv-sb::after{content:"SB";font-family:"Playfair Display",serif;font-size:100px;font-weight:700;color:rgba(232,96,28,0.07);position:absolute;bottom:-10px;right:20px}
+.cv-pitch::after{content:"DECK";font-family:"Playfair Display",serif;font-size:80px;font-weight:700;color:rgba(232,96,28,0.07);position:absolute;bottom:-10px;right:20px}
+.cv-email::after{content:"@";font-family:"Playfair Display",serif;font-size:120px;font-weight:700;color:rgba(232,96,28,0.07);position:absolute;bottom:-15px;right:20px}
+.flm-card{position:absolute;top:50%;left:35%;transform:translate(-50%,-50%);font-size:60px;opacity:0.25;animation:fc 2.8s ease-in-out infinite}
+@keyframes fc{0%,100%{opacity:0.18;transform:translate(-50%,-50%) scale(0.9)}50%{opacity:0.35;transform:translate(-50%,-50%) scale(1.1)}}
+.cb{padding:20px 24px 22px}
+.ctype{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--flame);margin-bottom:8px}
+.ctitle{font-family:"Playfair Display",serif;font-size:clamp(19px,2.4vw,27px);font-weight:700;margin-bottom:8px;line-height:1.15}
+.cdesc{font-size:13px;color:rgba(255,255,255,0.38);line-height:1.65;margin-bottom:16px}
+.cfoot{display:flex;align-items:center;justify-content:space-between}
+.cmeta{font-size:10px;color:rgba(255,255,255,0.22);letter-spacing:0.07em;text-transform:uppercase}
+.ccta{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--flame);display:flex;align-items:center;gap:6px;transition:gap 0.2s}
+.card:hover .ccta{gap:10px}
+footer{padding:36px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between}
+.fl{font-size:12px;color:rgba(255,255,255,0.22)}.fr{font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="bg-g"></div>
+<div class="dot-grid"></div>
+<div class="content">
+<nav>
+  <a class="nav-back" href="../">← Historias que se Sienten</a>
+  <span class="nav-logo">IGNEASENSE<sup>®</sup></span>
+  <span class="nav-tag">IS-AST-20260505</span>
+</nav>
+<div class="hero">
+  <div class="flame-hero">🔥</div>
+  <p class="hero-eyebrow">Astellas Pharma · InnovaSalud · 3Destiny · 2026</p>
+  <h1 class="hero-title">IGNEASENSE<sup>®</sup></h1>
+  <p class="hero-sub">"El fuego nace adentro. El dano tambien."</p>
+  <p class="hero-desc">Experiencia inmersiva 4D de 40 minutos que transforma como los profesionales de salud entienden la menopausia — no como una molestia, sino como un factor de riesgo vascular sistemico cuyo dano invisible comienza con cada bochorno no tratado.</p>
+  <div class="meta-pills">
+    <span class="pill pill-a">40 minutos</span>
+    <span class="pill">VR 4D + Exhibicion 9 estaciones</span>
+    <span class="pill">Meta Quest 3 + Props Tactiles</span>
+    <span class="pill">Neuronas KNDy</span>
+    <span class="pill pill-a">IS-AST-20260505</span>
+    <span class="pill">Valida 60 dias</span>
+  </div>
+</div>
+<div class="highlights">
+  <div class="hb"><div class="hn">1,100M</div><div class="hl">mujeres que conocen el fuego</div></div>
+  <div class="hb"><div class="hn">7-14</div><div class="hl">anos de transicion biologica</div></div>
+  <div class="hb"><div class="hn">7%</div><div class="hl">residentes competentes en menopausia</div></div>
+  <div class="hb"><div class="hn">55%</div><div class="hl">mayor riesgo CV en menopausia prematura</div></div>
+  <div class="hb"><div class="hn">9</div><div class="hl">estaciones interactivas</div></div>
+  <div class="hb"><div class="hn">$208K</div><div class="hl">inversion total USD Colombia</div></div>
+</div>
+<div class="section">
+  <p class="sl">Materiales de Produccion</p>
+  <div class="sd"></div>
+  <div class="grid-2">
+    <a class="card card-hero" href="/flow/igneasense">
+      <div class="cv cv-flow"><div class="flm-card">🔥</div></div>
+      <div class="cb">
+        <p class="ctype">Animatic Principal</p>
+        <h2 class="ctitle">Flow Cinematografico — 4 Secuencias</h2>
+        <p class="cdesc">Recorrido inmersivo por las 4 secuencias de Maria Elena: La Tormenta (bochorno en reunion ejecutiva con chaleco Peltier), KNDy Molecular (bola que crece en las manos), El Corazon Bajo Fuego (pelota que pulsa) y La Doctora — contraste narrativo SAVE.</p>
+        <div class="cfoot"><span class="cmeta">4 secuencias · 15-18 min · Props · ←→ Space F</span><span class="ccta">Iniciar Flow →</span></div>
+      </div>
+    </a>
+    <a class="card" href="/storyboard/igneasense">
+      <div class="cv cv-pitch"></div>
+      <div class="cb">
+        <p class="ctype">Presentacion</p>
+        <h2 class="ctitle">Pitch Deck — Astellas Pharma</h2>
+        <p class="cdesc">Propuesta ejecutiva completa: contexto epidemiologico, arquitectura hibrida, inversion de $208K USD, cronograma 22 semanas, metricas Kirkpatrick y ROI.</p>
+        <div class="cfoot"><span class="cmeta">VP Medical Affairs · Women's Health</span><span class="ccta">Ver →</span></div>
+      </div>
+    </a>
+    <a class="card" href="/pitch-deck/igneasense">
+      <div class="cv cv-sb"></div>
+      <div class="cb">
+        <p class="ctype">Produccion</p>
+        <h2 class="ctitle">Plan de Produccion</h2>
+        <p class="cdesc">22 semanas de desarrollo: pre-produccion, VR + prototipacion tactil, integracion multi-sensorial, Gates de aprobacion G1/G2/G3 y despliegue en Colombia.</p>
+        <div class="cfoot"><span class="cmeta">22 semanas · 4 fases · 3 Gates</span><span class="ccta">Ver →</span></div>
+      </div>
+    </a>
+    <a class="card" href="/email-simulacion/igneasense">
+      <div class="cv cv-email"></div>
+      <div class="cb">
+        <p class="ctype">Outreach</p>
+        <h2 class="ctitle">Email a Astellas Pharma</h2>
+        <p class="cdesc">Simulacion del email de primer contacto con Astellas — VP Medical Affairs & Head of Women's Health — para presentar IGNEASENSE y coordinar demostracion presencial.</p>
+        <div class="cfoot"><span class="cmeta">Outreach · Astellas Colombia</span><span class="ccta">Ver →</span></div>
+      </div>
+    </a>
+  </div>
+</div>
+<footer>
+  <span class="fl">InnovaSalud + 3Destiny · Luis Calderon Miranda · Juan Manuel Dobarro · 2026</span>
+  <span class="fr">CONFIDENCIAL · IS-AST-20260505</span>
+</footer>
+</div>
+</body>
+</html>

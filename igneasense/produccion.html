@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGNEASENSE® — Plan de Produccion</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--flame:#e8601c;--dark:#070300}
+body{background:var(--dark);color:#fff;font-family:"Inter",sans-serif}
+.dot-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,0.025) 1px,transparent 1px);background-size:36px 36px}
+.content{position:relative;z-index:1}
+nav{padding:26px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-back{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s}
+.nav-back:hover{color:rgba(255,255,255,0.7)}
+.nav-logo{font-family:"Playfair Display",serif;font-size:18px;font-weight:700}
+.nav-tag{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--flame);border:1px solid rgba(232,96,28,0.3);padding:4px 12px;border-radius:100px}
+.hero{padding:64px 60px 48px;text-align:center}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--flame);margin-bottom:20px}
+.hero-title{font-family:"Playfair Display",serif;font-size:clamp(36px,5vw,58px);font-weight:700;line-height:1.05;margin-bottom:14px}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.38);max-width:560px;margin:0 auto;line-height:1.7}
+.section{padding:0 60px 80px;max-width:1200px;margin:0 auto}
+.sl{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:8px;padding-top:40px}
+.sd{height:1px;background:linear-gradient(90deg,rgba(232,96,28,0.2),transparent);margin-bottom:28px}
+.phases{display:flex;flex-direction:column;gap:16px}
+.phase{border-radius:16px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);overflow:hidden}
+.phase-header{padding:20px 28px;display:flex;align-items:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.phase-num{font-family:"Playfair Display",serif;font-size:32px;font-weight:700;color:var(--flame);line-height:1;opacity:0.7;min-width:42px}
+.phase-info{flex:1}
+.phase-name{font-family:"Playfair Display",serif;font-size:clamp(16px,2vw,22px);font-weight:700;margin-bottom:4px;line-height:1.2}
+.phase-weeks{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--flame);opacity:0.8}
+.phase-badge{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px;border:1px solid rgba(232,96,28,0.3);color:rgba(232,96,28,0.8);background:rgba(232,96,28,0.06);white-space:nowrap}
+.phase-body{padding:20px 28px 22px}
+.phase-desc{font-size:13px;color:rgba(255,255,255,0.42);line-height:1.68;margin-bottom:14px}
+.phase-tasks{display:flex;gap:8px;flex-wrap:wrap}
+.task-tag{font-size:10px;font-weight:600;letter-spacing:0.07em;padding:4px 12px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.03)}
+.gates{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.gate{padding:22px;border-radius:14px;background:rgba(232,96,28,0.04);border:1px solid rgba(232,96,28,0.14)}
+.gate-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--flame);margin-bottom:8px}
+.gate-title{font-family:"Playfair Display",serif;font-size:18px;font-weight:700;margin-bottom:6px}
+.gate-when{font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:10px}
+.gate-desc{font-size:12px;color:rgba(255,255,255,0.38);line-height:1.6}
+.inv-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.inv-card{padding:22px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07)}
+.inv-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px}
+.inv-amount{font-family:"Playfair Display",serif;font-size:28px;font-weight:700;color:var(--flame);margin-bottom:4px}
+.inv-desc{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.5}
+footer{padding:36px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between}
+.fl{font-size:12px;color:rgba(255,255,255,0.22)}.fr{font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="dot-grid"></div>
+<div class="content">
+<nav>
+  <a class="nav-back" href="index.html">← IGNEASENSE Hub</a>
+  <span class="nav-logo">Plan de Produccion</span>
+  <span class="nav-tag">22 Semanas · 4 Fases</span>
+</nav>
+<div class="hero">
+  <p class="hero-eyebrow">IS-AST-20260505 · Astellas Pharma · Produccion</p>
+  <h1 class="hero-title">Plan de Produccion IGNEASENSE®</h1>
+  <p class="hero-sub">22 semanas de desarrollo desde pre-produccion hasta el despliegue en Colombia — con 3 Gates de aprobacion de Astellas.</p>
+</div>
+<div class="section">
+  <p class="sl">Fases del Proyecto</p>
+  <div class="sd"></div>
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">1</div>
+        <div class="phase-info">
+          <h2 class="phase-name">Pre-Produccion</h2>
+          <p class="phase-weeks">Semanas 1-4</p>
+        </div>
+        <span class="phase-badge">Gate G1 · Semana 3</span>
+      </div>
+      <div class="phase-body">
+        <p class="phase-desc">Alineacion con Medical Affairs de Astellas, desarrollo del guion VR (15-18 min), scripts de 9 estaciones, casting de voces, diseno arquitectonico, diseno industrial de 3 props tactiles, algoritmo del juego, formulacion de aromas, validacion cardiovascular con SME, prototipacion de masillas.</p>
+        <div class="phase-tasks">
+          <span class="task-tag">Guion VR</span><span class="task-tag">Scripts 9 estaciones</span><span class="task-tag">Diseno props</span><span class="task-tag">SME CV</span><span class="task-tag">Prototipo masillas</span><span class="task-tag">Casting voces</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">2</div>
+        <div class="phase-info">
+          <h2 class="phase-name">Produccion VR + Prototipacion Tactil</h2>
+          <p class="phase-weeks">Semanas 4-17</p>
+        </div>
+        <span class="phase-badge">Produccion principal</span>
+      </div>
+      <div class="phase-body">
+        <p class="phase-desc">Construccion de 4 entornos VR comprimidos, secuencia cardiovascular expandida, KNDy molecular, animacion de personajes (Fitzpatrick III-VI), grabacion de audio con 8 testimoniales, integracion haptica/termica/olfativa, prototipacion y testing de props tactiles (3 iteraciones), desarrollo de pelota neumatica.</p>
+        <div class="phase-tasks">
+          <span class="task-tag">4 entornos VR</span><span class="task-tag">Animacion 3D KNDy</span><span class="task-tag">Audio 8 testimoniales</span><span class="task-tag">Haptica BHaptics</span><span class="task-tag">Chaleco Peltier</span><span class="task-tag">Props x3 iteraciones</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">3</div>
+        <div class="phase-info">
+          <h2 class="phase-name">Integracion, Revision Astellas y Pruebas</h2>
+          <p class="phase-weeks">Semanas 17-20 (paralelo a Fase 2)</p>
+        </div>
+        <span class="phase-badge">Gate G2 · Semana 18</span>
+      </div>
+      <div class="phase-body">
+        <p class="phase-desc">Sincronizacion multisensorial VR + props, integracion de exhibicion, puente VR-exhibicion con props, revision exhaustiva Astellas medical-affairs, beta testing con panel multi-stakeholder ampliado incluyendo cardiólogos, capacitacion de facilitadores en protocolo de props.</p>
+        <div class="phase-tasks">
+          <span class="task-tag">Sync VR + props</span><span class="task-tag">Beta testing</span><span class="task-tag">Medical-legal review</span><span class="task-tag">Facilitadores certificados</span><span class="task-tag">Stress testing</span>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">4</div>
+        <div class="phase-info">
+          <h2 class="phase-name">Despliegue — Lanzamiento Colombia</h2>
+          <p class="phase-weeks">Semanas 21-22</p>
+        </div>
+        <span class="phase-badge">Gate G3 · Post-despliegue</span>
+      </div>
+      <div class="phase-body">
+        <p class="phase-desc">Primer despliegue en congreso / evento de lanzamiento Colombia: envio de hardware + props, setup de venue (2 dias), briefing de staff con certificacion de props, dry run, VR + exhibicion + props operativos, primer dia en vivo con 200 medicos.</p>
+        <div class="phase-tasks">
+          <span class="task-tag">Setup venue 2 dias</span><span class="task-tag">200 medicos Colombia</span><span class="task-tag">15 estaciones VR</span><span class="task-tag">9 estaciones exhibicion</span><span class="task-tag">Dry run</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="sl" style="margin-top:40px">Gates de Aprobacion</p>
+  <div class="sd"></div>
+  <div class="gates">
+    <div class="gate">
+      <p class="gate-label">Gate G1</p>
+      <h3 class="gate-title">Posicionamiento</h3>
+      <p class="gate-when">Semana 3 · 5 dias habiles</p>
+      <p class="gate-desc">Aprobacion de posicionamiento educacional (no promocional), clasificacion, lenguaje, framing de riesgo cardiovascular, diseno de props, limites de contenido.</p>
+    </div>
+    <div class="gate">
+      <p class="gate-label">Gate G2</p>
+      <h3 class="gate-title">Experiencia Integrada</h3>
+      <p class="gate-when">Semana 18 · 7 dias habiles</p>
+      <p class="gate-desc">Experiencia completa (VR + props + 9 estaciones) revisada. Contenido Veoza validado por medical-legal. Contenido CV validado por SME cardiovascular.</p>
+    </div>
+    <div class="gate">
+      <p class="gate-label">Gate G3</p>
+      <h3 class="gate-title">Aceptacion Final</h3>
+      <p class="gate-when">Semana 23 · 10 dias habiles</p>
+      <p class="gate-desc">Aceptacion final basada en reporte de impacto post-despliegue. Kirkpatrick Niveles 1-3. NPS, puntajes de juego, compromisos conductuales capturados.</p>
+    </div>
+  </div>
+
+  <p class="sl" style="margin-top:40px">Inversion Total</p>
+  <div class="sd"></div>
+  <div class="inv-row">
+    <div class="inv-card">
+      <p class="inv-label">Assets Digitales 4D (Fase A)</p>
+      <p class="inv-amount">$71,500</p>
+      <p class="inv-desc">Produccion VR + props + haptica + validacion cientifica + dashboard de medicion</p>
+    </div>
+    <div class="inv-card">
+      <p class="inv-label">Despliegue Lanzamiento Colombia (Fase A)</p>
+      <p class="inv-amount">$32,000</p>
+      <p class="inv-desc">Props 18 sets, hardware VR 15 estaciones renta, facilitadores certificados Bogota</p>
+    </div>
+    <div class="inv-card">
+      <p class="inv-label">Assets Digitales Exhibicion (Fase B)</p>
+      <p class="inv-amount">$94,500</p>
+      <p class="inv-desc">9 estaciones digitales: juego, recorrido CV, KNDy, reloj, atlas, voces, sala datos, ruta, compromiso</p>
+    </div>
+    <div class="inv-card">
+      <p class="inv-label">Despliegue Lanzamiento Colombia (Fase B)</p>
+      <p class="inv-amount">$10,000</p>
+      <p class="inv-desc">Props exhibicion, hardware 18 estaciones renta, facilitadores zona exhibicion Bogota</p>
+    </div>
+    <div class="inv-card" style="border-color:rgba(232,96,28,0.3);background:rgba(232,96,28,0.04)">
+      <p class="inv-label">Total Inversion — Colombia</p>
+      <p class="inv-amount" style="font-size:36px">$208,500</p>
+      <p class="inv-desc">Incluye desarrollo completo + despliegue en evento de lanzamiento Colombia + medicion 90 dias</p>
+    </div>
+    <div class="inv-card">
+      <p class="inv-label">Duracion Total</p>
+      <p class="inv-amount">22 sem</p>
+      <p class="inv-desc">5 meses de desarrollo con validacion medica exhaustiva e iteraciones de props</p>
+    </div>
+  </div>
+</div>
+<footer>
+  <span class="fl">InnovaSalud + 3Destiny · IS-AST-20260505 · Plan de Produccion</span>
+  <span class="fr">CONFIDENCIAL · IGNEASENSE®</span>
+</footer>
+</div>
+</body>
+</html>

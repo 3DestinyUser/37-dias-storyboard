@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThyroSense® — Pitch Deck Merck KGaA</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--teal:#00c2cc;--amber:#d4823a;--dark:#020a0b}
+body{background:var(--dark);color:#fff;font-family:"Inter",sans-serif;overflow-x:hidden}
+.dot-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,0.025) 1px,transparent 1px);background-size:36px 36px}
+.content{position:relative;z-index:1}
+nav{padding:26px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-back{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s}
+.nav-back:hover{color:rgba(255,255,255,0.7)}
+.nav-logo{font-family:"Playfair Display",serif;font-size:18px;font-weight:700}
+.nav-tag{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(0,194,204,0.3);padding:4px 12px;border-radius:100px}
+.slide{min-height:80vh;padding:72px 60px;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.05);position:relative;max-width:1200px;margin:0 auto}
+.slide-num{position:absolute;top:24px;right:60px;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2)}
+.slide-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--teal);margin-bottom:22px}
+.slide-title{font-family:"Playfair Display",serif;font-size:clamp(34px,5vw,68px);font-weight:700;line-height:1.03;margin-bottom:18px}
+.slide-body{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.76;max-width:780px;margin-top:14px}
+.slide-body p{margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;margin-top:34px}
+.stat{padding:20px;border-radius:13px;background:rgba(0,194,204,0.04);border:1px solid rgba(0,194,204,0.12);text-align:center}
+.stat-n{font-family:"Playfair Display",serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--teal);line-height:1;margin-bottom:5px}
+.stat-l{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.07em;text-transform:uppercase;line-height:1.4}
+.acts{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:32px}
+.act{padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02)}
+.act-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.act-name{font-family:"Playfair Display",serif;font-size:19px;font-weight:700;margin-bottom:8px;line-height:1.2}
+.act-desc{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.6}
+.highlight{color:var(--teal);font-weight:600}
+.quote{font-family:"Playfair Display",serif;font-size:clamp(17px,2.4vw,26px);font-style:italic;color:rgba(255,255,255,0.5);line-height:1.5;margin:28px 0;padding-left:22px;border-left:3px solid rgba(0,194,204,0.4)}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:28px}
+.tech{padding:18px 20px;border-radius:12px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02)}
+.tech-icon{font-size:24px;margin-bottom:8px;opacity:0.7}
+.tech-name{font-size:13px;font-weight:600;margin-bottom:4px;color:rgba(255,255,255,0.8)}
+.tech-desc{font-size:11px;color:rgba(255,255,255,0.3);line-height:1.5}
+footer{padding:36px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between}
+.fl{font-size:12px;color:rgba(255,255,255,0.22)}.fr{font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase}
+@media(max-width:700px){.acts{grid-template-columns:1fr}.slide{padding:48px 28px}}
+</style>
+</head>
+<body>
+<div class="dot-grid"></div>
+<div class="content">
+<nav>
+  <a class="nav-back" href="index.html">← ThyroSense Hub</a>
+  <span class="nav-logo">Pitch Deck</span>
+  <span class="nav-tag">Merck KGaA · RL-NONT-00044</span>
+</nav>
+
+<div class="slide">
+  <span class="slide-num">01 / 06</span>
+  <p class="slide-eyebrow">Merck KGaA · InnovaSalud · 3Destiny</p>
+  <h1 class="slide-title">ThyroSense®</h1>
+  <p style="font-size:18px;color:rgba(255,255,255,0.35);margin-top:-8px;margin-bottom:24px;letter-spacing:0.06em;font-style:italic">La Vida de Ximena</p>
+  <p class="slide-body" style="font-size:15px;color:rgba(255,255,255,0.42)">Una experiencia VR de 18 minutos que lleva al participante a traves del cuerpo y la mente de Ximena — 38 anos, directora de finanzas — desde la vida plena hasta el dia cero del diagnostico tiroideo.</p>
+  <div class="stat-grid" style="margin-top:40px">
+    <div class="stat"><div class="stat-n">750M</div><div class="stat-l">personas con disfuncion tiroidea en el mundo</div></div>
+    <div class="stat"><div class="stat-n">60%</div><div class="stat-l">sin diagnostico al momento del estudio</div></div>
+    <div class="stat"><div class="stat-n">18 min</div><div class="stat-l">experiencia VR lineal 4 actos</div></div>
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">idiomas: ES · PT · EN</div></div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">02 / 06</span>
+  <p class="slide-eyebrow">El Problema</p>
+  <h2 class="slide-title">El Diagnostico que llega tarde</h2>
+  <div class="slide-body">
+    <p>Los sintomas tiroideos son multisistemi cos e inespecificos. Fatiga, brainfog, cambios de peso, intolerancia al frio — cada uno puede atribuirse a otra causa. El resultado: un promedio de <span class="highlight">5-7 anos</span> desde el primer sintoma hasta el diagnostico correcto.</p>
+    <p>Los medicos no aprenden a ver el patron porque ningun modulo educativo les ha mostrado lo que se siente desde adentro. ThyroSense cambia eso.</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-n">5-7</div><div class="stat-l">anos promedio hasta diagnostico correcto</div></div>
+    <div class="stat"><div class="stat-n">8</div><div class="stat-l">especialistas consultados en promedio</div></div>
+    <div class="stat"><div class="stat-n">40%</div><div class="stat-l">pacientes diagnosticados con depresion primero</div></div>
+    <div class="stat"><div class="stat-n">3x</div><div class="stat-l">mas frecuente en mujeres que en hombres</div></div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">03 / 06</span>
+  <p class="slide-eyebrow">La Experiencia</p>
+  <h2 class="slide-title">4 Actos · 18 Minutos · Primera Persona</h2>
+  <div class="acts">
+    <div class="act">
+      <p class="act-label">Acto 1 · 3 min</p>
+      <h3 class="act-name">La Normalidad</h3>
+      <p class="act-desc">Vida plena de Ximena. Teal brillante. Mariposa tiroidea activa. Energia y confianza. El cuerpo funciona en silencio.</p>
+    </div>
+    <div class="act">
+      <p class="act-label">Acto 2 · 5 min</p>
+      <h3 class="act-name">La Grieta</h3>
+      <p class="act-desc">Primera fatiga inexplicable. Niebla cognitiva. Paleta amber. La mariposa se mueve despacio. El primer sintoma que nadie nombra.</p>
+    </div>
+    <div class="act">
+      <p class="act-label">Acto 3 · 5 min</p>
+      <h3 class="act-name">El Abismo</h3>
+      <p class="act-desc">Aislamiento progresivo. Negro profundo. Voice Changer en tiempo real: la voz de Ximena se degrada. El espejo se rompe.</p>
+    </div>
+    <div class="act">
+      <p class="act-label">Acto 4 · 5 min</p>
+      <h3 class="act-name">El Dia Cero</h3>
+      <p class="act-desc">La consulta. El TSH. La mariposa resurge en teal brillante. El diagnostico no es el fin — es el comienzo.</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">04 / 06</span>
+  <p class="slide-eyebrow">La Tecnologia</p>
+  <h2 class="slide-title">Pipeline Tecnico de Vanguardia</h2>
+  <div class="tech-grid">
+    <div class="tech"><div class="tech-icon">🥽</div><div class="tech-name">Meta Quest 3</div><div class="tech-desc">VR standalone de alta resolucion. Experiencia lineal sin controladores.</div></div>
+    <div class="tech"><div class="tech-icon">🎙️</div><div class="tech-name">ElevenLabs AI Voice</div><div class="tech-desc">Voz de Carolina en 3 idiomas: ES · PT · EN. Tonos emocionales por escena.</div></div>
+    <div class="tech"><div class="tech-icon">🦋</div><div class="tech-name">Mariposa Animada CSS</div><div class="tech-desc">La tiroides visualizada como mariposa en tiempo real, sincronizada con el arco narrativo.</div></div>
+    <div class="tech"><div class="tech-icon">🎮</div><div class="tech-name">Unity / Unreal</div><div class="tech-desc">Entornos 3D optimizados para Meta XR SDK. Animaciones de personaje Fitzpatrick III-V.</div></div>
+    <div class="tech"><div class="tech-icon">🔊</div><div class="tech-name">Audio Espacial</div><div class="tech-desc">Soundscape binaural por escena: de brillante y energetico a oscuro y opresivo.</div></div>
+    <div class="tech"><div class="tech-icon">🌐</div><div class="tech-name">Multi-idioma</div><div class="tech-desc">Espanol neutro, Portugues BR, Ingles US. Assets reutilizables en toda LATAM.</div></div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">05 / 06</span>
+  <p class="slide-eyebrow">Impacto Medible</p>
+  <h2 class="slide-title">De la Empatia al Cambio de Practica</h2>
+  <div class="slide-body">
+    <p>La retencion de una experiencia vivida a 90 dias es <span class="highlight">70-80%</span> — frente al 20-30% de un video testimonial. ThyroSense no busca informar: busca que el medico reconozca el patron de Ximena en su proximo paciente.</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-n">70-80%</div><div class="stat-l">retencion de experiencia vivida a 90 dias</div></div>
+    <div class="stat"><div class="stat-n">+40%</div><div class="stat-l">meta de screening tiroideo proactivo</div></div>
+    <div class="stat"><div class="stat-n">NPS</div><div class="stat-l">meta mayor a 75 post-experiencia</div></div>
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">idiomas listos para despliegue LATAM</div></div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">06 / 06</span>
+  <p class="slide-eyebrow">Siguiente Paso</p>
+  <h2 class="slide-title">Estamos Listos</h2>
+  <div class="slide-body">
+    <p>ThyroSense® esta disenado para transformar la consulta medica: que el proximo paciente con fatiga inexplicable y brainfog no espere 7 anos para tener un nombre para lo que siente.</p>
+  </div>
+  <div class="quote">La mariposa siempre estuvo ahi. Solo necesitaba que alguien supiera como verla.</div>
+  <div class="slide-body">
+    <p>Nos encantaria mostrarles la experiencia en vivo. <span class="highlight">20 minutos que cambian la perspectiva.</span></p>
+  </div>
+</div>
+
+<footer>
+  <span class="fl">InnovaSalud + 3Destiny · Merck KGaA · RL-NONT-00044 · Pitch Deck</span>
+  <span class="fr">ThyroSense® · CONFIDENCIAL</span>
+</footer>
+</div>
+</body>
+</html>

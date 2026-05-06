@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGNEASENSE® — Flow Cinematografico · La Vida de Maria Elena</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--flame:#e8601c;--amber:#c8841a;--dark:#050100}
+html,body{height:100%;overflow:hidden;background:var(--dark)}
+body{font-family:"Inter",sans-serif;color:#fff;position:relative}
+
+/* SCENE CONTAINER */
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:opacity 0.8s ease;padding:60px}
+.scene.active{opacity:1;pointer-events:all}
+
+/* SCENE BACKGROUNDS */
+#s0{background:radial-gradient(ellipse at 50% 40%,#1a0600 0%,#050100 70%)}
+#s1{background:radial-gradient(ellipse at 30% 60%,#280800 0%,#060100 70%),radial-gradient(ellipse at 70% 30%,#1e0c00 0%,transparent 60%)}
+#s2{background:radial-gradient(ellipse at 50% 30%,#100028 0%,#030008 70%)}
+#s3{background:radial-gradient(ellipse at 50% 50%,#180000 0%,#030000 70%)}
+#s4{background:radial-gradient(ellipse at 60% 50%,#1a1000 0%,#040200 70%)}
+
+/* AMBIENT PARTICLES */
+.particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.p{position:absolute;border-radius:50%;animation:drift linear infinite}
+@keyframes drift{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:0.3}100%{transform:translateY(-10vh) scale(1.5);opacity:0}}
+
+/* SCENE CONTENT */
+.scene-inner{text-align:center;max-width:780px;position:relative;z-index:2}
+.scene-num{font-size:11px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--flame);opacity:0.7;margin-bottom:20px}
+.scene-title{font-family:"Playfair Display",serif;font-size:clamp(32px,5vw,64px);font-weight:700;line-height:1.05;margin-bottom:22px;letter-spacing:-0.01em}
+.scene-sub{font-size:clamp(13px,1.6vw,17px);color:rgba(255,255,255,0.42);line-height:1.75;max-width:640px;margin:0 auto 32px}
+.scene-props{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.prop{padding:6px 16px;border-radius:100px;border:1px solid rgba(232,96,28,0.3);font-size:11px;font-weight:600;letter-spacing:0.07em;color:rgba(232,96,28,0.8);background:rgba(232,96,28,0.05)}
+.scene-data{font-size:12px;color:rgba(255,255,255,0.25);letter-spacing:0.08em;text-transform:uppercase;margin-top:8px}
+
+/* VISUAL ELEMENT - flame / molecules */
+.visual-el{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.flame-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);font-size:min(40vw,320px);opacity:0.04;animation:fbg 4s ease-in-out infinite;user-select:none}
+@keyframes fbg{0%,100%{opacity:0.03;transform:translate(-50%,-55%) scale(0.95)}50%{opacity:0.06;transform:translate(-50%,-55%) scale(1.05)}}
+
+.kndy-field{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.kndy-node{position:absolute;border-radius:50%;border:1px solid rgba(176,80,255,0.3);animation:kndy-pulse 3s ease-in-out infinite}
+@keyframes kndy-pulse{0%,100%{transform:translate(-50%,-50%) scale(0.9);opacity:0.2}50%{transform:translate(-50%,-50%) scale(1.2);opacity:0.6}}
+
+.heart-beat{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:min(30vw,240px);opacity:0.05;animation:hb 1s ease-in-out infinite;user-select:none}
+@keyframes hb{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.04}50%{transform:translate(-50%,-50%) scale(1.08);opacity:0.08}}
+
+.cv-wave{position:absolute;bottom:15%;left:50%;transform:translateX(-50%);width:80%;height:3px;background:linear-gradient(90deg,transparent,rgba(232,96,28,0.6),transparent);animation:wave 2s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:translateX(-50%) scaleX(0.7);opacity:0.4}50%{transform:translateX(-50%) scaleX(1);opacity:0.9}}
+
+/* STETHOSCOPE scene 4 */
+.consult-split{position:absolute;inset:0;display:flex}
+.consult-bad{flex:1;background:rgba(30,0,0,0.3);border-right:1px solid rgba(255,255,255,0.05)}
+.consult-good{flex:1;background:rgba(0,20,10,0.3)}
+
+/* PROGRESS */
+.progress-bar{position:fixed;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--flame),var(--amber));transition:width 0.5s ease;z-index:100}
+.scene-counter{position:fixed;bottom:16px;right:24px;font-size:11px;font-weight:700;letter-spacing:0.12em;color:rgba(255,255,255,0.3);z-index:100}
+
+/* NAV */
+.nav-top{position:fixed;top:0;left:0;right:0;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;z-index:100;background:linear-gradient(to bottom,rgba(5,1,0,0.9),transparent)}
+.nav-back{font-size:11px;color:rgba(255,255,255,0.3);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s}
+.nav-back:hover{color:rgba(255,255,255,0.7)}
+.nav-title{font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(232,96,28,0.7)}
+.nav-controls{font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:0.06em}
+
+/* ARROWS */
+.arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);font-size:20px;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;z-index:100}
+.arrow:hover{background:rgba(232,96,28,0.15);border-color:rgba(232,96,28,0.4);color:#fff}
+.arrow-prev{left:20px}.arrow-next{right:20px}
+.arrow.hidden{opacity:0;pointer-events:none}
+
+/* TIMELINE DOTS */
+.timeline{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:100}
+.tdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.15);cursor:pointer;transition:all 0.3s}
+.tdot.active{background:var(--flame);width:22px;border-radius:4px}
+
+/* SCENE 0 - Intro */
+.intro-tagline{font-family:"Playfair Display",serif;font-size:clamp(14px,2vw,20px);font-style:italic;color:rgba(255,255,255,0.35);margin-top:16px}
+.intro-badge{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:10px 24px;border:1px solid rgba(232,96,28,0.2);border-radius:100px;background:rgba(232,96,28,0.04);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(232,96,28,0.7)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav-top">
+  <a class="nav-back" href="/igneasense">← IGNEASENSE Hub</a>
+  <span class="nav-title">IGNEASENSE® — Flow Cinematografico</span>
+  <span class="nav-controls">← → Espacio · F pantalla completa</span>
+</div>
+
+<!-- ARROWS -->
+<button class="arrow arrow-prev hidden" id="prev" onclick="changeScene(-1)">‹</button>
+<button class="arrow arrow-next" id="next" onclick="changeScene(1)">›</button>
+
+<!-- PROGRESS -->
+<div class="progress-bar" id="pbar"></div>
+<div class="scene-counter" id="counter">1 / 5</div>
+
+<!-- TIMELINE DOTS -->
+<div class="timeline" id="timeline"></div>
+
+<!-- ═══════════ SCENE 0: INTRO ═══════════ -->
+<div class="scene active" id="s0">
+  <div class="visual-el">
+    <span class="flame-bg">🔥</span>
+    <div class="particles" id="p0"></div>
+  </div>
+  <div class="scene-inner">
+    <p class="scene-num">IGNEASENSE® · IS-AST-20260505</p>
+    <h1 class="scene-title">La Vida de María Elena</h1>
+    <p class="intro-tagline">"El fuego nace adentro. El daño también."</p>
+    <p class="scene-sub" style="margin-top:20px">María Elena Vásquez, 48 años. Gerente de proyectos. Ciudad de México. Perimenopausia. Y un sistema médico que mira hacia otro lado.</p>
+    <div class="intro-badge">Astellas Pharma · VR 4D · Props Táctiles · 9 Estaciones</div>
+    <p class="scene-data" style="margin-top:24px">40 min · Fase A: VR 15-18 min · Fase B: Exhibición 22-25 min</p>
+  </div>
+</div>
+
+<!-- ═══════════ SCENE 1: EL DÍA DE MARÍA ELENA ═══════════ -->
+<div class="scene" id="s1">
+  <div class="visual-el">
+    <span class="flame-bg" style="font-size:min(35vw,280px);animation-duration:5s">☀️</span>
+    <div class="particles" id="p1"></div>
+  </div>
+  <div class="scene-inner">
+    <p class="scene-num">Secuencia 01 · Fase A VR · 7 minutos</p>
+    <h2 class="scene-title">El Día de María Elena — La Tormenta</h2>
+    <p class="scene-sub">Rutina matinal impecable. Reunión ejecutiva con 30 personas. Y en el momento de mayor exposición — frente a todos — el bochorno llega. El calor sube desde el pecho. La camisa se moja. La sala no entiende. El cuerpo traiciona cuando más importa.</p>
+    <div class="scene-props">
+      <span class="prop">🔥 Chaleco Peltier → 45°C</span>
+      <span class="prop">💓 Chaleco Háptico Taquicardia</span>
+      <span class="prop">🟤 Masilla Suave Shore 00-20</span>
+    </div>
+    <p class="scene-data">Arco: Reconocimiento → Emboscada → Angustia → Vergüenza</p>
+  </div>
+</div>
+
+<!-- ═══════════ SCENE 2: DENTRO DEL CUERPO / KNDy ═══════════ -->
+<div class="scene" id="s2">
+  <div class="visual-el">
+    <div class="kndy-field">
+      <div class="kndy-node" style="width:60px;height:60px;top:45%;left:42%;animation-delay:0s"></div>
+      <div class="kndy-node" style="width:90px;height:90px;top:38%;left:55%;animation-delay:0.8s"></div>
+      <div class="kndy-node" style="width:45px;height:45px;top:58%;left:48%;animation-delay:1.6s"></div>
+      <div class="kndy-node" style="width:120px;height:120px;top:42%;left:32%;animation-delay:1s"></div>
+      <div class="kndy-node" style="width:75px;height:75px;top:55%;left:62%;animation-delay:2s"></div>
+    </div>
+  </div>
+  <div class="scene-inner">
+    <p class="scene-num">Secuencia 02 · Fase A VR · 5 minutos</p>
+    <h2 class="scene-title">Dentro del Cuerpo — KNDy + El Costo Vascular</h2>
+    <p class="scene-sub">Zoom molecular al hipotálamo. Las neuronas KNDy — desinhibidas por la retirada estrogénica — crecen e inundan el núcleo preóptico con neuroquinina B. El participante sostiene una bola que crece en su mano. La arteria pierde elasticidad. El vaso se convierte en piedra.</p>
+    <div class="scene-props">
+      <span class="prop">🧬 Bola KNDy 4cm → 7cm</span>
+      <span class="prop">🟤 Masilla suave → rígida</span>
+      <span class="prop">🔬 Zoom molecular 3D</span>
+    </div>
+    <p class="scene-data">Arco: Asombro → Preocupación → Comprensión científica</p>
+  </div>
+</div>
+
+<!-- ═══════════ SCENE 3: EL CORAZÓN BAJO FUEGO ═══════════ -->
+<div class="scene" id="s3">
+  <div class="visual-el">
+    <span class="heart-beat">❤️</span>
+    <div class="cv-wave"></div>
+    <div class="cv-wave" style="animation-delay:0.7s;opacity:0.5;bottom:22%"></div>
+    <div class="particles" id="p3"></div>
+  </div>
+  <div class="scene-inner">
+    <p class="scene-num">Secuencia 03 · Fase A VR · 3 minutos</p>
+    <h2 class="scene-title">El Corazón Bajo Fuego</h2>
+    <p class="scene-sub">Time-lapse de daño cardiovascular acumulativo. Años de bochornos sin tratar: inflamación endotelial, placa aterosclerótica, remodelación cardíaca. La pelota en la mano pulsa — normal, rápido, irregular. El chaleco vibra con cada taquicardia. La masilla en la mano es piedra.</p>
+    <div class="scene-props">
+      <span class="prop">⚡ Pelota neumática — taquicardia</span>
+      <span class="prop">💓 Chaleco háptico — arritmia</span>
+      <span class="prop">🟤 Masilla rígida Shore 00-60</span>
+    </div>
+    <p class="scene-data">+55% riesgo CV en menopausia prematura · 77% mayor riesgo con VMS frecuentes (SWAN)</p>
+  </div>
+</div>
+
+<!-- ═══════════ SCENE 4: LA DOCTORA — CONTRASTE ═══════════ -->
+<div class="scene" id="s4">
+  <div class="visual-el">
+    <div class="consult-split">
+      <div class="consult-bad"></div>
+      <div class="consult-good"></div>
+    </div>
+    <div style="position:absolute;top:50%;left:50%;width:1px;height:60%;background:rgba(255,255,255,0.08);transform:translate(-50%,-50%)"></div>
+    <div style="position:absolute;top:20%;left:24%;font-size:min(10vw,80px);opacity:0.06;user-select:none">✗</div>
+    <div style="position:absolute;top:20%;left:60%;font-size:min(10vw,80px);opacity:0.06;user-select:none;color:#00ff88">✓</div>
+  </div>
+  <div class="scene-inner">
+    <p class="scene-num">Secuencia 04 · Fase A VR · 1.5 minutos · Cierre</p>
+    <h2 class="scene-title">La Doctora — Contraste Rápido</h2>
+    <p class="scene-sub">Descarte: <em style="color:rgba(255,100,80,0.8)">"Es normal, es una etapa."</em> — 30 segundos. María Elena sale más pequeña.<br><br>Consulta SAVE: el médico pregunta, evalúa, valida, trata. La misma mujer sale con agencia. Sin mencionar fármacos. Solo el protocolo de abordaje integral.</p>
+    <div class="scene-props">
+      <span class="prop">🩺 Marco SAVE</span>
+      <span class="prop">⚖️ Contraste narrativo</span>
+      <span class="prop">→ Transición a Exhibición</span>
+    </div>
+    <p class="scene-data">Arco: Frustración → Alivio → Resolución clínica · Fase B: 9 estaciones</p>
+  </div>
+</div>
+
+<script>
+let current = 0;
+const total = 5;
+const scenes = document.querySelectorAll('.scene');
+const pbar = document.getElementById('pbar');
+const counter = document.getElementById('counter');
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+
+// Timeline dots
+const tl = document.getElementById('timeline');
+for(let i=0;i<total;i++){
+  const d = document.createElement('div');
+  d.className='tdot'+(i===0?' active':'');
+  d.onclick=()=>goTo(i);
+  tl.appendChild(d);
+}
+
+function goTo(n){
+  scenes[current].classList.remove('active');
+  document.querySelectorAll('.tdot')[current].classList.remove('active');
+  current=n;
+  scenes[current].classList.add('active');
+  document.querySelectorAll('.tdot')[current].classList.add('active');
+  pbar.style.width=((current/(total-1))*100)+'%';
+  counter.textContent=(current+1)+' / '+total;
+  prev.classList.toggle('hidden',current===0);
+  next.classList.toggle('hidden',current===total-1);
+}
+
+function changeScene(dir){
+  const n=current+dir;
+  if(n>=0&&n<total)goTo(n);
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeScene(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();changeScene(-1);}
+  if(e.key==='f'||e.key==='F'){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}
+});
+
+// Particles for scene 0 and 1
+function makeParticles(containerId, color, count){
+  const c = document.getElementById(containerId);
+  if(!c) return;
+  for(let i=0;i<count;i++){
+    const d = document.createElement('div');
+    d.className='p';
+    const size=Math.random()*4+1.5;
+    d.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;bottom:0;background:${color};animation-duration:${Math.random()*8+6}s;animation-delay:${Math.random()*8}s`;
+    c.appendChild(d);
+  }
+}
+makeParticles('p0','rgba(232,96,28,0.5)',18);
+makeParticles('p1','rgba(232,96,28,0.4)',14);
+makeParticles('p3','rgba(200,20,20,0.4)',12);
+
+// Init progress
+pbar.style.width='0%';
+</script>
+</body>
+</html>

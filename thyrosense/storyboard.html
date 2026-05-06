@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThyroSense® Storyboard — La Vida de Ximena</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--teal:#00c2cc;--amber:#d4823a;--dark:#020a0b}
+body{background:var(--dark);color:#fff;font-family:"Inter",sans-serif}
+.dot-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,0.025) 1px,transparent 1px);background-size:36px 36px}
+.content{position:relative;z-index:1}
+nav{padding:26px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-back{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s}
+.nav-back:hover{color:rgba(255,255,255,0.7)}
+.nav-logo{font-family:"Playfair Display",serif;font-size:18px;font-weight:700}
+.nav-tag{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(0,194,204,0.3);padding:4px 12px;border-radius:100px}
+.hero{padding:64px 60px 48px;text-align:center}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--teal);margin-bottom:20px}
+.hero-title{font-family:"Playfair Display",serif;font-size:clamp(38px,5vw,64px);font-weight:700;line-height:1.05;margin-bottom:14px}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.38);max-width:560px;margin:0 auto;line-height:1.7}
+.scenes{padding:0 60px 80px;max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.scene{border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02)}
+.scene-vis{height:150px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.e1-bg{background:linear-gradient(135deg,#021a1c,#053c44,#021218)}
+.e2-bg{background:linear-gradient(135deg,#1c0d00,#3c2000,#160900)}
+.e3-bg{background:linear-gradient(135deg,#080808,#181818,#060606)}
+.e4-bg{background:linear-gradient(135deg,#021a1c,#043540,#010e10)}
+.scene-num{position:absolute;top:12px;left:18px;font-family:"Playfair Display",serif;font-size:44px;font-weight:700;color:rgba(255,255,255,0.06);line-height:1}
+.scene-badge{position:absolute;top:12px;right:14px;font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(0,194,204,0.3);padding:3px 10px;border-radius:100px;background:rgba(0,194,204,0.05)}
+.scene-icon{font-size:48px;opacity:0.2;animation:si 3s ease-in-out infinite}
+@keyframes si{0%,100%{opacity:0.14;transform:scale(0.93)}50%{opacity:0.26;transform:scale(1.07)}}
+.scene-body{padding:22px 28px 26px}
+.scene-phase{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.scene-title{font-family:"Playfair Display",serif;font-size:clamp(19px,2.6vw,26px);font-weight:700;margin-bottom:10px;line-height:1.15}
+.scene-desc{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.7;margin-bottom:16px}
+.tags-row{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:10px;font-weight:600;letter-spacing:0.07em;padding:4px 11px;border-radius:100px;border:1px solid rgba(0,194,204,0.22);color:rgba(0,194,204,0.7);background:rgba(0,194,204,0.04)}
+.scene-meta{display:flex;gap:20px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.05)}
+.sm{font-size:11px;color:rgba(255,255,255,0.28);letter-spacing:0.05em}
+.sm strong{color:rgba(255,255,255,0.55);font-weight:600}
+footer{padding:36px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between}
+.fl{font-size:12px;color:rgba(255,255,255,0.22)}.fr{font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="dot-grid"></div>
+<div class="content">
+<nav>
+  <a class="nav-back" href="index.html">← ThyroSense Hub</a>
+  <span class="nav-logo">Storyboard</span>
+  <span class="nav-tag">Visual · 4 Actos</span>
+</nav>
+<div class="hero">
+  <p class="hero-eyebrow">Merck KGaA · RL-NONT-00044 · Visual</p>
+  <h1 class="hero-title">ThyroSense® — La Vida de Ximena</h1>
+  <p class="hero-sub">Los 4 actos de la experiencia VR de 18 minutos: desde la vida plena hasta el Dia Cero del diagnostico tiroideo.</p>
+</div>
+<div class="scenes">
+
+  <div class="scene">
+    <div class="scene-vis e1-bg">
+      <div class="scene-num">E1</div>
+      <span class="scene-icon">🌟</span>
+      <span class="scene-badge">La Normalidad · 3 min</span>
+    </div>
+    <div class="scene-body">
+      <p class="scene-phase">Acto 1</p>
+      <h2 class="scene-title">La Normalidad — La Vida Plena</h2>
+      <p class="scene-desc">Ximena, 38 anos, directora de finanzas. Una manana perfecta: cafe, reunion exitosa, hija que rie, pareja que abraza. Todo funciona. El cuerpo es silencioso. La tiroides — esa mariposa en el cuello — trabaja sin que ella lo sepa. El mundo teal, brillante, energetico.</p>
+      <div class="tags-row">
+        <span class="tag">Paleta: Teal brillante</span>
+        <span class="tag">Energia y confianza</span>
+        <span class="tag">Voz narradora Carolina</span>
+        <span class="tag">Mariposa visible</span>
+      </div>
+      <div class="scene-meta">
+        <span class="sm"><strong>Duracion:</strong> 3 min</span>
+        <span class="sm"><strong>Arco:</strong> Plenitud</span>
+        <span class="sm"><strong>POV:</strong> Primera persona</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="scene-vis e2-bg">
+      <div class="scene-num">E2</div>
+      <span class="scene-icon">🌫️</span>
+      <span class="scene-badge">La Grieta · 5 min</span>
+    </div>
+    <div class="scene-body">
+      <p class="scene-phase">Acto 2</p>
+      <h2 class="scene-title">La Grieta — Fatiga Cognitiva</h2>
+      <p class="scene-desc">Algo cambia. Una fatiga que no se va. Un pensamiento que no termina. El nombre de un cliente que desaparece a mitad de una frase. El cuerpo se vuelve pesado como neblina. La paleta vira al amber: calida, turbia, imprecisa. La mariposa empieza a moverse despacio.</p>
+      <div class="tags-row">
+        <span class="tag">Paleta: Amber · neblina</span>
+        <span class="tag">Primer sintoma</span>
+        <span class="tag">Niebla cognitiva</span>
+        <span class="tag">ElevenLabs - tono cansado</span>
+      </div>
+      <div class="scene-meta">
+        <span class="sm"><strong>Duracion:</strong> 5 min</span>
+        <span class="sm"><strong>Arco:</strong> Confusion creciente</span>
+        <span class="sm"><strong>Sintomas:</strong> Fatiga · Brainfog · Frio</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="scene-vis e3-bg">
+      <div class="scene-num">E3</div>
+      <span class="scene-icon">🪞</span>
+      <span class="scene-badge">El Abismo · 5 min</span>
+    </div>
+    <div class="scene-body">
+      <p class="scene-phase">Acto 3</p>
+      <h2 class="scene-title">El Abismo — Aislamiento</h2>
+      <p class="scene-desc">El mundo se vuelve negro. Ximena ya no se reconoce en el espejo. La voz cambia — Voice Changer en tiempo real — mas lenta, mas oscura. El espejo se rompe. Las reuniones duelen. El cuerpo se vuelve ajeno. La mariposa esta quieta, casi invisible.</p>
+      <div class="tags-row">
+        <span class="tag">Paleta: Negro profundo</span>
+        <span class="tag">Espejo roto</span>
+        <span class="tag">Voice Changer ElevenLabs</span>
+        <span class="tag">Aislamiento social</span>
+      </div>
+      <div class="scene-meta">
+        <span class="sm"><strong>Duracion:</strong> 5 min</span>
+        <span class="sm"><strong>Arco:</strong> Desintegracion</span>
+        <span class="sm"><strong>Tecnica:</strong> Voice degradation en tiempo real</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <div class="scene-vis e4-bg">
+      <div class="scene-num">E4</div>
+      <span class="scene-icon">🦋</span>
+      <span class="scene-badge">El Dia Cero · 5 min</span>
+    </div>
+    <div class="scene-body">
+      <p class="scene-phase">Acto 4</p>
+      <h2 class="scene-title">El Dia Cero — La Mariposa · El Diagnostico</h2>
+      <p class="scene-desc">La consulta. El endocrinologo que escucha. El TSH en pantalla. La mariposa de la tiroides aparece en toda su gloria — teal brillante, alas abiertas — mientras Ximena entiende: tiene nombre. El diagnostico es el comienzo, no el fin. La paleta vuelve al teal.</p>
+      <div class="tags-row">
+        <span class="tag">Paleta: Teal · Resurreccion</span>
+        <span class="tag">Mariposa plena</span>
+        <span class="tag">Diagnostico TSH</span>
+        <span class="tag">Esperanza</span>
+      </div>
+      <div class="scene-meta">
+        <span class="sm"><strong>Duracion:</strong> 5 min</span>
+        <span class="sm"><strong>Arco:</strong> Reconocimiento → Esperanza</span>
+        <span class="sm"><strong>Idiomas:</strong> ES · PT · EN</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+<footer>
+  <span class="fl">InnovaSalud + 3Destiny · Merck KGaA · RL-NONT-00044 · Storyboard</span>
+  <span class="fr">ThyroSense® · CONFIDENCIAL</span>
+</footer>
+</div>
+</body>
+</html>

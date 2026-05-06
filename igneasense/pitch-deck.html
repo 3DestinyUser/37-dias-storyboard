@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGNEASENSE® — Pitch Deck Astellas Pharma</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--flame:#e8601c;--amber:#c8841a;--dark:#060300}
+body{background:var(--dark);color:#fff;font-family:"Inter",sans-serif;overflow-x:hidden}
+.dot-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,0.025) 1px,transparent 1px);background-size:36px 36px}
+.content{position:relative;z-index:1}
+nav{padding:26px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-back{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s}
+.nav-back:hover{color:rgba(255,255,255,0.7)}
+.nav-logo{font-family:"Playfair Display",serif;font-size:18px;font-weight:700}
+.nav-tag{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--flame);border:1px solid rgba(232,96,28,0.3);padding:4px 12px;border-radius:100px}
+.slide{min-height:85vh;padding:80px 60px;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.05);position:relative;max-width:1200px;margin:0 auto}
+.slide-num{position:absolute;top:28px;right:60px;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2)}
+.slide-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--flame);margin-bottom:22px}
+.slide-title{font-family:"Playfair Display",serif;font-size:clamp(36px,5vw,72px);font-weight:700;line-height:1.02;letter-spacing:-0.01em;margin-bottom:20px}
+.slide-sub{font-size:clamp(14px,1.8vw,18px);color:rgba(255,255,255,0.38);max-width:680px;line-height:1.74}
+.slide-body{font-size:14px;color:rgba(255,255,255,0.48);line-height:1.76;max-width:800px;margin-top:16px}
+.slide-body p{margin-bottom:14px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-top:36px}
+.stat{padding:22px;border-radius:14px;background:rgba(232,96,28,0.04);border:1px solid rgba(232,96,28,0.12);text-align:center}
+.stat-n{font-family:"Playfair Display",serif;font-size:clamp(26px,3.5vw,44px);font-weight:700;color:var(--flame);line-height:1;margin-bottom:6px}
+.stat-l{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;line-height:1.4}
+.phase-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
+.phase-card{padding:26px;border-radius:16px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02)}
+.pc-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--flame);margin-bottom:8px}
+.pc-title{font-family:"Playfair Display",serif;font-size:22px;font-weight:700;margin-bottom:10px;line-height:1.2}
+.pc-desc{font-size:13px;color:rgba(255,255,255,0.38);line-height:1.65;margin-bottom:14px}
+.pc-tags{display:flex;gap:8px;flex-wrap:wrap}
+.ptag{font-size:10px;font-weight:600;letter-spacing:0.07em;padding:4px 10px;border-radius:100px;border:1px solid rgba(232,96,28,0.22);color:rgba(232,96,28,0.75);background:rgba(232,96,28,0.05)}
+.stations{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:28px}
+.sta{padding:16px 20px;border-radius:12px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02)}
+.sta-num{font-family:"Playfair Display",serif;font-size:24px;font-weight:700;color:var(--flame);opacity:0.6;margin-bottom:4px}
+.sta-name{font-size:13px;font-weight:600;margin-bottom:4px;color:rgba(255,255,255,0.8)}
+.sta-desc{font-size:11px;color:rgba(255,255,255,0.32);line-height:1.5}
+.inv-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:32px}
+.inv{padding:22px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07)}
+.inv.accent{background:rgba(232,96,28,0.06);border-color:rgba(232,96,28,0.25)}
+.inv-l{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:8px}
+.inv-n{font-family:"Playfair Display",serif;font-size:32px;font-weight:700;color:var(--flame);line-height:1;margin-bottom:4px}
+.inv-d{font-size:12px;color:rgba(255,255,255,0.32);line-height:1.5}
+.highlight{color:var(--flame);font-weight:600}
+.quote{font-family:"Playfair Display",serif;font-size:clamp(18px,2.5vw,28px);font-style:italic;color:rgba(255,255,255,0.55);line-height:1.5;margin:28px 0;padding-left:24px;border-left:3px solid rgba(232,96,28,0.4)}
+footer{padding:36px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between}
+.fl{font-size:12px;color:rgba(255,255,255,0.22)}.fr{font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase}
+@media(max-width:700px){.phase-grid{grid-template-columns:1fr}.slide{padding:48px 28px}}
+</style>
+</head>
+<body>
+<div class="dot-grid"></div>
+<div class="content">
+<nav>
+  <a class="nav-back" href="index.html">← IGNEASENSE Hub</a>
+  <span class="nav-logo">Pitch Deck</span>
+  <span class="nav-tag">Astellas Pharma · IS-AST-20260505</span>
+</nav>
+
+<div class="slide">
+  <span class="slide-num">01 / 08</span>
+  <p class="slide-eyebrow">Astellas Pharma · VP Medical Affairs &amp; Head of Women's Health · Mayo 2026</p>
+  <h1 class="slide-title">IGNEASENSE®</h1>
+  <p class="slide-sub">El fuego nace adentro. El dano tambien.</p>
+  <p class="slide-sub" style="margin-top:12px;font-size:14px">Experiencia Inmersiva de Menopausia — Formato Hibrido: 4D + Exhibicion Interactiva</p>
+  <div class="stat-grid" style="margin-top:48px">
+    <div class="stat"><div class="stat-n">1,100M</div><div class="stat-l">mujeres que conocen el fuego</div></div>
+    <div class="stat"><div class="stat-n">7-14</div><div class="stat-l">anos de transicion biologica</div></div>
+    <div class="stat"><div class="stat-n">$150B</div><div class="stat-l">costo economico global anual</div></div>
+    <div class="stat"><div class="stat-n">7%</div><div class="stat-l">residentes competentes en menopausia</div></div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">02 / 08</span>
+  <p class="slide-eyebrow">El Problema</p>
+  <h2 class="slide-title">La Paradoja del Prescriptor</h2>
+  <div class="slide-body">
+    <p>Los tratamientos basados en evidencia existen. Los medicos no estan siendo entrenados para reconocer, evaluar y tratar la menopausia de manera integral. El resultado: una mujer que finalmente busca ayuda llega a un consultorio donde el medico no fue entrenado para verla. La consulta dura 630 segundos. La respuesta es "es normal."</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-n">7%</div><div class="stat-l">residentes competentes en manejo de menopausia</div></div>
+    <div class="stat"><div class="stat-n">80%</div><div class="stat-l">internistas no preparados</div></div>
+    <div class="stat"><div class="stat-n">54%</div><div class="stat-l">mujeres nunca consultan</div></div>
+    <div class="stat"><div class="stat-n">55%</div><div class="stat-l">mayor riesgo CV en menopausia prematura</div></div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">03 / 08</span>
+  <p class="slide-eyebrow">El Dano Invisible</p>
+  <h2 class="slide-title">Menopausia = Riesgo Vascular Sistemico</h2>
+  <div class="slide-body">
+    <p>La menopausia no es solo bochornos. Es una ventana de riesgo vascular acelerado que la mayoria de los ginecologos no evalua y la mayoria de los cardiologos no pregunta. IGNEASENSE hace visible — y tactil — el dano que ningun sintoma senala.</p>
+    <p>La disfuncion endotelial comienza con la retirada estrogenica, anos antes de cualquier sintoma cardiovascular. Cada bochorno no tratado es un insulto endotelial acumulativo.</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-n">#1</div><div class="stat-l">causa de muerte en mujeres postmenopausicas: enf. cardiovascular</div></div>
+    <div class="stat"><div class="stat-n">77%</div><div class="stat-l">mayor riesgo CV con VMS frecuentes (SWAN)</div></div>
+    <div class="stat"><div class="stat-n">$67B</div><div class="stat-l">costo CV anual mujeres postmenopausicas EE.UU.</div></div>
+    <div class="stat"><div class="stat-n">0</div><div class="stat-l">ginecologos que evaluan riesgo CV sistematicamente</div></div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">04 / 08</span>
+  <p class="slide-eyebrow">La Solucion</p>
+  <h2 class="slide-title">Arquitectura Hibrida de Dos Fases</h2>
+  <div class="phase-grid">
+    <div class="phase-card">
+      <p class="pc-label">Fase A — VR Core · 15-18 min</p>
+      <h3 class="pc-title">4D Inmersivo con Props Tactiles</h3>
+      <p class="pc-desc">El participante siente en su propio cuerpo el bochorno, sostiene la arteria que se endurece, siente la neurona KNDy crecer entre sus dedos y presencia el dano cardiovascular acumulativo.</p>
+      <div class="pc-tags">
+        <span class="ptag">Chaleco Haptico</span><span class="ptag">Chaleco Peltier</span><span class="ptag">Masilla 2 durometros</span><span class="ptag">Bola KNDy</span><span class="ptag">Pelota cardiaca</span>
+      </div>
+    </div>
+    <div class="phase-card">
+      <p class="pc-label">Fase B — Exhibicion · 22-25 min</p>
+      <h3 class="pc-title">9 Estaciones Caminantes</h3>
+      <p class="pc-desc">La comprension encarnada se transforma en compromiso conductual. Un juego que no se puede ganar, un recorrido cardiovascular con tubos fisicos, neuronas KNDy anatomicas y el muro de compromisos.</p>
+      <div class="pc-tags">
+        <span class="ptag">9 estaciones</span><span class="ptag">Juego zona termoneutral</span><span class="ptag">Recorrido CV</span><span class="ptag">Mesa KNDy</span><span class="ptag">Muro compromisos</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">05 / 08</span>
+  <p class="slide-eyebrow">Exhibicion Interactiva</p>
+  <h2 class="slide-title">9 Estaciones — Fase B</h2>
+  <div class="stations">
+    <div class="sta"><div class="sta-num">1</div><div class="sta-name">La Zona que se Estrecha</div><div class="sta-desc">Gaming/mesa haptica · Zona termoneutral</div></div>
+    <div class="sta"><div class="sta-num">2</div><div class="sta-name">Recorrido Cardiovascular</div><div class="sta-desc">Tubos transparentes · Rigidez arterial</div></div>
+    <div class="sta"><div class="sta-num">3</div><div class="sta-name">Mesa de Neuronas KNDy</div><div class="sta-desc">Modelos anatomicos · 3D web</div></div>
+    <div class="sta"><div class="sta-num">4</div><div class="sta-name">Atlas de Sintomas</div><div class="sta-desc">Pantalla tactil · RA en 3D</div></div>
+    <div class="sta"><div class="sta-num">5</div><div class="sta-name">El Reloj Invisible</div><div class="sta-desc">7.4 anos de VMS · Filtro RA</div></div>
+    <div class="sta"><div class="sta-num">6</div><div class="sta-name">Muro de Voces</div><div class="sta-desc">8 historias · Audio direccional</div></div>
+    <div class="sta"><div class="sta-num">7</div><div class="sta-name">Sala de Datos</div><div class="sta-desc">$150B · Proyeccion mural</div></div>
+    <div class="sta"><div class="sta-num">8</div><div class="sta-name">Ruta de Tratamiento</div><div class="sta-desc">MOA animado · Display 3D web</div></div>
+    <div class="sta"><div class="sta-num">9</div><div class="sta-name">Muro de Compromisos</div><div class="sta-desc">Compromiso conductual fisico + digital</div></div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">06 / 08</span>
+  <p class="slide-eyebrow">El Ancla Take-Home</p>
+  <h2 class="slide-title">Memoria Corporal Deliberada</h2>
+  <div class="slide-body">
+    <p>Al concluir la experiencia, cada participante conserva una masilla suave. El facilitador dice:</p>
+  </div>
+  <div class="quote">"Protege la salud. Deja el dano aqui. Cada paciente que ves en tu consultorio esta en una de estas dos. Tu trabajo es preguntar en cual."</div>
+  <div class="slide-body">
+    <p>Este objeto — que cabe en un bolsillo de bata blanca — es un disparador de memoria somatica. Cada vez que el medico lo toca, la experiencia se reactiva. La neurociencia es clara: los objetos sostenidos durante experiencias emocionales crean codificacion episodica que persiste semanas despues.</p>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">07 / 08</span>
+  <p class="slide-eyebrow">Inversion — Colombia</p>
+  <h2 class="slide-title">USD $208,500 — Lanzamiento Completo</h2>
+  <div class="inv-row">
+    <div class="inv"><div class="inv-l">Assets Digitales 4D</div><div class="inv-n">$71,500</div><div class="inv-d">Produccion VR, props, haptica, validacion cientifica, dashboard</div></div>
+    <div class="inv"><div class="inv-l">Despliegue Fase A</div><div class="inv-n">$32,000</div><div class="inv-d">Props 18 sets, hardware VR 15 estaciones, facilitadores Bogota</div></div>
+    <div class="inv"><div class="inv-l">Assets Exhibicion</div><div class="inv-n">$94,500</div><div class="inv-d">9 estaciones digitales completas con todos los assets</div></div>
+    <div class="inv"><div class="inv-l">Despliegue Fase B</div><div class="inv-n">$10,000</div><div class="inv-d">Props exhibicion, hardware kioscos, facilitadores zona exhibicion</div></div>
+    <div class="inv accent"><div class="inv-l">Total Inversion</div><div class="inv-n" style="font-size:40px">$208,500</div><div class="inv-d">22 semanas desarrollo + despliegue Colombia 200 medicos + medicion 90 dias</div></div>
+    <div class="inv"><div class="inv-l">ROI Estimado</div><div class="inv-n">3:1</div><div class="inv-d">Si contribuye a prevenir 1 evento CV mayor ($760K) en primer ano</div></div>
+  </div>
+</div>
+
+<div class="slide">
+  <span class="slide-num">08 / 08</span>
+  <p class="slide-eyebrow">El Momento es Unico</p>
+  <h2 class="slide-title">Estamos Listos para Empezar</h2>
+  <div class="slide-body">
+    <p>Dos antagonistas NK aprobados (fezolinetant 2023, elinzanetant octubre 2025). La serie de referencia del Lancet publicada en marzo 2024. El momentum politico y cultural sin precedentes. <span class="highlight">La ciencia, la economia y la preparacion cultural convergen.</span></p>
+    <p>IGNEASENSE® es la herramienta para convertir ese momentum en cambio de practica real — el lunes por la manana, en el consultorio, en la empresa, en la poliza de cobertura.</p>
+    <p>Nos encantaria mostrarles como funciona en una demostracion presencial. <span class="highlight">Estamos listos para empezar.</span></p>
+  </div>
+  <div class="stat-grid" style="margin-top:40px">
+    <div class="stat"><div class="stat-n">22</div><div class="stat-l">semanas de desarrollo</div></div>
+    <div class="stat"><div class="stat-n">200</div><div class="stat-l">medicos en lanzamiento Colombia</div></div>
+    <div class="stat"><div class="stat-n">70-80%</div><div class="stat-l">retencion de experiencia vivida a 90 dias</div></div>
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">Gates de aprobacion Astellas</div></div>
+  </div>
+</div>
+
+<footer>
+  <span class="fl">InnovaSalud + 3Destiny · Luis Calderon Miranda · Juan Manuel Dobarro · IS-AST-20260505</span>
+  <span class="fr">CONFIDENCIAL · IGNEASENSE®</span>
+</footer>
+</div>
+</body>
+</html>

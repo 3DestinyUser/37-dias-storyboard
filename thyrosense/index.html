@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ThyroSense® — Hub · La Vida de Ximena</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--accent:#00c2cc;--amber:#d4823a;--dark:#020a0b}
+body{background:var(--dark);color:#fff;font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+.bg-gradient{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,194,204,0.07) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(212,130,58,0.04) 0%,transparent 50%)}
+.dot-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,0.025) 1px,transparent 1px);background-size:36px 36px}
+.content{position:relative;z-index:1}
+nav{padding:28px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-back{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s}
+.nav-back:hover{color:rgba(255,255,255,0.7)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;letter-spacing:0.04em}
+.nav-logo sup{font-size:12px;vertical-align:super}
+.nav-tag{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(0,194,204,0.3);padding:4px 12px;border-radius:100px}
+.hero{padding:80px 60px 60px;text-align:center;position:relative}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--accent);margin-bottom:24px}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(48px,7vw,90px);font-weight:700;line-height:1;letter-spacing:-0.01em;margin-bottom:8px}
+.hero-brand{font-size:18px;color:rgba(255,255,255,0.25);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:28px}
+.hero-desc{font-size:15px;color:rgba(255,255,255,0.4);max-width:580px;margin:0 auto 40px;line-height:1.75}
+/* Butterfly hero */
+.butterfly-hero{position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);width:300px;height:200px;pointer-events:none;z-index:-1;opacity:0.06}
+.butterfly-hero::before,.butterfly-hero::after{content:'';position:absolute;border-radius:50% 50% 0 50%;background:var(--accent);animation:wing-h 4s ease-in-out infinite}
+.butterfly-hero::before{width:130px;height:165px;top:0;left:10px;transform:rotate(-20deg)}
+.butterfly-hero::after{width:130px;height:165px;top:0;right:10px;transform:scaleX(-1) rotate(-20deg);animation-delay:0.3s}
+@keyframes wing-h{0%,100%{opacity:0.6;transform:rotate(-20deg) scaleY(0.95)}50%{opacity:1;transform:rotate(-25deg) scaleY(1.05)}}
+.meta-pills{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.pill{padding:8px 20px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.06em;background:rgba(255,255,255,0.03)}
+.pill-accent{border-color:rgba(0,194,204,0.3);color:var(--accent);background:rgba(0,194,204,0.05)}
+.highlights{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:60px;padding:0 60px;max-width:1300px;margin-left:auto;margin-right:auto}
+.highlight-box{padding:24px;border-radius:12px;background:rgba(0,194,204,0.04);border:1px solid rgba(0,194,204,0.12);text-align:center}
+.highlight-num{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--accent);line-height:1;margin-bottom:6px}
+.highlight-label{font-size:11px;color:rgba(255,255,255,0.32);letter-spacing:0.08em;text-transform:uppercase;line-height:1.4}
+.section{padding:0 60px 80px;max-width:1300px;margin:0 auto}
+.section-label{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:8px}
+.section-divider{height:1px;background:linear-gradient(90deg,rgba(0,194,204,0.2),transparent);margin-bottom:28px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{border-radius:16px;overflow:hidden;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease;text-decoration:none;display:block;color:#fff}
+.card:hover{transform:translateY(-5px);border-color:rgba(0,194,204,0.3);box-shadow:0 20px 50px rgba(0,194,204,0.1)}
+.card-hero{grid-column:1/-1}
+.card-visual{height:180px;position:relative;overflow:hidden}
+.card-hero .card-visual{height:250px}
+.cv-flow{background:linear-gradient(135deg,#021a1c 0%,#043c44 50%,#021218 100%)}
+.cv-storyboard{background:linear-gradient(135deg,#031015 0%,#052830 100%)}
+.cv-pitch{background:linear-gradient(135deg,#050e10 0%,#031e22 100%)}
+.cv-module{background:linear-gradient(135deg,#060f12 0%,#082028 100%)}
+.card-visual-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:80px;font-weight:700;color:rgba(0,194,204,0.07);letter-spacing:0.05em;white-space:nowrap}
+/* Teal particles on flow card */
+.card-particles{position:absolute;inset:0;overflow:hidden}
+.card-dot{position:absolute;border-radius:50%;background:rgba(0,194,204,0.5);animation:float-up linear infinite}
+@keyframes float-up{0%{transform:translateY(180px);opacity:0}10%{opacity:0.8}90%{opacity:0.2}100%{transform:translateY(-10px);opacity:0}}
+/* Butterfly on pitch card */
+.butterfly-card{position:absolute;top:50%;left:50%;width:80px;height:54px;transform:translate(-50%,-50%);opacity:0.25;animation:butterfly-pulse-c 3s ease-in-out infinite}
+.butterfly-card::before,.butterfly-card::after{content:'';position:absolute;border-radius:50% 50% 0 50%;background:var(--accent)}
+.butterfly-card::before{width:36px;height:46px;top:0;left:4px;transform:rotate(-20deg)}
+.butterfly-card::after{width:36px;height:46px;top:0;right:4px;transform:scaleX(-1) rotate(-20deg)}
+@keyframes butterfly-pulse-c{0%,100%{opacity:0.2;transform:translate(-50%,-50%) scale(0.9)}50%{opacity:0.45;transform:translate(-50%,-50%) scale(1.1)}}
+.card-body{padding:20px 24px 22px}
+.card-type{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.card-title{font-family:'Playfair Display',serif;font-size:clamp(18px,2.2vw,26px);font-weight:700;margin-bottom:8px;line-height:1.15}
+.card-desc{font-size:13px;color:rgba(255,255,255,0.38);line-height:1.65;margin-bottom:16px}
+.card-footer{display:flex;align-items:center;justify-content:space-between}
+.card-meta{font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:0.07em;text-transform:uppercase}
+.card-cta{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:6px;transition:gap 0.2s}
+.card:hover .card-cta{gap:10px}
+footer{padding:36px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between}
+.footer-l{font-size:12px;color:rgba(255,255,255,0.22)}
+.footer-r{font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="bg-gradient"></div>
+<div class="dot-grid"></div>
+<div class="content">
+<nav>
+<a class="nav-back" href="../">← InnovaSalud Hub</a>
+<span class="nav-logo">ThyroSense<sup>®</sup></span>
+<span class="nav-tag">RL-NONT-00044</span>
+</nav>
+<div class="hero">
+<div class="butterfly-hero"></div>
+<p class="hero-eyebrow">Merck KGaA · InnovaSalud · Blueprint RL-NONT-00044</p>
+<h1 class="hero-title">La Vida de Ximena</h1>
+<p class="hero-brand">ThyroSense®</p>
+<p class="hero-desc">Una experiencia VR de 18 minutos que lleva al participante a través del cuerpo y la mente de Ximena — 38 años, directora de finanzas — desde la vida plena hasta el día cero del diagnóstico tiroideo.</p>
+<div class="meta-pills">
+<span class="pill pill-accent">18 minutos</span>
+<span class="pill">4 Actos · VR Lineal</span>
+<span class="pill">Meta Quest 3</span>
+<span class="pill">Voz: Carolina · ElevenLabs</span>
+<span class="pill pill-accent">RL-NONT-00044</span>
+</div>
+</div>
+<div class="highlights">
+<div class="highlight-box"><div class="highlight-num">E1</div><div class="highlight-label">La Normalidad · Vida plena · 3 min</div></div>
+<div class="highlight-box"><div class="highlight-num">E2</div><div class="highlight-label">La Grieta · Fatiga cognitiva · 5 min</div></div>
+<div class="highlight-box"><div class="highlight-num">E3</div><div class="highlight-label">El Abismo · Aislamiento · Voice Changer · 5 min</div></div>
+<div class="highlight-box"><div class="highlight-num">E4</div><div class="highlight-label">El Día Cero · La Mariposa · Diagnóstico · 5 min</div></div>
+<div class="highlight-box"><div class="highlight-num">🦋</div><div class="highlight-label">La Mariposa · Simbolismo Tiroideo</div></div>
+<div class="highlight-box"><div class="highlight-num">3</div><div class="highlight-label">Idiomas: ES · PT · EN</div></div>
+</div>
+<div class="section">
+<p class="section-label">Materiales del Proyecto</p>
+<div class="section-divider"></div>
+<div class="grid-2">
+<a class="card card-hero" href="flow.html">
+<div class="card-visual cv-flow">
+<div class="card-particles" id="particles"></div>
+<div class="card-visual-label">E1—E4</div>
+</div>
+<div class="card-body">
+<p class="card-type">Animatic Principal</p>
+<h2 class="card-title">Flow Cinematográfico — 4 Actos</h2>
+<p class="card-desc">Recorrido inmersivo por los cuatro momentos de la vida de Ximena: La Normalidad (teal, energía, confianza), La Grieta (amber, primer síntoma, niebla), El Abismo (negro, espejo roto, voz degradada) y El Día Cero (teal, mariposa, diagnóstico). Con animaciones CSS específicas por escena y controles de navegación.</p>
+<div class="card-footer">
+<span class="card-meta">4 actos · 18 min · ←→ Space F</span>
+<span class="card-cta">Iniciar Flow →</span>
+</div>
+</div>
+</a>
+<a class="card" href="storyboard.html">
+<div class="card-visual cv-storyboard"><div class="card-visual-label">SB</div></div>
+<div class="card-body">
+<p class="card-type">Visual</p>
+<h2 class="card-title">Storyboard de los 4 Actos</h2>
+<p class="card-desc">Las cuatro escenas con descripción narrativa, simbolismo, paleta visual, líneas clave de Ximena y especificaciones de producción.</p>
+<div class="card-footer"><span class="card-meta">4 escenas · Referencia visual</span><span class="card-cta">Ver →</span></div>
+</div>
+</a>
+<a class="card" href="pitch-deck.html">
+<div class="card-visual cv-pitch"><div class="butterfly-card"></div></div>
+<div class="card-body">
+<p class="card-type">Presentación Ejecutiva</p>
+<h2 class="card-title">Pitch Deck · Merck KGaA</h2>
+<p class="card-desc">Propuesta ejecutiva: contexto tiroideo, solución VR, diseño de experiencia, producción multi-idioma ElevenLabs y pipeline técnico Unity.</p>
+<div class="card-footer"><span class="card-meta">Stakeholders · Merck</span><span class="card-cta">Ver →</span></div>
+</div>
+</a>
+<a class="card" href="module1.html">
+<div class="card-visual cv-module"><div class="card-visual-label">M1</div></div>
+<div class="card-body">
+<p class="card-type">Módulo Interactivo</p>
+<h2 class="card-title">Módulo 1 · v5b · Interactivo</h2>
+<p class="card-desc">Versión interactiva completa del Módulo 1. La experiencia web de ThyroSense que corre en navegador con el guión completo y la lógica de escenas.</p>
+<div class="card-footer"><span class="card-meta">HTML Interactivo · v5b</span><span class="card-cta">Abrir →</span></div>
+</div>
+</a>
+</div>
+</div>
+<footer>
+<span class="footer-l">InnovaSalud · Merck KGaA · Blueprint RL-NONT-00044 · Multi-idioma ES/PT/EN</span>
+<span class="footer-r">ThyroSense® · Producción VR</span>
+</footer>
+</div>
+<script>
+const c=document.getElementById('particles');
+for(let i=0;i<20;i++){
+const d=document.createElement('div');d.className='card-dot';
+const size=Math.random()*4+2;const left=Math.random()*100;
+const dur=Math.random()*6+5;const delay=Math.random()*6;
+d.style.cssText=`width:${size}px;height:${size}px;left:${left}%;bottom:0;animation-duration:${dur}s;animation-delay:${delay}s`;
+c.appendChild(d);
+}
+</script>
+</body>
+</html>

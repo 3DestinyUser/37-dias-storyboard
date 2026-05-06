@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThyroSense® — Animatic Flow · La Vida de Ximena</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--accent:#00c2cc;--amber:#d4823a;--teal:#006b73;--dark:#020a0b}
+body{background:var(--dark);color:#fff;font-family:'Inter',sans-serif;overflow:hidden;height:100vh;width:100vw;user-select:none}
+#player{position:relative;width:100vw;height:100vh;overflow:hidden;background:var(--dark)}
+.scene-slide{position:absolute;inset:0;overflow:hidden;opacity:0;z-index:1;transition:opacity 1.2s cubic-bezier(0.4,0,0.2,1)}
+.scene-slide.active{opacity:1;z-index:2}
+.scene-slide.exiting{opacity:0;z-index:3}
+.scene-bg{position:absolute;inset:0}
+.scene-gradient{position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.5) 40%,transparent 100%);z-index:6;pointer-events:none}
+.scene-slide::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0.65) 100%);z-index:5;pointer-events:none}
+.scene-text{position:absolute;bottom:0;left:0;right:0;padding:0 72px 72px;z-index:7;transform:translateY(12px);opacity:0;transition:opacity 0.8s ease 0.6s,transform 0.8s ease 0.6s}
+.scene-slide.active .scene-text{opacity:1;transform:translateY(0)}
+.scene-label{font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.scene-label::before{content:'';display:block;width:28px;height:1px;background:var(--accent);opacity:0.7}
+.scene-title{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,62px);font-weight:700;line-height:1.05;letter-spacing:-0.02em;margin-bottom:18px;text-shadow:0 2px 24px rgba(0,0,0,0.8)}
+.scene-quote{font-size:clamp(13px,1.5vw,16px);font-style:italic;color:rgba(255,255,255,0.75);line-height:1.65;max-width:640px;text-shadow:0 1px 8px rgba(0,0,0,0.9);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.scene-duration-badge{display:inline-block;margin-top:14px;padding:4px 14px;border-radius:100px;border:1px solid rgba(255,255,255,0.2);font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.06em}
+.scene-number-overlay{position:absolute;top:50%;right:60px;transform:translateY(-50%);z-index:6;font-family:'Playfair Display',serif;font-size:clamp(80px,12vw,160px);font-weight:700;color:rgba(255,255,255,0.04);letter-spacing:-0.04em;pointer-events:none;line-height:1}
+/* SCENE BACKGROUNDS */
+#s1 .scene-bg{background:linear-gradient(135deg,#021a1c 0%,#043540 40%,#061e22 100%)}
+#s2 .scene-bg{background:linear-gradient(135deg,#1a0e00 0%,#2d1800 40%,#180c00 100%)}
+#s3 .scene-bg{background:linear-gradient(180deg,#080808 0%,#101010 50%,#060a0a 100%)}
+#s4 .scene-bg{background:radial-gradient(ellipse at 50% 40%,rgba(0,194,204,0.25) 0%,#020a0b 65%)}
+/* SPECIAL EFFECTS */
+/* E1: Teal particle flow (energy/confidence) */
+.teal-particles{position:absolute;inset:0;overflow:hidden}
+.teal-dot{position:absolute;border-radius:50%;background:rgba(0,194,204,0.6);animation:float-up linear infinite}
+@keyframes float-up{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:0.3}100%{transform:translateY(-20px) scale(1);opacity:0}}
+/* E2: Amber degradation ripple */
+.amber-ripple{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid rgba(212,130,58,0.4);transform:translate(-50%,-50%);animation:ripple-expand 4s ease-out infinite}
+.amber-ripple:nth-child(2){animation-delay:1.3s}
+.amber-ripple:nth-child(3){animation-delay:2.6s}
+@keyframes ripple-expand{0%{width:40px;height:40px;opacity:0.7}100%{width:120vmax;height:120vmax;opacity:0}}
+/* E3: Dark fog + desaturation flicker */
+.fog-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(20,20,20,0.6) 0%,rgba(0,0,0,0.9) 100%);animation:fog-pulse 4s ease-in-out infinite}
+@keyframes fog-pulse{0%,100%{opacity:0.6}50%{opacity:1}}
+.static-line{position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,0.04);animation:static-scan 8s linear infinite}
+@keyframes static-scan{0%{top:-1px}100%{top:100vh}}
+/* E4: Butterfly/thyroid glow */
+.butterfly-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120px;height:80px;animation:butterfly-pulse 3s ease-in-out infinite}
+.butterfly-glow::before,.butterfly-glow::after{content:'';position:absolute;border-radius:50% 50% 0 50%;background:rgba(0,194,204,0.2);box-shadow:0 0 40px rgba(0,194,204,0.4),0 0 80px rgba(0,194,204,0.15);animation:wing-pulse 3s ease-in-out infinite}
+.butterfly-glow::before{width:55px;height:70px;top:0;left:0;transform:rotate(-20deg)}
+.butterfly-glow::after{width:55px;height:70px;top:0;right:0;transform:scaleX(-1) rotate(-20deg);animation-delay:0.2s}
+@keyframes butterfly-pulse{0%,100%{opacity:0.4;transform:translate(-50%,-50%) scale(0.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
+@keyframes wing-pulse{0%,100%{background:rgba(0,194,204,0.15);box-shadow:0 0 30px rgba(0,194,204,0.3)}50%{background:rgba(0,194,204,0.35);box-shadow:0 0 60px rgba(0,194,204,0.6),0 0 100px rgba(0,194,204,0.2)}}
+/* UI */
+#topbar{position:fixed;top:0;left:0;right:0;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;z-index:20;background:linear-gradient(to bottom,rgba(0,0,0,0.7) 0%,transparent 100%)}
+.topbar-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;letter-spacing:0.04em;opacity:0.9}
+.topbar-badge{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(0,194,204,0.3);padding:3px 10px;border-radius:100px}
+#scene-counter{font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:0.05em}
+#timeline{position:fixed;bottom:0;left:0;right:0;z-index:20;padding:0 40px 28px}
+.timeline-track{position:relative;height:3px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:12px;cursor:pointer}
+#progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),rgba(0,194,204,0.6));border-radius:3px;width:0%;transition:width 0.1s linear}
+.timeline-scenes{display:flex;gap:0;justify-content:stretch}
+.tl-scene{flex:1;font-size:9px;letter-spacing:0.05em;color:rgba(255,255,255,0.3);text-transform:uppercase;text-align:center;cursor:pointer;transition:color 0.25s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}
+.tl-scene.active-scene{color:var(--accent)}
+.tl-scene:hover{color:rgba(255,255,255,0.7)}
+.timeline-ticks{position:absolute;top:0;left:0;right:0;height:3px;pointer-events:none}
+.tick{position:absolute;top:-2px;width:1px;height:7px;background:rgba(255,255,255,0.2)}
+#controls{position:fixed;right:40px;bottom:80px;z-index:20;display:flex;flex-direction:column;gap:10px}
+.ctrl-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;backdrop-filter:blur(8px)}
+.ctrl-btn:hover{background:rgba(0,194,204,0.15);border-color:rgba(0,194,204,0.4);transform:scale(1.08)}
+.ctrl-btn:active{transform:scale(0.95)}
+#play-btn{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:30;width:80px;height:80px;border-radius:50%;background:rgba(0,194,204,0.12);border:2px solid rgba(0,194,204,0.45);color:var(--accent);font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(12px);transition:all 0.25s}
+#play-btn:hover{background:rgba(0,194,204,0.22);transform:translate(-50%,-50%) scale(1.08)}
+#play-btn.hidden{opacity:0;pointer-events:none}
+/* INTRO */
+#intro{position:fixed;inset:0;z-index:50;background:#020a0b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 1.2s ease}
+#intro.fade-out{opacity:0;pointer-events:none}
+.intro-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:var(--accent)}
+.intro-title{font-family:'Playfair Display',serif;font-size:clamp(52px,9vw,100px);font-weight:700;line-height:0.95;text-align:center;letter-spacing:-0.01em}
+.intro-sub{font-size:16px;color:rgba(255,255,255,0.35);letter-spacing:0.08em;font-style:italic}
+.intro-brand{font-size:14px;color:rgba(255,255,255,0.25);letter-spacing:0.15em;text-transform:uppercase}
+.intro-meta{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.intro-meta span{font-size:11px;color:rgba(255,255,255,0.22);letter-spacing:0.1em;text-transform:uppercase}
+.intro-play{margin-top:20px;padding:14px 40px;border-radius:100px;background:rgba(0,194,204,0.08);border:1px solid rgba(0,194,204,0.35);color:var(--accent);font-size:14px;font-weight:500;letter-spacing:0.08em;cursor:pointer;transition:all 0.25s;font-family:'Inter',sans-serif}
+.intro-play:hover{background:rgba(0,194,204,0.18);border-color:rgba(0,194,204,0.65)}
+.intro-line{width:1px;height:50px;background:linear-gradient(to bottom,transparent,rgba(0,194,204,0.4),transparent);margin:-8px 0}
+.butterfly-intro{position:absolute;opacity:0.06;pointer-events:none}
+.butterfly-intro::before,.butterfly-intro::after{content:'';position:absolute;border-radius:50% 50% 0 50%;background:var(--accent);animation:wing-pulse 4s ease-in-out infinite}
+.butterfly-intro::before{width:80px;height:100px;top:0;left:-40px;transform:rotate(-20deg)}
+.butterfly-intro::after{width:80px;height:100px;top:0;right:-40px;transform:scaleX(-1) rotate(-20deg);animation-delay:0.3s}
+</style>
+</head>
+<body>
+<div id="intro">
+<div class="butterfly-intro" style="width:200px;height:140px;top:50%;left:50%;transform:translate(-50%,-60%) scale(3)"></div>
+<p class="intro-eyebrow">Merck KGaA · InnovaSalud · Blueprint RL-NONT-00044</p>
+<div class="intro-line"></div>
+<h1 class="intro-title">La Vida<br>de Ximena</h1>
+<p class="intro-sub">Una experiencia VR sobre tiroides y el día cero</p>
+<p class="intro-brand">ThyroSense®</p>
+<div class="intro-meta">
+<span>4 actos</span><span>·</span><span>18 minutos</span><span>·</span><span>Meta Quest 3</span><span>·</span><span>Voz: Carolina · ElevenLabs</span>
+</div>
+<div class="intro-line"></div>
+<button class="intro-play" onclick="startFlow()">▶ &nbsp; Iniciar Flow</button>
+</div>
+<div id="player">
+<div class="scene-slide" id="s1">
+<div class="scene-bg">
+<div class="teal-particles" id="particles"></div>
+</div>
+<div class="scene-gradient"></div>
+<div class="scene-number-overlay">E1</div>
+<div class="scene-text">
+<p class="scene-label">Acto 1 · La Normalidad</p>
+<h2 class="scene-title">Mi nombre es Ximena.</h2>
+<p class="scene-quote">"Y este es un martes. Solo un martes normal. 52 empleados. Tres clientes. Dos hijos. Una vida que yo elegí y que funciona porque yo la sostengo."</p>
+<span class="scene-duration-badge">3:00 · POV Escritorio/Ciudad · Confianza Total</span>
+</div>
+</div>
+<div class="scene-slide" id="s2">
+<div class="scene-bg">
+<div class="amber-ripple"></div>
+<div class="amber-ripple"></div>
+<div class="amber-ripple"></div>
+</div>
+<div class="scene-gradient"></div>
+<div class="scene-number-overlay">E2</div>
+<div class="scene-text">
+<p class="scene-label">Acto 2 · La Grieta</p>
+<h2 class="scene-title">Algo es diferente hoy.</h2>
+<p class="scene-quote">"Todos se quejan del calor. Yo lo siento desde adentro. La palabra estaba ahí. Frente a mí. Y no llegaba. Mi hija de ocho años sabe que mamá no es la de antes."</p>
+<span class="scene-duration-badge">5:00 · POV Degradación · Fatiga · Niebla cognitiva</span>
+</div>
+</div>
+<div class="scene-slide" id="s3">
+<div class="scene-bg">
+<div class="fog-overlay"></div>
+<div class="static-line"></div>
+</div>
+<div class="scene-gradient"></div>
+<div class="scene-number-overlay">E3</div>
+<div class="scene-text">
+<p class="scene-label">Acto 3 · El Abismo</p>
+<h2 class="scene-title">Mañana, mi amor.</h2>
+<p class="scene-quote">"Hoy no puedo. ¿Quién es esta persona que me mira? Revisé este reporte cuatro veces y no sé si está bien. ¿Qué me está pasando?"</p>
+<span class="scene-duration-badge">5:00 · POV Espejo Roto · Voice Changer · Aislamiento</span>
+</div>
+</div>
+<div class="scene-slide" id="s4">
+<div class="scene-bg">
+<div class="butterfly-glow"></div>
+</div>
+<div class="scene-gradient"></div>
+<div class="scene-number-overlay">E4</div>
+<div class="scene-text">
+<p class="scene-label">Acto 4 · El Umbral del Diagnóstico</p>
+<h2 class="scene-title">El Día Cero.</h2>
+<p class="scene-quote">"Ximena, no estabas imaginando el cansancio. Tu cuerpo estaba gritando, pero en una frecuencia que nadie más podía oír. Ese fue el día cero. El día en que dejé de ser una extraña para mí misma."</p>
+<span class="scene-duration-badge">5:00 · POV Consultorio Onírico · La Mariposa · Tiroides</span>
+</div>
+</div>
+</div>
+<div id="topbar">
+<div style="display:flex;align-items:center;gap:14px">
+<span class="topbar-title">ThyroSense®</span>
+<span class="topbar-badge">RL-NONT-00044</span>
+</div>
+<div style="display:flex;align-items:center;gap:20px"><span id="scene-counter">1 / 4</span></div>
+</div>
+<div id="controls">
+<button class="ctrl-btn" onclick="toggleFS()" title="Pantalla completa">⛶</button>
+<button class="ctrl-btn" onclick="prevScene()" title="Anterior">‹</button>
+<button class="ctrl-btn" id="btn-play" onclick="togglePlay()" title="Play/Pause">⏸</button>
+<button class="ctrl-btn" onclick="nextScene()" title="Siguiente">›</button>
+</div>
+<button id="play-btn" class="hidden" onclick="togglePlay()">▶</button>
+<div id="timeline">
+<div class="timeline-track" onclick="seekTimeline(event)">
+<div id="progress-bar"></div>
+<div class="timeline-ticks" id="ticks"></div>
+</div>
+<div class="timeline-scenes" id="tl-scenes"></div>
+</div>
+<script>
+const SCENES=[
+{id:'s1',label:'La Normalidad',duration:180,color:'#043540'},
+{id:'s2',label:'La Grieta',duration:300,color:'#2d1800'},
+{id:'s3',label:'El Abismo',duration:300,color:'#080808'},
+{id:'s4',label:'El Día Cero',duration:300,color:'#020a0b'}
+];
+const TOTAL_DURATION=SCENES.reduce((a,s)=>a+s.duration,0);
+const SLIDE_DURATION=8000;
+const TRANSITION_DURATION=1200;
+let currentIdx=0,isPlaying=false,timer=null,elapsed=0,lastTick=null;
+function init(){buildTimeline();buildParticles();goTo(0,false);}
+function buildParticles(){
+const c=document.getElementById('particles');
+for(let i=0;i<25;i++){
+const d=document.createElement('div');d.className='teal-dot';
+const size=Math.random()*5+2;
+const left=Math.random()*100;
+const dur=Math.random()*8+6;
+const delay=Math.random()*8;
+d.style.cssText=`width:${size}px;height:${size}px;left:${left}%;bottom:0;animation-duration:${dur}s;animation-delay:${delay}s`;
+c.appendChild(d);
+}
+}
+function buildTimeline(){
+const tl=document.getElementById('tl-scenes');
+const ticks=document.getElementById('ticks');
+SCENES.forEach((s,i)=>{
+const el=document.createElement('div');
+el.className='tl-scene';el.id='tl-'+i;el.textContent=s.label;
+el.onclick=()=>{goTo(i);if(!isPlaying)startPlaying();};
+tl.appendChild(el);
+if(i>0){
+const pct=SCENES.slice(0,i).reduce((a,x)=>a+x.duration,0)/TOTAL_DURATION*100;
+const tick=document.createElement('div');tick.className='tick';tick.style.left=pct+'%';
+ticks.appendChild(tick);
+}
+});
+}
+function goTo(idx,animate=true){
+const slides=document.querySelectorAll('.scene-slide');
+if(animate&&slides[currentIdx]){slides[currentIdx].classList.add('exiting');slides[currentIdx].classList.remove('active');setTimeout(()=>slides[currentIdx]?.classList.remove('exiting'),TRANSITION_DURATION+100);}
+else if(slides[currentIdx]){slides[currentIdx].classList.remove('active','exiting');}
+currentIdx=Math.max(0,Math.min(idx,SCENES.length-1));elapsed=0;
+const slide=slides[currentIdx];
+if(slide)slide.classList.add('active');
+updateUI();
+}
+function nextScene(){if(currentIdx<SCENES.length-1)goTo(currentIdx+1);else pausePlaying();}
+function prevScene(){goTo(currentIdx-1);}
+function startPlaying(){if(isPlaying)return;isPlaying=true;lastTick=performance.now();document.getElementById('btn-play').textContent='⏸';document.getElementById('play-btn').classList.add('hidden');tick();}
+function pausePlaying(){isPlaying=false;if(timer){cancelAnimationFrame(timer);timer=null;}document.getElementById('btn-play').textContent='▶';document.getElementById('play-btn').classList.remove('hidden');}
+function togglePlay(){if(isPlaying)pausePlaying();else startPlaying();}
+function tick(){if(!isPlaying)return;const now=performance.now();const dt=now-lastTick;lastTick=now;elapsed+=dt;if(elapsed>=SLIDE_DURATION){elapsed=0;nextScene();if(currentIdx===SCENES.length-1&&elapsed>=SLIDE_DURATION){pausePlaying();return;}}updateProgress();timer=requestAnimationFrame(tick);}
+function updateProgress(){const scenePct=SCENES.slice(0,currentIdx).reduce((a,x)=>a+x.duration,0)/TOTAL_DURATION;const inScenePct=(elapsed/SLIDE_DURATION)*(SCENES[currentIdx].duration/TOTAL_DURATION);document.getElementById('progress-bar').style.width=((scenePct+inScenePct)*100)+'%';}
+function updateUI(){document.getElementById('scene-counter').textContent=(currentIdx+1)+' / '+SCENES.length;document.querySelectorAll('.tl-scene').forEach((el,i)=>el.classList.toggle('active-scene',i===currentIdx));}
+function seekTimeline(e){const track=e.currentTarget;const pct=e.offsetX/track.offsetWidth;let acc=0;for(let i=0;i<SCENES.length;i++){acc+=SCENES[i].duration/TOTAL_DURATION;if(pct<=acc){goTo(i);if(!isPlaying)startPlaying();break;}}}
+function toggleFS(){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+function startFlow(){const intro=document.getElementById('intro');intro.classList.add('fade-out');setTimeout(()=>{intro.style.display='none';startPlaying();},1200);}
+document.addEventListener('keydown',e=>{if(e.code==='ArrowRight')nextScene();else if(e.code==='ArrowLeft')prevScene();else if(e.code==='Space'){e.preventDefault();togglePlay();}else if(e.code==='KeyF')toggleFS();});
+init();
+</script>
+</body>
+</html>

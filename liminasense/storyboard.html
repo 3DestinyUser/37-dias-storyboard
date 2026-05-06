@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LIMINASENSE® — Storyboard · 9 Escenas</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--accent:#b06ef3;--pain:#c41e3a;--dark:#05000f}
+body{background:var(--dark);color:#fff;font-family:'Inter',sans-serif}
+.dot-grid{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(rgba(255,255,255,0.025) 1px,transparent 1px);background-size:36px 36px}
+.content{position:relative;z-index:1}
+nav{padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-back{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s}
+.nav-back:hover{color:rgba(255,255,255,0.7)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;letter-spacing:0.08em}
+.nav-logo sup{font-size:11px;vertical-align:super}
+header{padding:60px 48px 48px;text-align:center}
+.eyebrow{font-size:10px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,56px);font-weight:700;margin-bottom:12px;letter-spacing:-0.01em}
+.subtitle{font-size:15px;color:rgba(255,255,255,0.4);margin-bottom:40px}
+.total-time{display:inline-block;padding:8px 24px;border-radius:100px;border:1px solid rgba(176,110,243,0.3);font-size:12px;color:var(--accent);letter-spacing:0.1em}
+/* SCENES GRID */
+.scenes{padding:0 48px 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;max-width:1280px;margin:0 auto}
+.scene-card{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);transition:all 0.3s}
+.scene-card:hover{border-color:rgba(176,110,243,0.3);transform:translateY(-4px);box-shadow:0 16px 40px rgba(176,110,243,0.1)}
+.scene-visual{height:170px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.scene-num-bg{font-family:'Playfair Display',serif;font-size:100px;font-weight:700;color:rgba(255,255,255,0.04);position:absolute;bottom:-10px;right:16px;line-height:1;letter-spacing:-0.04em}
+/* Per-scene visuals */
+.sv-1{background:radial-gradient(ellipse at 50% 35%,rgba(176,110,243,0.4) 0%,#1a0630 100%)}
+.sv-2{background:linear-gradient(135deg,#1a0f00,#2d1a00,#180c00)}
+.sv-3{background:radial-gradient(ellipse at center,#0a0014,#000)}
+.sv-4{background:radial-gradient(ellipse at 35% 45%,rgba(196,30,58,0.55),#180008 60%)}
+.sv-5{background:radial-gradient(ellipse at center,#050a1e,#000)}
+.sv-6{background:linear-gradient(180deg,#1a1a1a,#0d0d0d)}
+.sv-7{background:linear-gradient(135deg,#04040c,#080818)}
+.sv-8{background:linear-gradient(135deg,#0d0a1e,#1a0a3e,#0a0a14)}
+.sv-9{background:radial-gradient(ellipse at 50% 60%,rgba(200,169,110,0.3),#0a0800 65%)}
+/* special elements */
+.sv-3 .aura-sb{position:absolute;top:45%;left:55%;width:18px;height:14px;border-radius:50%;border:2px solid #e8d5ff;box-shadow:0 0 8px #b06ef3;clip-path:polygon(50% 0%,100% 0%,100% 100%,50% 100%);animation:aura-sb-ex 5s ease-out infinite,sc-sb 0.15s steps(2) infinite;transform:translate(-50%,-50%)}
+@keyframes aura-sb-ex{0%{width:18px;height:14px;opacity:0}10%{opacity:1}80%{width:140px;height:105px;opacity:0.4}100%{width:160px;height:120px;opacity:0}}
+@keyframes sc-sb{0%{border-color:#fff}50%{border-color:#b06ef3}100%{border-color:#e8d5ff}}
+.sv-4 .pulse-sb{position:absolute;top:45%;left:40%;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(196,30,58,0.6),transparent);animation:pulsb 1s ease-in-out infinite;transform:translate(-50%,-50%)}
+@keyframes pulsb{0%,100%{opacity:0.3;transform:translate(-50%,-50%) scale(0.8)}50%{opacity:0.9;transform:translate(-50%,-50%) scale(1.3)}}
+.sv-5 .synapse-sb{position:absolute;width:4px;height:4px;border-radius:50%;background:rgba(0,212,255,0.7);animation:syn-sb 2s ease-in-out infinite}
+.sv-5 .csd-sb{position:absolute;top:0;left:-20%;width:25%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.12),transparent);animation:csd-sb 4s linear infinite}
+@keyframes syn-sb{0%,100%{opacity:0}50%{opacity:1}}
+@keyframes csd-sb{0%{left:-25%}100%{left:120%}}
+.sv-9 .gold-glow{position:absolute;top:50%;left:50%;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,rgba(200,169,110,0.5),transparent);transform:translate(-50%,-50%);animation:gold-pulse 2.5s ease-in-out infinite}
+@keyframes gold-pulse{0%,100%{opacity:0.3;transform:translate(-50%,-50%) scale(0.8)}50%{opacity:0.8;transform:translate(-50%,-50%) scale(1.5)}}
+/* Scene card body */
+.scene-body{padding:20px 22px 22px}
+.scene-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.scene-phase{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent)}
+.scene-badge{font-size:10px;color:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.1);padding:2px 10px;border-radius:100px;white-space:nowrap}
+.scene-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;line-height:1.2}
+.scene-desc{font-size:12.5px;color:rgba(255,255,255,0.45);line-height:1.65;margin-bottom:14px}
+.scene-specs{display:flex;gap:8px;flex-wrap:wrap}
+.spec{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.05em;background:rgba(255,255,255,0.04);padding:3px 10px;border-radius:100px;border:1px solid rgba(255,255,255,0.07)}
+</style>
+</head>
+<body>
+<div class="dot-grid"></div>
+<div class="content">
+<nav>
+<a class="nav-back" href="index.html">← Hub LIMINASENSE</a>
+<span class="nav-logo">LIMINASENSE<sup>®</sup></span>
+<a class="nav-back" href="flow.html">Animatic →</a>
+</nav>
+<header>
+<p class="eyebrow">Storyboard Visual · 9 Escenas</p>
+<h1>Las Cuatro Fases de Gabriela</h1>
+<p class="subtitle">Pródromo · Aura · Cefalea · Postdromo + Ciencia + Datos + Compromiso</p>
+<span class="total-time">Duración total: ~27 min · Meta Quest 3 + Exhibición 4D</span>
+</header>
+<div class="scenes">
+
+<div class="scene-card"><div class="scene-visual sv-1"><div class="scene-num-bg">01</div></div>
+<div class="scene-body">
+<div class="scene-header"><span class="scene-phase">Presentación</span><span class="scene-badge">2:00</span></div>
+<h2 class="scene-title">Gabriela Soto Ramírez</h2>
+<p class="scene-desc">34 años. Directora creativa. Ciudad de México. 21 años con migraña sin diagnóstico durante los primeros 5. 8 a 10 días de ataque al mes. Tres tratamientos preventivos abandonados por efectos adversos.</p>
+<div class="scene-specs"><span class="spec">POV Primer Encuentro</span><span class="spec">CDMX</span><span class="spec">34 años</span></div>
+</div></div>
+
+<div class="scene-card"><div class="scene-visual sv-2"><div class="scene-num-bg">02</div></div>
+<div class="scene-body">
+<div class="scene-header"><span class="scene-phase">Fase 1 · Pródromo</span><span class="scene-badge">3:00</span></div>
+<h2 class="scene-title">El Aviso</h2>
+<p class="scene-desc">18 horas comprimidas en 6 minutos: bostezos, rigidez cervical, antojo de chocolate, irritabilidad con su hija Emilia, visión borrosa, sueño inquieto. La acumulación invisible que nadie más ve ni cree.</p>
+<div class="scene-specs"><span class="spec">POV Acumulación</span><span class="spec">18h → 6min</span><span class="spec">Invisible</span></div>
+</div></div>
+
+<div class="scene-card"><div class="scene-visual sv-3"><div class="aura-sb"></div><div class="scene-num-bg">03</div></div>
+<div class="scene-body">
+<div class="scene-header"><span class="scene-phase">Fase 2 · Aura Visual ★</span><span class="scene-badge">3:30</span></div>
+<h2 class="scene-title">Lo Que Gabriela Ve</h2>
+<p class="scene-desc">Escotoma centellante expandiéndose en el campo visual del participante. Espectros de fortificación. Primera simulación VR en tiempo real de aura visual en la historia de la educación médica.</p>
+<div class="scene-specs"><span class="spec">Primera en VR</span><span class="spec">Escotoma CSS</span><span class="spec">Espectros</span></div>
+</div></div>
+
+<div class="scene-card"><div class="scene-visual sv-4"><div class="pulse-sb"></div><div class="scene-num-bg">04</div></div>
+<div class="scene-body">
+<div class="scene-header"><span class="scene-phase">Fase 2 · Cefalea</span><span class="scene-badge">3:00</span></div>
+<h2 class="scene-title">La Tormenta</h2>
+<p class="scene-desc">Cefalea unilateral pulsátil. Fotofobia. Fonofobia. Náusea. Alodinia cutánea. Osmofobia. El sistema TEMPLE HAPTIC replica la pulsación temporal a 60-90 BPM directamente en el headset.</p>
+<div class="scene-specs"><span class="spec">TEMPLE HAPTIC</span><span class="spec">60-90 BPM</span><span class="spec">Multisensorial</span></div>
+</div></div>
+
+<div class="scene-card"><div class="scene-visual sv-5">
+<div class="synapse-sb" style="left:20%;top:30%;animation-delay:0s"></div>
+<div class="synapse-sb" style="left:50%;top:60%;animation-delay:0.7s"></div>
+<div class="synapse-sb" style="left:75%;top:25%;animation-delay:1.4s"></div>
+<div class="synapse-sb" style="left:35%;top:70%;animation-delay:2.1s"></div>
+<div class="csd-sb"></div>
+<div class="scene-num-bg">05</div></div>
+<div class="scene-body">
+<div class="scene-header"><span class="scene-phase">Zoom Molecular</span><span class="scene-badge">3:30</span></div>
+<h2 class="scene-title">Adentro del Cerebro</h2>
+<p class="scene-desc">Zoom desde la corteza cerebral hasta la unión trigeminovascular. Onda CSD a 3mm/min. Liberación de CGRP. Unión al receptor. El punto exacto donde interviene el gepant. Estética Cosmos.</p>
+<div class="scene-specs"><span class="spec">CSD 3mm/min</span><span class="spec">CGRP</span><span class="spec">Gepant</span></div>
+</div></div>
+
+<div class="scene-card"><div class="scene-visual sv-6"><div class="scene-num-bg">06</div></div>
+<div class="scene-body">
+<div class="scene-header"><span class="scene-phase">Fase 4 · Postdromo</span><span class="scene-badge">2:30</span></div>
+<h2 class="scene-title">El Día Invisible</h2>
+<p class="scene-desc">25.2 horas de niebla cognitiva, fatiga y rigidez. Gabriela trabaja. Funciona. "Se ve bien". El 80% invisible del ataque que nadie cuenta, nadie registra, nadie trata. La Calculadora lo hace visible.</p>
+<div class="scene-specs"><span class="spec">25.2h Postdromo</span><span class="spec">El 80% oculto</span><span class="spec">Niebla cognitiva</span></div>
+</div></div>
+
+<div class="scene-card"><div class="scene-visual sv-7"><div class="scene-num-bg">07</div></div>
+<div class="scene-body">
+<div class="scene-header"><span class="scene-phase">Epidemiología</span><span class="scene-badge">2:00</span></div>
+<h2 class="scene-title">1,160 Millones</h2>
+<p class="scene-desc">Segunda causa de discapacidad global. Primera en menores de 50. Solo 13% recibe prevención. 4 años entre diagnóstico y primer tratamiento. 1.2% del PIB de México. La brecha preventiva visible.</p>
+<div class="scene-specs"><span class="spec">GBD 2021</span><span class="spec">1.2% PIB MX</span><span class="spec">13% prevención</span></div>
+</div></div>
+
+<div class="scene-card"><div class="scene-visual sv-8"><div class="scene-num-bg">08</div></div>
+<div class="scene-body">
+<div class="scene-header"><span class="scene-phase">La Experiencia Híbrida</span><span class="scene-badge">3:00</span></div>
+<h2 class="scene-title">LIMINASENSE®</h2>
+<p class="scene-desc">7 estaciones: El Juego (imposible de ganar), Las 4 Fases, La Calculadora Invisible, El Muro de Voces (8 países), La Sala de Datos, La Línea del Tiempo CGRP, El Muro de Compromisos.</p>
+<div class="scene-specs"><span class="spec">7 Estaciones</span><span class="spec">5 Formatos</span><span class="spec">Congreso · KOL · Rep</span></div>
+</div></div>
+
+<div class="scene-card"><div class="scene-visual sv-9"><div class="gold-glow"></div><div class="scene-num-bg">09</div></div>
+<div class="scene-body">
+<div class="scene-header"><span class="scene-phase">El Compromiso</span><span class="scene-badge">1:30</span></div>
+<h2 class="scene-title">Cross Into Migraine</h2>
+<p class="scene-desc">Escribe tu compromiso. Escanea el QR. Seguimiento a 7, 30 y 90 días vía WhatsApp Business API. El lunes por la mañana, en el consultorio, algo habrá cambiado. Ese es el objetivo.</p>
+<div class="scene-specs"><span class="spec">QR + WhatsApp</span><span class="spec">7/30/90 días</span><span class="spec">Kirkpatrick L3</span></div>
+</div></div>
+
+</div>
+</div>
+</body>
+</html>

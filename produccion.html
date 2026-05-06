@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>37 Días — Plan de Producción · InnovaSalud 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A96E;
+  --gold-dim: rgba(201,169,110,0.15);
+  --dark: #080C14;
+  --dark-2: #0D1420;
+  --dark-3: #141C2E;
+  --dark-4: #1A2540;
+  --white: #F0EDE8;
+  --gray: #6B7280;
+  --gray-light: #9CA3AF;
+  --green: #22C55E;
+  --green-dim: rgba(34,197,94,0.12);
+  --blue: #3B82F6;
+  --blue-dim: rgba(59,130,246,0.12);
+  --red: #EF4444;
+  --red-dim: rgba(239,68,68,0.12);
+  --amber: #F59E0B;
+  --amber-dim: rgba(245,158,11,0.12);
+  --purple: #8B5CF6;
+  --purple-dim: rgba(139,92,246,0.12);
+  --sidebar: 220px;
+  --header: 56px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--dark);
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── TOP HEADER ─── */
+.top-header {
+  height: var(--header);
+  background: var(--dark-2);
+  border-bottom: 1px solid rgba(201,169,110,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-logo {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+}
+
+.header-sep { color: rgba(201,169,110,0.3); }
+
+.header-title {
+  font-size: 0.8rem;
+  color: var(--gray-light);
+  font-weight: 400;
+}
+
+.header-badges {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.badge {
+  padding: 0.2rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.badge-lite { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.25); }
+.badge-gold { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(201,169,110,0.3); }
+
+/* ─── LAYOUT ─── */
+.layout {
+  display: flex;
+  flex: 1;
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: var(--sidebar);
+  background: var(--dark-2);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  position: sticky;
+  top: var(--header);
+  height: calc(100vh - var(--header));
+  overflow-y: auto;
+  padding: 1.5rem 0;
+  flex-shrink: 0;
+}
+
+.sidebar-section {
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.78rem;
+  color: var(--gray-light);
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.sidebar-item:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.03);
+}
+
+.sidebar-item.active {
+  color: var(--gold);
+  border-left-color: var(--gold);
+  background: var(--gold-dim);
+  font-weight: 600;
+}
+
+.sidebar-icon { font-size: 0.9rem; opacity: 0.7; }
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  flex: 1;
+  padding: 2.5rem 3rem;
+  overflow-y: auto;
+  max-width: 1100px;
+}
+
+/* ─── SECTION HEADERS ─── */
+.section {
+  margin-bottom: 3rem;
+  scroll-margin-top: calc(var(--header) + 1.5rem);
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-num {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.section-sub {
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* ─── KPI ROW ─── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.kpi {
+  background: var(--dark-3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 1.2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.kpi-label {
+  font-size: 0.68rem;
+  color: var(--gray-light);
+  margin-top: 0.4rem;
+  line-height: 1.4;
+}
+
+/* ─── GANTT ─── */
+.gantt-container {
+  background: var(--dark-3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gantt-header {
+  display: grid;
+  grid-template-columns: 200px repeat(14, 1fr);
+  background: var(--dark-4);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.gantt-col-label {
+  padding: 0.6rem 0.5rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.04);
+}
+
+.gantt-col-label:first-child {
+  text-align: left;
+  padding-left: 1rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+
+.gantt-row {
+  display: grid;
+  grid-template-columns: 200px repeat(14, 1fr);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.15s;
+}
+
+.gantt-row:hover { background: rgba(255,255,255,0.02); }
+
+.gantt-row.phase-header {
+  background: rgba(201,169,110,0.06);
+  border-bottom: 1px solid rgba(201,169,110,0.15);
+}
+
+.gantt-task-label {
+  padding: 0.6rem 1rem;
+  font-size: 0.72rem;
+  color: var(--gray-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-right: 1px solid rgba(255,255,255,0.04);
+}
+
+.gantt-row.phase-header .gantt-task-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+
+.gantt-cell {
+  border-right: 1px solid rgba(255,255,255,0.03);
+  padding: 4px 2px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.gantt-bar {
+  height: 16px;
+  border-radius: 3px;
+  width: 100%;
+  position: relative;
+}
+
+.bar-preproduccion { background: linear-gradient(to right, #6366F1, #818CF8); opacity: 0.85; }
+.bar-audio { background: linear-gradient(to right, #EC4899, #F472B6); opacity: 0.85; }
+.bar-visual { background: linear-gradient(to right, #3B82F6, #60A5FA); opacity: 0.85; }
+.bar-haptic { background: linear-gradient(to right, #F59E0B, #FCD34D); opacity: 0.85; }
+.bar-prop { background: linear-gradient(to right, #10B981, #34D399); opacity: 0.85; }
+.bar-scent { background: linear-gradient(to right, #8B5CF6, #A78BFA); opacity: 0.85; }
+.bar-integration { background: linear-gradient(to right, #EF4444, #F87171); opacity: 0.85; }
+.bar-qa { background: linear-gradient(to right, #F97316, #FB923C); opacity: 0.85; }
+.bar-deploy { background: linear-gradient(to right, var(--gold), var(--gold-dim)); opacity: 1; }
+.bar-milestone { background: var(--gold); width: 12px; height: 12px; transform: rotate(45deg); margin: auto; }
+
+.gantt-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 1.2rem;
+  background: var(--dark-4);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  color: var(--gray-light);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* ─── BUDGET TABLES ─── */
+.budget-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.budget-card {
+  background: var(--dark-3);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.budget-card-header {
+  padding: 1rem 1.2rem;
+  background: var(--dark-4);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.budget-card-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.03em;
+}
+
+.budget-card-badge {
+  font-size: 0.6rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+table.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+
+.budget-table th {
+  padding: 0.5rem 0.8rem;
+  text-align: left;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gray);
+  text-transform: uppercase;
+  background: var(--dark-4);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.budget-table td {
+  padding: 0.55rem 0.8rem;
+  color: var(--gray-light);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.budget-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.budget-table .td-cat { color: var(--white); font-weight: 500; }
+.budget-table .td-range { font-family: 'JetBrains Mono', monospace; color: var(--gold); font-size: 0.68rem; }
+
+.budget-table tfoot td {
+  font-weight: 700;
+  color: var(--white);
+  border-top: 1px solid rgba(201,169,110,0.3);
+  background: rgba(201,169,110,0.06);
+  padding: 0.75rem 0.8rem;
+}
+
+.budget-table tfoot .td-range { font-size: 0.78rem; color: var(--gold); }
+
+/* ─── COMPARISON TABLE ─── */
+.comparison-table {
+  background: var(--dark-3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+table.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.73rem;
+}
+
+.comp-table th {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--gold);
+  background: var(--dark-4);
+  border-bottom: 1px solid rgba(201,169,110,0.2);
+}
+
+.comp-table th:first-child { color: var(--gray); font-weight: 600; }
+
+.comp-table td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  color: var(--gray-light);
+  vertical-align: top;
+}
+
+.comp-table td:first-child {
+  font-weight: 600;
+  color: var(--white);
+}
+
+.comp-table tr:hover td { background: rgba(255,255,255,0.015); }
+
+.comp-table .td-win { color: var(--green); font-weight: 600; }
+.comp-table .td-note { color: var(--gray); font-size: 0.68rem; }
+
+/* ─── TEAM GRID ─── */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.team-card {
+  background: var(--dark-3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 1.1rem 1.2rem;
+  transition: all 0.2s;
+}
+
+.team-card:hover {
+  border-color: rgba(201,169,110,0.3);
+}
+
+.team-role {
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+  line-height: 1.3;
+}
+
+.team-desc {
+  font-size: 0.65rem;
+  color: var(--gray);
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+
+.team-badge {
+  display: inline-flex;
+  font-size: 0.58rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.team-badge-full { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(59,130,246,0.25); }
+.team-badge-lite { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.25); }
+.team-badge-both { background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(139,92,246,0.25); }
+
+/* ─── KPI TABLE ─── */
+.kpi-table-wrap {
+  background: var(--dark-3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+table.kpi-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+
+.kpi-table th {
+  padding: 0.6rem 1rem;
+  text-align: left;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gray);
+  text-transform: uppercase;
+  background: var(--dark-4);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.kpi-table td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  color: var(--gray-light);
+  vertical-align: middle;
+}
+
+.kpi-table tr:hover td { background: rgba(255,255,255,0.02); }
+.kpi-table .td-kpi { font-weight: 600; color: var(--white); }
+.kpi-table .td-target { font-family: 'JetBrains Mono', monospace; color: var(--green); font-size: 0.68rem; }
+.kpi-table .td-when { color: var(--amber); font-size: 0.68rem; }
+
+/* ─── RISK TABLE ─── */
+.risk-wrap {
+  background: var(--dark-3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+table.risk-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+
+.risk-table th {
+  padding: 0.6rem 1rem;
+  text-align: left;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gray);
+  text-transform: uppercase;
+  background: var(--dark-4);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.risk-table td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  color: var(--gray-light);
+  vertical-align: top;
+}
+
+.risk-table .td-risk { font-weight: 600; color: var(--white); }
+
+.risk-pill {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.risk-high { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+.risk-med { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+.risk-low { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+
+/* ─── CONSENT CHECKLIST ─── */
+.checklist {
+  background: var(--dark-3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.checklist-header {
+  padding: 0.9rem 1.2rem;
+  background: var(--dark-4);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 0.75rem 1.2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.15s;
+}
+
+.checklist-item:hover { background: rgba(255,255,255,0.02); }
+
+.checklist-box {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid rgba(201,169,110,0.4);
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.checklist-box.checked {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.checklist-box.checked::after { content: '✓'; color: var(--dark); font-size: 0.65rem; font-weight: 700; }
+
+.checklist-content { flex: 1; }
+.checklist-title { font-size: 0.75rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+.checklist-desc { font-size: 0.65rem; color: var(--gray); line-height: 1.4; }
+
+.checklist-urgency {
+  font-size: 0.6rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+}
+
+/* ─── NEXT STEPS ─── */
+.next-steps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.next-card {
+  background: var(--dark-3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 1.4rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.next-card:hover {
+  border-color: rgba(201,169,110,0.3);
+  transform: translateY(-2px);
+}
+
+.next-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.nc-1::before { background: #6366F1; }
+.nc-2::before { background: #EC4899; }
+.nc-3::before { background: #3B82F6; }
+.nc-4::before { background: #10B981; }
+
+.next-card-num {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--gray);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.next-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.next-card-desc {
+  font-size: 0.72rem;
+  color: var(--gray);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.next-card-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.next-item {
+  font-size: 0.68rem;
+  color: var(--gray-light);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.4;
+}
+
+.next-item::before { content: '→'; color: var(--gold); flex-shrink: 0; font-size: 0.7rem; }
+
+/* ─── PRINT / EXPORT BAR ─── */
+.action-bar {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.action-btn {
+  padding: 0.35rem 0.9rem;
+  border-radius: 5px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--dark);
+}
+.btn-primary:hover { opacity: 0.85; }
+
+.btn-secondary {
+  background: var(--dark-4);
+  color: var(--gray-light);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-secondary:hover { color: var(--white); }
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: rgba(255,255,255,0.05);
+  margin: 2rem 0;
+}
+</style>
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<div class="top-header">
+  <div class="header-brand">
+    <div class="header-logo">37 DÍAS</div>
+    <span class="header-sep">|</span>
+    <div class="header-title">Plan de Producción — Versión 1.0 · Abril 2026</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <div class="header-badges">
+      <span class="badge badge-gold">InnovaSalud</span>
+      <span class="badge badge-lite">Lite Deployment ★</span>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn btn-secondary" onclick="window.print()">🖨 Imprimir</button>
+      <button class="action-btn btn-primary" onclick="exportPlan()">↓ Exportar</button>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-label">Visión General</div>
+    <a href="#overview" class="sidebar-item active"><span class="sidebar-icon">📊</span>Dashboard</a>
+    <a href="#gantt" class="sidebar-item"><span class="sidebar-icon">📅</span>Gantt 14 Semanas</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Producción</div>
+    <a href="#budget" class="sidebar-item"><span class="sidebar-icon">💰</span>Presupuesto</a>
+    <a href="#comparison" class="sidebar-item"><span class="sidebar-icon">⚖️</span>Full vs. Lite</a>
+    <a href="#team" class="sidebar-item"><span class="sidebar-icon">👥</span>Equipo</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Operaciones</div>
+    <a href="#kpis" class="sidebar-item"><span class="sidebar-icon">🎯</span>KPIs de Impacto</a>
+    <a href="#risks" class="sidebar-item"><span class="sidebar-icon">⚠️</span>Riesgos y Flags</a>
+    <a href="#consents" class="sidebar-item"><span class="sidebar-icon">✅</span>Consents Pendientes</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Próximos Pasos</div>
+    <a href="#next" class="sidebar-item"><span class="sidebar-icon">🚀</span>Next Steps</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ─── DASHBOARD ─── -->
+  <section class="section" id="overview">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Dashboard del Proyecto</h2>
+    </div>
+    <p class="section-sub">Estado actual · Configuración Lite Deployment recomendada · Primer congreso: Buenos Aires</p>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-value">14</div>
+        <div class="kpi-label">Semanas de producción hasta despliegue</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">500</div>
+        <div class="kpi-label">HCPs objetivo por congreso</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">27m</div>
+        <div class="kpi-label">Duración de la experiencia core</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">$35K</div>
+        <div class="kpi-label">Hardware Lite Deployment (USD)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">20</div>
+        <div class="kpi-label">Personas en el equipo core</div>
+      </div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-value">11</div>
+        <div class="kpi-label">Escenas VR (+ CTA médico)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">9</div>
+        <div class="kpi-label">Canales sensoriales (Lite)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">12</div>
+        <div class="kpi-label">Prop handoffs por participante</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">25</div>
+        <div class="kpi-label">Participantes simultáneos por sesión</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">42m</div>
+        <div class="kpi-label">Duración total por batch (Lite)</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── GANTT ─── -->
+  <section class="section" id="gantt">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Cronograma Gantt — 14 Semanas</h2>
+    </div>
+    <p class="section-sub">Semana 1 = aprobación de sponsor. Semana 14 = despliegue en congreso BsAs. Tracks paralelos desde semana 4.</p>
+
+    <div class="gantt-container">
+      <div class="gantt-header">
+        <div class="gantt-col-label">TAREA / TRACK</div>
+        <div class="gantt-col-label">S1</div><div class="gantt-col-label">S2</div>
+        <div class="gantt-col-label">S3</div><div class="gantt-col-label">S4</div>
+        <div class="gantt-col-label">S5</div><div class="gantt-col-label">S6</div>
+        <div class="gantt-col-label">S7</div><div class="gantt-col-label">S8</div>
+        <div class="gantt-col-label">S9</div><div class="gantt-col-label">S10</div>
+        <div class="gantt-col-label">S11</div><div class="gantt-col-label">S12</div>
+        <div class="gantt-col-label">S13</div><div class="gantt-col-label">S14</div>
+      </div>
+
+      <!-- FASE 1: PREPRODUCCIÓN -->
+      <div class="gantt-row phase-header">
+        <div class="gantt-task-label">⟦ FASE 1 · PRE-PRODUCCIÓN ⟧</div>
+        <div class="gantt-cell" style="grid-column:span 14"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Consents familia + Bezrodnik</div>
+        <div class="gantt-cell"><div class="gantt-bar bar-preproduccion"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-preproduccion"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-preproduccion"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Grabación — Sesión 3 (Carolina)</div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-preproduccion"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-preproduccion"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Grabación — Juanma + Bauti + Agustina</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-preproduccion"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-preproduccion"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Diseño sonoro y composición musical</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-audio"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-audio"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-audio"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-audio"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+
+      <!-- FASE 2: DESARROLLO VR -->
+      <div class="gantt-row phase-header">
+        <div class="gantt-task-label">⟦ FASE 2 · DESARROLLO VR ⟧</div>
+        <div class="gantt-cell" style="grid-column:span 14"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Unity — Bloque NICU (Escenas 1–3)</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Unity — Bloque Familia (Escenas 4, 6–8)</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Unity — Molecular Journey (5A) + 7</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Unity — Cancha, Puerta, CTA (9–10+)</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-visual"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Haptic Design (Lite) — Arduino + firmware</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-haptic"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-haptic"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-haptic"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-haptic"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Prop Fabrication — Silicone casting + 3D print</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-prop"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-prop"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-prop"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Scent Design — OVR ION 3 cartridges</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-scent"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-scent"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-scent"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+
+      <!-- FASE 3: QA -->
+      <div class="gantt-row phase-header">
+        <div class="gantt-task-label">⟦ FASE 3 · INTEGRACIÓN & QA ⟧</div>
+        <div class="gantt-cell" style="grid-column:span 14"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Integración multi-sistema + MDM</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-integration"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-integration"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-integration"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Alpha interno — equipo completo</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-qa"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Review clínica (inmunólogo + psicólogo)</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-qa"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-qa"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Beta con HCPs (n=10) + calibración props</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-qa"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Sign-off pulmonólogo (mouthpiece) + ética</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-qa"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Ajustes post-beta + build final</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-qa"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-qa"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+
+      <!-- FASE 4: DEPLOY -->
+      <div class="gantt-row phase-header">
+        <div class="gantt-task-label">⟦ FASE 4 · DESPLIEGUE ⟧</div>
+        <div class="gantt-cell" style="grid-column:span 14"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Carga en 37 Quest 3 + MDM config</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-deploy"></div></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label">Entrenamiento facilitadores (8h workshop)</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-deploy"></div></div>
+        <div class="gantt-cell"><div class="gantt-bar bar-deploy"></div></div>
+        <div class="gantt-cell"></div>
+      </div>
+      <div class="gantt-row">
+        <div class="gantt-task-label" style="color:var(--gold);font-weight:700;">★ CONGRESO BUENOS AIRES — 500 HCPs</div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        <div class="gantt-cell"></div>
+        <div class="gantt-cell" style="background:rgba(201,169,110,0.1);"><div class="gantt-bar bar-deploy" style="opacity:1;box-shadow:0 0 8px rgba(201,169,110,0.4)"></div></div>
+      </div>
+
+      <div class="gantt-legend">
+        <div class="legend-item"><div class="legend-dot bar-preproduccion"></div> Pre-producción</div>
+        <div class="legend-item"><div class="legend-dot bar-audio"></div> Audio</div>
+        <div class="legend-item"><div class="legend-dot bar-visual"></div> VR Development</div>
+        <div class="legend-item"><div class="legend-dot bar-haptic"></div> Haptic Design</div>
+        <div class="legend-item"><div class="legend-dot bar-prop"></div> Props</div>
+        <div class="legend-item"><div class="legend-dot bar-scent"></div> Scent</div>
+        <div class="legend-item"><div class="legend-dot bar-integration"></div> Integración</div>
+        <div class="legend-item"><div class="legend-dot bar-qa"></div> QA / Testing</div>
+        <div class="legend-item"><div class="legend-dot bar-deploy"></div> Despliegue ★</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── BUDGET ─── -->
+  <section class="section" id="budget">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Presupuesto por Categoría</h2>
+    </div>
+    <p class="section-sub">Estimaciones en USD. Primer despliegue incluye hardware amortizable. Despliegues adicionales: solo ops + consumibles.</p>
+
+    <div class="budget-section">
+      <div class="budget-card">
+        <div class="budget-card-header">
+          <div class="budget-card-title">Lite Deployment  ★ Recomendado</div>
+          <span class="budget-card-badge badge-lite">LITE</span>
+        </div>
+        <table class="budget-table">
+          <thead><tr><th>Categoría</th><th>Rango (USD)</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr><td class="td-cat">Pre-producción</td><td class="td-range">$15K–25K</td><td>Consents, viaje BsAs, estudio</td></tr>
+            <tr><td class="td-cat">Audio / Voces</td><td class="td-range">$30K–45K</td><td>4+ voces, música, foley</td></tr>
+            <tr><td class="td-cat">Producción Visual VR</td><td class="td-range">$140K–200K</td><td>10 entornos, personajes, molecular</td></tr>
+            <tr><td class="td-cat">Haptic Design (Lite)</td><td class="td-range">$12K–20K</td><td>Arduino, firmware, calibración</td></tr>
+            <tr><td class="td-cat">Fabricación de Props</td><td class="td-range">$8K–12K</td><td>Silicona, 3D print, boquillas</td></tr>
+            <tr><td class="td-cat">Diseño de Aromas</td><td class="td-range">$15K–25K</td><td>8 cartuchos ION 3 custom</td></tr>
+            <tr><td class="td-cat">Integración + QA</td><td class="td-range">$45K–65K</td><td>Sync, MDM, versiones idioma</td></tr>
+            <tr><td class="td-cat">Hardware</td><td class="td-range">$35K–39K</td><td>37 Quest 3 + ION 3 + Lite haptic</td></tr>
+            <tr><td class="td-cat">Ops por congreso</td><td class="td-range">$24K–38K</td><td>Staff, venue, logística</td></tr>
+            <tr><td class="td-cat">Medición + Seguimiento</td><td class="td-range">$10K–15K</td><td>Encuestas, análisis, follow-up</td></tr>
+          </tbody>
+          <tfoot><tr><td>TOTAL PRIMER DESPLIEGUE</td><td class="td-range">$338K–484K</td><td>Hardware amortizado en 3+ congresos</td></tr></tfoot>
+        </table>
+      </div>
+
+      <div class="budget-card">
+        <div class="budget-card-header">
+          <div class="budget-card-title">Full Deployment  (bHaptics)</div>
+          <span class="budget-card-badge badge-gold">FULL</span>
+        </div>
+        <table class="budget-table">
+          <thead><tr><th>Categoría</th><th>Rango (USD)</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr><td class="td-cat">Pre-producción</td><td class="td-range">$15K–25K</td><td>Igual que Lite</td></tr>
+            <tr><td class="td-cat">Audio / Voces</td><td class="td-range">$30K–45K</td><td>Igual que Lite</td></tr>
+            <tr><td class="td-cat">Producción Visual VR</td><td class="td-range">$140K–200K</td><td>Igual que Lite</td></tr>
+            <tr><td class="td-cat">Haptic Design (Full)</td><td class="td-range">$20K–35K</td><td>bHaptics patterns + calibración</td></tr>
+            <tr><td class="td-cat">Fabricación de Props</td><td class="td-range">—</td><td>No aplica en Full</td></tr>
+            <tr><td class="td-cat">Diseño de Aromas</td><td class="td-range">$15K–25K</td><td>Igual que Lite</td></tr>
+            <tr><td class="td-cat">Integración + QA</td><td class="td-range">$45K–65K</td><td>Igual que Lite</td></tr>
+            <tr><td class="td-cat">Hardware</td><td class="td-range">$45K–60K</td><td>37 Quest 3 + TactSuit + TactGloves</td></tr>
+            <tr><td class="td-cat">Ops por congreso</td><td class="td-range">$25K–40K</td><td>Staff, venue, logística</td></tr>
+            <tr><td class="td-cat">Medición + Seguimiento</td><td class="td-range">$10K–15K</td><td>Igual que Lite</td></tr>
+          </tbody>
+          <tfoot><tr><td>TOTAL PRIMER DESPLIEGUE</td><td class="td-range">$345K–510K</td><td>Hardware más caro; ops más simples</td></tr></tfoot>
+        </table>
+      </div>
+    </div>
+
+    <div class="budget-card" style="max-width:500px;">
+      <div class="budget-card-header">
+        <div class="budget-card-title">Despliegues Adicionales</div>
+      </div>
+      <table class="budget-table">
+        <thead><tr><th>Config</th><th>Por congreso adicional</th><th>Qué incluye</th></tr></thead>
+        <tbody>
+          <tr><td class="td-cat">Lite</td><td class="td-range">$28K–43K</td><td>Ops + consumibles + prop replacement</td></tr>
+          <tr><td class="td-cat">Full</td><td class="td-range">$25K–40K</td><td>Ops + consumibles higiene</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── COMPARISON ─── -->
+  <section class="section" id="comparison">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Full vs. Lite — Comparación Definitiva</h2>
+    </div>
+    <p class="section-sub">El Lite Deployment supera al Full en 5 de 7 métricas clave. La complejidad operativa es el único trade-off real.</p>
+
+    <div class="comparison-table">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Métrica</th>
+            <th>Full Deployment</th>
+            <th>Lite Deployment ★</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hardware por unidad</td>
+            <td>$45K–60K</td>
+            <td class="td-win">$35K–39K · Ahorra $10K–21K</td>
+          </tr>
+          <tr>
+            <td>Canales sensoriales</td>
+            <td>4 (visual, audio, vibrotáctil, olfato)</td>
+            <td class="td-win">9 (+ temperatura, textura, respiración, tactile pathology, kinestésico)</td>
+          </tr>
+          <tr>
+            <td>Impacto emocional Escena 5A</td>
+            <td>Vibración + visual molecular</td>
+            <td class="td-win">Tejido pulmonar en manos + boquilla + cascade fisico + antibody models</td>
+          </tr>
+          <tr>
+            <td>Tiempo de fitting por batch</td>
+            <td>7 minutos (chaleco + guantes)</td>
+            <td class="td-win">4 minutos (headset + bone conductor only)</td>
+          </tr>
+          <tr>
+            <td>Peso de transporte</td>
+            <td>~120 kg (vests + gloves)</td>
+            <td class="td-win">~25 kg · 5x más liviano</td>
+          </tr>
+          <tr>
+            <td>Ops por batch</td>
+            <td class="td-win">Simple — facilitadores monitorean</td>
+            <td>Alta complejidad — 12 prop handoffs/participante</td>
+          </tr>
+          <tr>
+            <td>Costo operativo adicional</td>
+            <td class="td-win">$25K–40K/congreso</td>
+            <td>$28K–43K/congreso (capacitación extendida)</td>
+          </tr>
+          <tr>
+            <td>Veredicto</td>
+            <td class="td-note">Más simple de operar. Menor impacto sensorial.</td>
+            <td class="td-win">Más liviano, más barato en hardware, impacto sensorial superior. Recomendado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── TEAM ─── -->
+  <section class="section" id="team">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Equipo — 20 personas</h2>
+    </div>
+    <p class="section-sub">17 para Full; 3 roles adicionales en Lite. Todos los roles core son part-time excepto los developers VR y el Project Manager.</p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-role">🎬 Director Creativo</div>
+        <div class="team-desc">Diseño de experiencia inmersiva, educación médica, competencia cultural LATAM</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🩺 Asesor Médico (Inmunólogo)</div>
+        <div class="team-desc">Revisión de precisión clínica — escenas moleculares, cascada de complemento, PID</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">💻 VR Developer Lead</div>
+        <div class="team-desc">Unity/Meta Quest 3, audio espacial, optimización de rendimiento, filtros POV</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🏗 VR Developer — Entornos (×2)</div>
+        <div class="team-desc">NICU, hogar, hospital, cocina, cancha de fútbol, pasillo de La Puerta</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">✨ VR Developer — Efectos</div>
+        <div class="team-desc">Particle systems, molecular visualization (5A), newborn vision filter, split-screen shader</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🔬 Consultor Visualización Molecular</div>
+        <div class="team-desc">Precisión científica en el rendering de IgG/IgA/IgM, comportamiento de patógenos</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🎵 Diseñador de Audio</div>
+        <div class="team-desc">Audio ambisonics, diseño de soundscape emocional, mezcla final</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🎼 Compositor</div>
+        <div class="team-desc">Score minimal LATAM-informed — la música como ausencia diseñada</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">📝 Guionista</div>
+        <div class="team-desc">Español argentino nativo, narrativa médica, adaptaciones ES-LATAM / PT-BR</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🎮 Haptic Designer</div>
+        <div class="team-desc">bHaptics patterns (Full) / Programación Arduino + bone conductor (Lite)</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🌸 Diseñador de Aromas</div>
+        <div class="team-desc">OVR ION 3, formulación de 8 cartuchos custom, pruebas de fatiga olfatoria</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🎨 UX Designer</div>
+        <div class="team-desc">Interacción por gaze, accesibilidad, pathway Comfort (opt-out)</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🧪 QA Lead</div>
+        <div class="team-desc">Testing multi-device (25 Quest 3 simultáneos), verificación de sync</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🧠 Reviewer Trauma-Informed</div>
+        <div class="team-desc">Psicología clínica pediátrica, experiencia NICU y enfermedad crónica</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">🌎 Reviewer Cultural LATAM</div>
+        <div class="team-desc">Especificidad argentina, adaptaciones regionales, revisión lingüística</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card">
+        <div class="team-role">📋 Project Manager</div>
+        <div class="team-desc">Cronograma, stakeholders, gestión de consents, coordinación sponsor</div>
+        <span class="team-badge team-badge-both">Ambos</span>
+      </div>
+      <div class="team-card" style="border-color:rgba(34,197,94,0.3)">
+        <div class="team-role">⚙️ Lite Deployment Engineer ★</div>
+        <div class="team-desc">Bass transducer, firmware neumático, bone conduction, heartbeat pads, prop timing sync</div>
+        <span class="team-badge team-badge-lite">Solo Lite</span>
+      </div>
+      <div class="team-card" style="border-color:rgba(34,197,94,0.3)">
+        <div class="team-role">🏭 Especialista en Props ★</div>
+        <div class="team-desc">Moldes silicona (pulmones, corazón), impresión 3D (complement trays), boquillas</div>
+        <span class="team-badge team-badge-lite">Solo Lite</span>
+      </div>
+      <div class="team-card" style="border-color:rgba(34,197,94,0.3)">
+        <div class="team-role">🫁 Consultor Pulmonólogo ★</div>
+        <div class="team-desc">Calibración de boquilla de resistencia respiratoria, certificación, protocolos de emergencia</div>
+        <span class="team-badge team-badge-lite">Solo Lite</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── KPIs ─── -->
+  <section class="section" id="kpis">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2 class="section-title">KPIs de Impacto — Modelo Kirkpatrick</h2>
+    </div>
+    <p class="section-sub">4 niveles: Reacción → Aprendizaje → Conducta → Resultados. Cada KPI tiene target, método y timing.</p>
+
+    <div class="kpi-table-wrap">
+      <table class="kpi-table">
+        <thead>
+          <tr>
+            <th>Nivel</th><th>KPI</th><th>Target</th><th>Método</th><th>¿Cuándo?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="risk-pill risk-low">L1 Reacción</span></td>
+            <td class="td-kpi">Tasa de completación</td>
+            <td class="td-target">&gt;93%</td>
+            <td>MDM session logs</td>
+            <td class="td-when">Por batch</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill risk-low">L1 Reacción</span></td>
+            <td class="td-kpi">Impacto emocional</td>
+            <td class="td-target">&gt;4.2 / 5.0</td>
+            <td>Post-survey Q1</td>
+            <td class="td-when">Por batch</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill risk-low">L1 Reacción</span></td>
+            <td class="td-kpi">NPS (recomendaría a colega)</td>
+            <td class="td-target">&gt;75</td>
+            <td>Post-survey Q5</td>
+            <td class="td-when">Por despliegue</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill risk-low">L1 Reacción</span></td>
+            <td class="td-kpi">Opt-out (Escena 6)</td>
+            <td class="td-target">&lt;10%</td>
+            <td>MDM Comfort icon logs</td>
+            <td class="td-when">Por batch</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill" style="background:var(--blue-dim);color:var(--blue);border:1px solid rgba(59,130,246,0.3)">L2 Aprendizaje</span></td>
+            <td class="td-kpi">Shift en importancia de ruta de tratamiento</td>
+            <td class="td-target">&gt;1.5 pts Likert</td>
+            <td>Pre/Post survey Q3</td>
+            <td class="td-when">Por despliegue</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill" style="background:var(--blue-dim);color:var(--blue);border:1px solid rgba(59,130,246,0.3)">L2 Aprendizaje</span></td>
+            <td class="td-kpi">ID correcto de patrón de infecciones PID</td>
+            <td class="td-target">&gt;80%</td>
+            <td>Post-survey knowledge</td>
+            <td class="td-when">Por despliegue</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill" style="background:var(--blue-dim);color:var(--blue);border:1px solid rgba(59,130,246,0.3)">L2 Aprendizaje</span></td>
+            <td class="td-kpi">Conciencia de carga psicosocial en hermanos</td>
+            <td class="td-target">Pre &lt;30% → Post &gt;65%</td>
+            <td>Pre/Post survey Q4</td>
+            <td class="td-when">Por despliegue</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill risk-med">L3 Conducta</span></td>
+            <td class="td-kpi">Tasa de respuesta follow-up 7 días</td>
+            <td class="td-target">&gt;35%</td>
+            <td>Plataforma digital</td>
+            <td class="td-when">7 días post</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill risk-med">L3 Conducta</span></td>
+            <td class="td-kpi">Pedido de IgG en infecciones recurrentes</td>
+            <td class="td-target">&gt;50% aumento</td>
+            <td>Auto-reporte 30 días</td>
+            <td class="td-when">30 días post</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill risk-med">L3 Conducta</span></td>
+            <td class="td-kpi">Conversación SCIG con familia en IVIG</td>
+            <td class="td-target">&gt;40% iniciaron</td>
+            <td>Auto-reporte 30 días</td>
+            <td class="td-when">30 días post</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill risk-med">L3 Conducta</span></td>
+            <td class="td-kpi">Pregunta sobre hermanos en consulta</td>
+            <td class="td-target">&gt;45%</td>
+            <td>Auto-reporte 30 días</td>
+            <td class="td-when">30 días post</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill risk-high">L4 Resultados</span></td>
+            <td class="td-kpi">Derivaciones a inmunología (institucional)</td>
+            <td class="td-target">Aumento medible</td>
+            <td>Datos LASID member centers</td>
+            <td class="td-when">6–12 meses</td>
+          </tr>
+          <tr>
+            <td><span class="risk-pill risk-high">L4 Resultados</span></td>
+            <td class="td-kpi">Uptake SCIG en pacientes IVIG</td>
+            <td class="td-target">Aumento medible</td>
+            <td>Datos Takeda (anon.)</td>
+            <td class="td-when">6–12 meses</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── RISKS ─── -->
+  <section class="section" id="risks">
+    <div class="section-head">
+      <span class="section-num">07</span>
+      <h2 class="section-title">Flags de Riesgo Críticos</h2>
+    </div>
+    <p class="section-sub">17 flags identificados en el blueprint. Los de nivel HIGH requieren resolución antes de cualquier despliegue público.</p>
+
+    <div class="risk-wrap">
+      <table class="risk-table">
+        <thead>
+          <tr><th>#</th><th>Flag</th><th>Nivel</th><th>Mitigation</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td class="td-risk">Boquilla respiratoria — contraindicación</td>
+            <td><span class="risk-pill risk-high">HIGH</span></td>
+            <td>Screening respiratorio obligatorio + sign-off pulmonólogo + máx. 20 cmH₂O + 30 seg peak + opt-in solo</td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td class="td-risk">Re-traumatización por NICU / escena IVIG</td>
+            <td><span class="risk-pill risk-high">HIGH</span></td>
+            <td>Aviso de contenido sensible + icono Comfort activo + staff de apoyo emocional + pathway alternativo</td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td class="td-risk">Joaquín y Agustina: consentimiento</td>
+            <td><span class="risk-pill risk-high">HIGH</span></td>
+            <td>No se puede desplegar sin consent individual de Joaquín + Agustina, o anonimización completa como composites</td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td class="td-risk">Consent institucional Dra. Bezrodnik</td>
+            <td><span class="risk-pill risk-high">HIGH</span></td>
+            <td>Outreach formal al Centro de Inmunología Clínica antes de cualquier despliegue público</td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td class="td-risk">Presencia de sponsor en escenas emocionales</td>
+            <td><span class="risk-pill risk-high">HIGH</span></td>
+            <td>Prohibición absoluta técnica en el build VR. Solo zonas de entrada/salida.</td>
+          </tr>
+          <tr>
+            <td>06</td>
+            <td class="td-risk">Falsa esperanza por beat de de-escalación (Escena 10)</td>
+            <td><span class="risk-pill risk-high">HIGH</span></td>
+            <td>Disclaimer explícito en texto de pantalla: "Esta es la posibilidad de una familia. No es una predicción clínica."</td>
+          </tr>
+          <tr>
+            <td>07</td>
+            <td class="td-risk">Escena IVIG re-traumatizante</td>
+            <td><span class="risk-pill risk-high">HIGH</span></td>
+            <td>Sin agujas visuales, sin sangre. Solo manos + palabras + haptic. Comfort opt-out. Consult psicólogo.</td>
+          </tr>
+          <tr>
+            <td>08</td>
+            <td class="td-risk">Higiene de props compartidos</td>
+            <td><span class="risk-pill risk-med">MED</span></td>
+            <td>UV-C entre batches (mín. 5 min). Gel y boquillas single-use. Esponjas reemplazadas cada 100 usos.</td>
+          </tr>
+          <tr>
+            <td>09</td>
+            <td class="td-risk">Sensibilidad látex/silicona</td>
+            <td><span class="risk-pill risk-med">MED</span></td>
+            <td>Todo silicona medical-grade, libre de látex. Guantes nitrilo disponibles. Screening en check-in.</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td class="td-risk">Lectura padre-héroe / madre-villana</td>
+            <td><span class="risk-pill risk-med">MED</span></td>
+            <td>Sesión 3 con Carolina obligatoria antes de finalización. Su voz en Escena 7 es la corrección.</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td class="td-risk">Negación de Bauti como riesgo de diseño</td>
+            <td><span class="risk-pill risk-med">MED</span></td>
+            <td>Ambivalencia de Juanma ("lo más sano que escuché") contiene ambas lecturas. No romanticizar ni patologizar.</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td class="td-risk">Sensibilidad a movimiento (motion sickness)</td>
+            <td><span class="risk-pill risk-low">LOW</span></td>
+            <td>Experiencia 100% sentada. Sin locomoción. Escena 5A tiene opción de reducción de movimiento.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── CONSENTS ─── -->
+  <section class="section" id="consents">
+    <div class="section-head">
+      <span class="section-num">08</span>
+      <h2 class="section-title">Consents y Aprobaciones Pendientes</h2>
+    </div>
+    <p class="section-sub">Esta checklist define el camino crítico. Ningún despliegue público es posible sin TODOS los ítems HIGH marcados.</p>
+
+    <div class="checklist">
+      <div class="checklist-header">
+        <span>Checklist de Producción — Pre-Despliegue</span>
+        <span style="font-size:0.65rem;color:var(--gray);">Click para marcar completado</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Consent — Juanma (voz principal)</div>
+          <div class="checklist-desc">Incluye: uso de voz y likeness, uso de frases literales, grabaciones de video, uso comercial/educativo, adaptaciones idiomáticas</div>
+        </div>
+        <span class="checklist-urgency risk-high risk-pill">CRÍTICO</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Consent — Carolina (voz + historia)</div>
+          <div class="checklist-desc">Sesión 3 obligatoria para: voz en Escena 7, revisión de su representación como personaje, aprobación del arc narrativo</div>
+        </div>
+        <span class="checklist-urgency risk-high risk-pill">CRÍTICO</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Consent — Bautista (historia + posible voz)</div>
+          <div class="checklist-desc">Es menor de edad actualmente — requiere consent de tutor (Juanma/Carolina) + asentimiento propio. Voz opcional (si consiente, grabar Sesión 4)</div>
+        </div>
+        <span class="checklist-urgency risk-high risk-pill">CRÍTICO</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Consent — Joaquín (hermano)</div>
+          <div class="checklist-desc">Su historia en Escenas 4 y 8 es central. Si no consiente individualmente → anonimización completa como personaje compuesto</div>
+        </div>
+        <span class="checklist-urgency risk-high risk-pill">CRÍTICO</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Consent — Agustina (media hermana)</div>
+          <div class="checklist-desc">Una sola línea en Escena 8 — su frase literal es [REAL]. Si no consiente → voz de actriz + frase adaptada</div>
+        </div>
+        <span class="checklist-urgency risk-high risk-pill">CRÍTICO</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Consent institucional — Dra. Bezrodnik / Centro de Inmunología Clínica</div>
+          <div class="checklist-desc">Su nombre y rol son parte de la narrativa central (Escena 5B). Outreach formal obligatorio antes de cualquier despliegue público.</div>
+        </div>
+        <span class="checklist-urgency risk-high risk-pill">CRÍTICO</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Sign-off pulmonólogo — boquilla de resistencia respiratoria</div>
+          <div class="checklist-desc">Certificado de calibración a máx. 20 cmH₂O, protocolos de emergencia, contraindicaciones documentadas, firma pre-despliegue</div>
+        </div>
+        <span class="checklist-urgency risk-high risk-pill">CRÍTICO</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Revisión ética / IRB equivalente LATAM</div>
+          <div class="checklist-desc">Protocolo de bienestar psicológico, gestión de datos (Ley 25.326 Argentina), manejo de participantes vulnerables, protocolo Comfort</div>
+        </div>
+        <span class="checklist-urgency risk-high risk-pill">CRÍTICO</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Acuerdo de sponsor — Takeda (primario)</div>
+          <div class="checklist-desc">Definir: nivel de sponsorship, protocolo de presencia de marca, acceso a datos, derechos sobre materiales, número de congresos</div>
+        </div>
+        <span class="checklist-urgency risk-med risk-pill">URGENTE</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Acuerdo institucional — IPOPI / LASID</div>
+          <div class="checklist-desc">Endorsement institucional, acceso a red de congresos, logos como co-hosts, materiales clínicos en zona de salida</div>
+        </div>
+        <span class="checklist-urgency risk-med risk-pill">URGENTE</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Confirmación de diagnóstico específico de Bauti</div>
+          <div class="checklist-desc">Sesión 3 / información médica directa. Actualmente: "hipogammaglobulinemia" / PAD. Confirmar nomenclatura exacta IUIS 2022.</div>
+        </div>
+        <span class="checklist-urgency risk-med risk-pill">URGENTE</span>
+      </div>
+
+      <div class="checklist-item" onclick="toggleCheck(this)">
+        <div class="checklist-box"></div>
+        <div class="checklist-content">
+          <div class="checklist-title">Revisión clínica — inmunólogo externo (precisión Escena 5A)</div>
+          <div class="checklist-desc">El Molecular Journey debe ser revisado por un inmunólogo clínico antes del despliegue. Certifica la cadena de seis pasos.</div>
+        </div>
+        <span class="checklist-urgency risk-low risk-pill">IMPORTANTE</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── NEXT STEPS ─── -->
+  <section class="section" id="next">
+    <div class="section-head">
+      <span class="section-num">09</span>
+      <h2 class="section-title">Next Steps — Las 4 Prioridades</h2>
+    </div>
+    <p class="section-sub">Para desbloquear la producción: primero los consents, luego el sponsor, en paralelo la fabricación de props.</p>
+
+    <div class="next-steps">
+      <div class="next-card nc-1">
+        <div class="next-card-num">Prioridad 01 · Esta semana</div>
+        <div class="next-card-title">Consents familiares</div>
+        <div class="next-card-desc">Ninguna producción pública puede comenzar sin esta base. Es el camino crítico absoluto.</div>
+        <div class="next-card-items">
+          <div class="next-item">Agendar Sesión 3 con Carolina — voz + revisión de narrativa</div>
+          <div class="next-item">Outreach a Bezrodnik — email formal + propuesta de consent</div>
+          <div class="next-item">Preparar documentos legales de consent (5 miembros individualmente)</div>
+          <div class="next-item">Definir: Joaquín y Agustina consenten vs. anonimización</div>
+        </div>
+      </div>
+
+      <div class="next-card nc-2">
+        <div class="next-card-num">Prioridad 02 · Semana 1–2</div>
+        <div class="next-card-title">Acercamiento a Takeda / IPOPI</div>
+        <div class="next-card-desc">El pitch deck está listo. El Pitch Deck y el Blueprint son los documentos de outreach.</div>
+        <div class="next-card-items">
+          <div class="next-item">Enviar pitch-deck.html + Blueprint a contacto Takeda LATAM</div>
+          <div class="next-item">Agendar presentación con IPOPI-LASID</div>
+          <div class="next-item">Compartir storyboard y animatic flow como muestra visual</div>
+          <div class="next-item">Presentar las 3 modalidades de sponsorship</div>
+        </div>
+      </div>
+
+      <div class="next-card nc-3">
+        <div class="next-card-num">Prioridad 03 · Semana 2–4</div>
+        <div class="next-card-title">Fabricación de Props (Lite) + Pulmonólogo</div>
+        <div class="next-card-desc">El lead time de fabricación es de 3 semanas — debe comenzar en paralelo con los consents.</div>
+        <div class="next-card-items">
+          <div class="next-item">Contratar especialista en silicona médica para casting de pulmones + corazones</div>
+          <div class="next-item">Iniciar impresión 3D de complement cascade trays (PLA + bisagras)</div>
+          <div class="next-item">Formular y testear gel de metilcelulosa para tubos de vías aéreas</div>
+          <div class="next-item">Contratar pulmonólogo para calibración de boquilla — sign-off Semana 6</div>
+        </div>
+      </div>
+
+      <div class="next-card nc-4">
+        <div class="next-card-num">Prioridad 04 · Semana 1–3</div>
+        <div class="next-card-title">Grabación de Voces — Buenos Aires</div>
+        <div class="next-card-desc">El guión está listo (GUION-37-Dias-v1.0.md). Necesitamos estudio + casting.</div>
+        <div class="next-card-items">
+          <div class="next-item">Reservar estudio de grabación BsAs (Sesiones 1–4)</div>
+          <div class="next-item">Casting de Bauti Niño (4–5 años, argentino, voz actoral)</div>
+          <div class="next-item">Confirmar: ¿Juanma real o actor profesional?</div>
+          <div class="next-item">Grabar Sesión 1 (Juanma, Escenas 1–5B) primero</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="height:4rem;"></div>
+
+</main>
+</div>
+
+<script>
+  // Sidebar active state
+  const sections = document.querySelectorAll('.section');
+  const sidebarLinks = document.querySelectorAll('.sidebar-item');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        sidebarLinks.forEach(l => l.classList.remove('active'));
+        const id = e.target.id;
+        const link = document.querySelector(`.sidebar-item[href="#${id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Checklist toggle
+  function toggleCheck(item) {
+    const box = item.querySelector('.checklist-box');
+    box.classList.toggle('checked');
+  }
+
+  // Export
+  function exportPlan() {
+    const link = document.createElement('a');
+    link.href = window.location.href;
+    link.download = '37-Dias-Plan-Produccion-v1.0.html';
+    alert('Guardá la página actual (Ctrl+S) para exportar el plan completo con tu progreso de checklist.');
+  }
+</script>
+</body>
+</html>

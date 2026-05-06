@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulación Email — 37 Días Outreach</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #1A1A2E;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2rem 1rem 4rem;
+  }
+
+  /* ─── BROWSER CHROME ─── */
+  .browser {
+    width: 100%;
+    max-width: 920px;
+    background: #2D2D3A;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  }
+
+  .browser-bar {
+    background: #3A3A4A;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .browser-dots {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .browser-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .bd-red { background: #FF5F57; }
+  .bd-yellow { background: #FEBC2E; }
+  .bd-green { background: #28C840; }
+
+  .browser-url {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border-radius: 6px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    font-family: monospace;
+  }
+
+  /* ─── EMAIL CLIENT LAYOUT ─── */
+  .mail-client {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    min-height: 600px;
+    background: #fff;
+  }
+
+  /* Sidebar */
+  .mail-sidebar {
+    background: #F8F9FA;
+    border-right: 1px solid #E5E7EB;
+    padding: 1rem 0;
+  }
+
+  .mail-sidebar-top {
+    padding: 0.5rem 1rem 1rem;
+    border-bottom: 1px solid #E5E7EB;
+    margin-bottom: 0.5rem;
+  }
+
+  .compose-btn {
+    width: 100%;
+    padding: 0.6rem;
+    background: #1A73E8;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .mail-folder {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 1.2rem;
+    font-size: 0.72rem;
+    color: #374151;
+    cursor: pointer;
+    border-radius: 0 20px 20px 0;
+    margin-right: 0.5rem;
+    transition: background 0.15s;
+  }
+
+  .mail-folder:hover { background: #E8EAED; }
+  .mail-folder.active { background: #D2E3FC; color: #1A73E8; font-weight: 600; }
+
+  .mail-folder-icon { font-size: 0.9rem; opacity: 0.7; }
+  .mail-folder-count {
+    margin-left: auto;
+    font-size: 0.65rem;
+    background: #1A73E8;
+    color: white;
+    border-radius: 10px;
+    padding: 0.1rem 0.4rem;
+    font-weight: 700;
+  }
+
+  /* Main panel */
+  .mail-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Toolbar */
+  .mail-toolbar {
+    padding: 0.6rem 1.5rem;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fff;
+  }
+
+  .tb-btn {
+    padding: 0.35rem 0.7rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    color: #374151;
+    cursor: pointer;
+    background: white;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .tb-btn:hover { background: #F3F4F6; }
+  .tb-primary { background: #1A73E8; color: white; border-color: #1A73E8; font-weight: 600; }
+  .tb-primary:hover { background: #1557B0; }
+
+  /* Email compose area */
+  .mail-compose {
+    flex: 1;
+    padding: 1.5rem;
+    background: white;
+  }
+
+  .compose-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #E5E7EB;
+    font-size: 0.78rem;
+  }
+
+  .compose-field:last-of-type { border-bottom: none; }
+
+  .cf-label {
+    color: #6B7280;
+    font-size: 0.72rem;
+    font-weight: 500;
+    min-width: 70px;
+    padding-top: 0.1rem;
+  }
+
+  .cf-value {
+    color: #111827;
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .cf-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: #EEF2FF;
+    border: 1px solid #C7D2FE;
+    border-radius: 20px;
+    padding: 0.15rem 0.7rem;
+    font-size: 0.68rem;
+    color: #3730A3;
+    font-weight: 500;
+  }
+
+  .subject-line {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    padding: 1rem 0;
+    border-bottom: 1px solid #E5E7EB;
+    margin-bottom: 1rem;
+  }
+
+  /* EMAIL BODY */
+  .email-body {
+    font-size: 0.83rem;
+    color: #374151;
+    line-height: 1.8;
+    max-width: 700px;
+  }
+
+  .email-body p {
+    margin-bottom: 1.2rem;
+  }
+
+  .email-banner {
+    background: linear-gradient(135deg, #0A1020 0%, #1A2540 100%);
+    border-radius: 8px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .email-banner::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, #C9A96E, rgba(201,169,110,0.1));
+  }
+
+  .eb-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: #C9A96E;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .eb-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #F5F0E8;
+    line-height: 0.9;
+  }
+
+  .eb-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #E8D5A3;
+    margin-top: 0.5rem;
+  }
+
+  .eb-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .eb-meta-item {
+    font-size: 0.65rem;
+    color: rgba(248,246,240,0.6);
+  }
+
+  .eb-meta-item strong { color: #C9A96E; display: block; font-size: 0.72rem; }
+
+  .email-section-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    margin-top: 1.5rem;
+  }
+
+  .email-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+
+  .email-stat {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    padding: 0.9rem 1rem;
+    border-left: 3px solid #C9A96E;
+  }
+
+  .email-stat-num {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #C9A96E;
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+  }
+
+  .email-stat-label {
+    font-size: 0.65rem;
+    color: #6B7280;
+    margin-top: 0.2rem;
+    line-height: 1.3;
+  }
+
+  .email-quote {
+    border-left: 3px solid #C9A96E;
+    padding: 0.8rem 1.2rem;
+    background: #FFFBF3;
+    border-radius: 0 6px 6px 0;
+    margin: 1.2rem 0;
+    font-style: italic;
+    color: #374151;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  .email-quote .q-author {
+    font-size: 0.65rem;
+    color: #9CA3AF;
+    font-style: normal;
+    font-weight: 600;
+    margin-top: 0.4rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .email-objectives {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.8rem 0;
+  }
+
+  .email-obj {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    color: #374151;
+    line-height: 1.4;
+  }
+
+  .email-obj-icon { flex-shrink: 0; margin-top: 0.05rem; }
+
+  .email-cta-block {
+    background: #0A1020;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+
+  .email-cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #F5F0E8;
+    margin-bottom: 0.5rem;
+  }
+
+  .email-cta-btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: #C9A96E;
+    color: #0A1020;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+
+  .email-cta-sub {
+    font-size: 0.65rem;
+    color: rgba(248,246,240,0.4);
+    margin-top: 0.6rem;
+  }
+
+  .email-attachments {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+
+  .email-attach {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    color: #374151;
+    background: #F9FAFB;
+    font-weight: 500;
+  }
+
+  .email-sign {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #E5E7EB;
+    font-size: 0.78rem;
+    color: #374151;
+  }
+
+  .sign-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #111827;
+    margin-bottom: 0.2rem;
+  }
+
+  .sign-role { color: #6B7280; margin-bottom: 0.1rem; }
+  .sign-org { color: #C9A96E; font-weight: 600; }
+
+  /* LABEL INDICATOR */
+  .simulation-note {
+    background: #FEF3C7;
+    border: 1px solid #F59E0B;
+    border-radius: 8px;
+    padding: 0.75rem 1.2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.75rem;
+    color: #92400E;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 920px;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+
+<div class="simulation-note">
+  ⚠️ <strong>Simulación de email</strong> — Esta es una previsualización exacta de cómo llegaría el mail al inbox de Takeda / el receptor. No se ha enviado nada aún.
+</div>
+
+<div class="browser">
+  <div class="browser-bar">
+    <div class="browser-dots">
+      <div class="browser-dot bd-red"></div>
+      <div class="browser-dot bd-yellow"></div>
+      <div class="browser-dot bd-green"></div>
+    </div>
+    <div class="browser-url">Gmail · Redactar · 37 Días — Propuesta de Experiencia VR · InnovaSalud 2026</div>
+  </div>
+
+  <div class="mail-client">
+
+    <!-- SIDEBAR -->
+    <div class="mail-sidebar">
+      <div class="mail-sidebar-top">
+        <button class="compose-btn">✏ Redactar</button>
+      </div>
+      <div class="mail-folder active"><span class="mail-folder-icon">📤</span> Enviados <span class="mail-folder-count">1</span></div>
+      <div class="mail-folder"><span class="mail-folder-icon">📥</span> Recibidos</div>
+      <div class="mail-folder"><span class="mail-folder-icon">⭐</span> Destacados</div>
+      <div class="mail-folder"><span class="mail-folder-icon">📁</span> Borradores</div>
+      <div class="mail-folder"><span class="mail-folder-icon">🏷</span> Proyectos</div>
+      <div style="margin-top:1rem; padding:0.5rem 1.2rem;">
+        <div style="font-size:0.6rem;letter-spacing:0.1em;color:#9CA3AF;text-transform:uppercase;font-weight:600;margin-bottom:0.5rem;">Etiquetas</div>
+        <div style="font-size:0.68rem;color:#374151;display:flex;align-items:center;gap:0.4rem;padding:0.2rem 0;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#C9A96E;display:inline-block;"></span>
+          37 Días
+        </div>
+        <div style="font-size:0.68rem;color:#374151;display:flex;align-items:center;gap:0.4rem;padding:0.2rem 0;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#3B82F6;display:inline-block;"></span>
+          Takeda Outreach
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="mail-main">
+
+      <!-- Toolbar -->
+      <div class="mail-toolbar">
+        <button class="tb-btn tb-primary">✓  Enviar</button>
+        <button class="tb-btn">🗑 Descartar</button>
+        <button class="tb-btn">📎 Adjuntar</button>
+        <button class="tb-btn">💾 Guardar borrador</button>
+        <span style="margin-left:auto;font-size:0.65rem;color:#9CA3AF;">Guardado automáticamente</span>
+      </div>
+
+      <!-- Compose -->
+      <div class="mail-compose">
+
+        <div class="compose-field">
+          <span class="cf-label">De:</span>
+          <div class="cf-value"><span class="cf-chip">✉ hola@innovasalud.ar</span></div>
+        </div>
+
+        <div class="compose-field">
+          <span class="cf-label">Para:</span>
+          <div class="cf-value">
+            <span class="cf-chip">👤 Director Medical Affairs · Takeda LATAM</span>
+          </div>
+        </div>
+
+        <div class="compose-field">
+          <span class="cf-label">CC:</span>
+          <div class="cf-value">
+            <span class="cf-chip">👤 IPOPI · Secretaría General</span>
+            &nbsp;&nbsp;
+            <span class="cf-chip">👤 LASID · Comité Científico</span>
+          </div>
+        </div>
+
+        <div class="compose-field" style="border-bottom:none;">
+          <span class="cf-label">Adjuntos:</span>
+          <div class="cf-value">
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+              <span style="font-size:0.65rem;background:#F3F4F6;border:1px solid #E5E7EB;border-radius:4px;padding:0.2rem 0.6rem;">📊 37Dias-PitchDeck.html (480KB)</span>
+              <span style="font-size:0.65rem;background:#F3F4F6;border:1px solid #E5E7EB;border-radius:4px;padding:0.2rem 0.6rem;">📅 37Dias-PlanProduccion.html (390KB)</span>
+              <span style="font-size:0.65rem;background:#F3F4F6;border:1px solid #E5E7EB;border-radius:4px;padding:0.2rem 0.6rem;">🎬 37Dias-Storyboard.html (2.1MB)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subject-line">
+          37 Días — Propuesta de Experiencia VR Inmersiva sobre IDP · InnovaSalud 2026
+        </div>
+
+        <!-- EMAIL BODY -->
+        <div class="email-body">
+
+          <!-- Banner -->
+          <div class="email-banner">
+            <div class="eb-eyebrow">InnovaSalud · Buenos Aires · 2026</div>
+            <div class="eb-title">37 Días</div>
+            <div class="eb-subtitle">Una experiencia VR inmersiva sobre Inmunodeficiencia Primaria</div>
+            <div class="eb-meta">
+              <div class="eb-meta-item"><strong>27 min</strong>Experiencia core</div>
+              <div class="eb-meta-item"><strong>Meta Quest 3</strong>Hardware</div>
+              <div class="eb-meta-item"><strong>500 HCPs</strong>Por congreso</div>
+              <div class="eb-meta-item"><strong>9 canales</strong>Sensoriales (Lite)</div>
+            </div>
+          </div>
+
+          <p>Estimado equipo de Medical Affairs de Takeda LATAM,</p>
+
+          <p>Les escribo para presentarles <strong>"37 Días"</strong>, una experiencia de realidad virtual inmersiva diseñada específicamente para transformar la comprensión de los médicos sobre la Inmunodeficiencia Primaria — no a través de diapositivas, sino a través del cuerpo.</p>
+
+          <div class="email-quote">
+            "El primer grito fue suficiente para saber que estaba vivo. No fue suficiente para saber que iba a seguir estando."
+            <div class="q-author">— Juanma · Padre de Bautista · Buenos Aires</div>
+          </div>
+
+          <div class="email-section-title">El Problema que Abordamos</div>
+
+          <div class="email-stats">
+            <div class="email-stat">
+              <div class="email-stat-num">5</div>
+              <div class="email-stat-label">años promedio de odisea diagnóstica en LATAM</div>
+            </div>
+            <div class="email-stat">
+              <div class="email-stat-num">85%</div>
+              <div class="email-stat-label">de pacientes con IDP sin diagnóstico correcto</div>
+            </div>
+            <div class="email-stat">
+              <div class="email-stat-num">+550</div>
+              <div class="email-stat-label">entidades genéticas bajo el paraguas de IDP</div>
+            </div>
+          </div>
+
+          <p>Bautista tiene hoy 17 años. Recibe tratamiento subcutáneo en su casa, en familia, sin internación. Su padre, Juanma, narra la historia con sus propias palabras. Su madre, Carolina, hizo posible la transición que lo liberó.</p>
+
+          <div class="email-section-title">La Experiencia — 5 Objetivos Conductuales Medibles</div>
+
+          <div class="email-objectives">
+            <div class="email-obj"><span class="email-obj-icon">🔍</span><span><strong>Derivación temprana:</strong> referir a inmunología ante ≥2 infecciones severas/año, antes de 5 años de búsqueda diagnóstica</span></div>
+            <div class="email-obj"><span class="email-obj-icon">💉</span><span><strong>Ruta de tratamiento:</strong> proponer opciones de Ig subcutánea a familias que actualmente reciben IVIG hospitalaria</span></div>
+            <div class="email-obj"><span class="email-obj-icon">👦</span><span><strong>Hermanos en foco:</strong> incluir a los hermanos en la evaluación psicosocial de familias con IDP</span></div>
+            <div class="email-obj"><span class="email-obj-icon">🔄</span><span><strong>Transición pediátrica:</strong> iniciar conversaciones de transición antes de los 16 años</span></div>
+            <div class="email-obj"><span class="email-obj-icon">👨‍👩‍👦</span><span><strong>Carga del cuidador:</strong> incorporar preguntas de bienestar del cuidador en cada consulta de IDP</span></div>
+          </div>
+
+          <div class="email-section-title">Alineación con Takeda</div>
+
+          <p>Bautista recibe actualmente tratamiento con SCIG facilitada (programa de soporte de pacientes con bomba domiciliaria) — una modalidad que corresponde directamente al portafolio de Takeda. La <strong>Escena 6</strong> del guión nombra las infusiones intravenosas como "torturas" con las palabras exactas del padre. La <strong>Escena 7</strong> muestra la liberación que trajo el tratamiento subcutáneo en casa. Esto no es publicidad — es el testimonio de un paciente real.</p>
+
+          <div class="email-section-title">Opción de Participación</div>
+
+          <div class="email-objectives">
+            <div class="email-obj"><span class="email-obj-icon">⭐</span><span><strong>Patrocinador Fundacional:</strong> cubre producción completa + hardware + 3 congresos LATAM — acceso exclusivo a datos de 500 HCPs por evento</span></div>
+            <div class="email-obj"><span class="email-obj-icon">🤝</span><span><strong>Alianza Institucional:</strong> co-producción con IPOPI-LASID — presencia en zonas de entrada/salida y acceso a datos compartidos</span></div>
+            <div class="email-obj"><span class="email-obj-icon">🔬</span><span><strong>Piloto de Validación:</strong> n=50-100 HCPs — con datos de impacto conductual para decisión informada de escalar</span></div>
+          </div>
+
+          <p>Adjunto encuentran el <strong>Pitch Deck ejecutivo</strong> (11 slides), el <strong>Plan de Producción completo</strong> (14 semanas, presupuesto por categoría) y el <strong>Storyboard visual</strong> de las 11 escenas.</p>
+
+          <div class="email-cta-block">
+            <div class="email-cta-title">¿Podemos agendar 30 min esta semana?</div>
+            <div style="font-size:0.75rem;color:rgba(248,246,240,0.6);margin-top:0.4rem;">La presentación completa se realiza en 25 minutos. La experiencia VR se ve en el storyboard adjunto.</div>
+            <a class="email-cta-btn">Solicitar reunión →</a>
+            <div class="email-cta-sub">O respondé este email y coordinamos en el formato que prefieran</div>
+          </div>
+
+          <div class="email-section-title">Adjuntos</div>
+          <div class="email-attachments">
+            <div class="email-attach">📊 37Dias-PitchDeck.html</div>
+            <div class="email-attach">📅 37Dias-PlanProduccion.html</div>
+            <div class="email-attach">🎬 37Dias-Storyboard.html</div>
+          </div>
+
+          <div class="email-sign">
+            <div class="sign-name">Esteban</div>
+            <div class="sign-role">Director Creativo · Proyecto 37 Días</div>
+            <div class="sign-org">InnovaSalud</div>
+            <div style="margin-top:0.5rem;font-size:0.7rem;color:#9CA3AF;">hola@innovasalud.ar · Buenos Aires, Argentina</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:2rem;text-align:center;font-size:0.7rem;color:rgba(255,255,255,0.3);">
+  Simulación de previsualización de email — InnovaSalud · 37 Días · 2026
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>37 Días — Pitch Deck · InnovaSalud 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5A3;
+    --dark: #080C14;
+    --dark-2: #0D1420;
+    --dark-3: #141C2E;
+    --dark-4: #1A2540;
+    --white: #F8F6F0;
+    --gray: #8A8F9E;
+    --accent-blue: #2A4A8C;
+    --accent-red: #8B1A1A;
+    --accent-green: #1A5C2A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* NAVIGATION */
+  #nav {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 100;
+    background: rgba(13,20,32,0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+  }
+
+  #nav button {
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50%;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  #nav button:hover { background: rgba(201,169,110,0.15); }
+  #nav button:disabled { color: rgba(201,169,110,0.2); cursor: not-allowed; }
+
+  #slide-counter {
+    font-size: 0.75rem;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  #dots {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(201,169,110,0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .dot.active { background: var(--gold); transform: scale(1.4); }
+
+  /* SLIDES */
+  #slides-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.7s ease;
+    overflow: hidden;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* SLIDE LABEL */
+  .slide-label {
+    position: absolute;
+    top: 2rem;
+    left: 2.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .slide-number {
+    position: absolute;
+    top: 2rem;
+    right: 2.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    font-weight: 500;
+  }
+
+  /* ─── SLIDE 1: COVER ─── */
+  #s1 {
+    background: var(--dark);
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #s1::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(44,76,140,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(201,169,110,0.08) 0%, transparent 50%);
+  }
+
+  .cover-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 12vw, 10rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--gold-light);
+    font-weight: 400;
+    font-style: italic;
+    margin-top: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .cover-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 2.5rem auto;
+    opacity: 0.6;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .cover-meta span { color: var(--gold-light); }
+
+  .cover-logos {
+    position: absolute;
+    bottom: 5rem;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-pill {
+    padding: 0.4rem 1.2rem;
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 4px;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  /* ─── SLIDE 2: HOOK QUOTE ─── */
+  #s2 {
+    background: var(--dark-2);
+    flex-direction: column;
+    padding: 4rem 8rem;
+  }
+
+  #s2::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+
+  .quote-mega {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--white);
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    color: var(--gold);
+    opacity: 0.15;
+    position: absolute;
+    top: -3rem;
+    left: -2rem;
+    line-height: 1;
+  }
+
+  .quote-attribution {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .quote-attribution-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  .quote-author {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .quote-context {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-top: 3rem;
+    max-width: 700px;
+    line-height: 1.7;
+  }
+
+  /* ─── SLIDE 3: EL PROBLEMA ─── */
+  #s3 {
+    background: var(--dark);
+    flex-direction: column;
+    padding: 0 6rem;
+  }
+
+  .slide-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .slide-heading-gold {
+    color: var(--gold);
+  }
+
+  .slide-subheading {
+    font-size: 0.85rem;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 3rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  .stat-card {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--gray);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .stat-label strong {
+    color: var(--white);
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+  }
+
+  .problem-quote {
+    margin-top: 2.5rem;
+    padding: 1.5rem 2rem;
+    background: rgba(139,26,26,0.1);
+    border-left: 2px solid #8B1A1A;
+    border-radius: 4px;
+    max-width: 1000px;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.6;
+  }
+
+  /* ─── SLIDE 4: LA EXPERIENCIA ─── */
+  #s4 {
+    background: var(--dark-2);
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0;
+  }
+
+  .exp-left {
+    padding: 4rem 4rem 4rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .exp-right {
+    height: 100%;
+    background: var(--dark-3);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    border-left: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 50px;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .exp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  .exp-desc {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .exp-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .spec-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .spec-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(201,169,110,0.1);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .spec-label { color: var(--gray); font-size: 0.7rem; }
+  .spec-value { color: var(--white); font-weight: 600; margin-top: 0.1rem; }
+
+  .scene-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .scene-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(13,20,32,0.5);
+    border-radius: 6px;
+    border-left: 2px solid rgba(201,169,110,0.2);
+    transition: all 0.2s;
+  }
+
+  .scene-item:hover {
+    border-left-color: var(--gold);
+    background: rgba(201,169,110,0.05);
+  }
+
+  .scene-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    font-weight: 700;
+    min-width: 24px;
+  }
+
+  .scene-title-small {
+    font-size: 0.78rem;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .scene-time {
+    margin-left: auto;
+    font-size: 0.65rem;
+    color: var(--gray);
+    font-weight: 400;
+    font-family: monospace;
+  }
+
+  /* ─── SLIDE 5: ARQUITECTURA POV ─── */
+  #s5 {
+    background: var(--dark);
+    flex-direction: column;
+    padding: 3rem 5rem;
+  }
+
+  .pov-timeline {
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+    margin-top: 2rem;
+  }
+
+  .pov-track {
+    position: relative;
+    height: 8px;
+    background: rgba(201,169,110,0.1);
+    border-radius: 10px;
+    margin-bottom: 3rem;
+  }
+
+  .pov-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--accent-blue), var(--gold));
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  .pov-nodes {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: -12px;
+    left: 0;
+    right: 0;
+  }
+
+  .pov-node {
+    width: 32px;
+    height: 32px;
+    background: var(--dark-3);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--gold);
+    position: relative;
+    cursor: default;
+  }
+
+  .pov-node-label {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    color: var(--gray);
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .pov-node-label strong {
+    color: var(--white);
+    display: block;
+    font-size: 0.65rem;
+  }
+
+  .pov-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 1.5rem;
+  }
+
+  .pov-card {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: 8px;
+    padding: 1.2rem;
+    position: relative;
+  }
+
+  .pov-card-age {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .pov-card-label {
+    font-size: 0.65rem;
+    color: var(--gray);
+    margin-top: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+
+  .pov-card-height {
+    font-size: 0.7rem;
+    color: var(--white);
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+
+  .pov-card-scene {
+    font-size: 0.6rem;
+    color: rgba(201,169,110,0.6);
+    margin-top: 0.3rem;
+  }
+
+  .pov-desc {
+    max-width: 700px;
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-top: 0rem;
+    margin-bottom: 2rem;
+  }
+
+  /* ─── SLIDE 6: OBJETIVOS CONDUCTUALES ─── */
+  #s6 {
+    background: var(--dark-2);
+    flex-direction: column;
+    padding: 3rem 5rem;
+  }
+
+  .objectives-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    width: 100%;
+    max-width: 1100px;
+    margin-top: 2rem;
+  }
+
+  .obj-card {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.1);
+    border-radius: 10px;
+    padding: 1.5rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .obj-card:hover {
+    border-color: rgba(201,169,110,0.4);
+    transform: translateY(-3px);
+  }
+
+  .obj-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .obj-number {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .obj-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  .obj-desc {
+    font-size: 0.68rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  .obj-measure {
+    font-size: 0.6rem;
+    color: rgba(201,169,110,0.7);
+    border-top: 1px solid rgba(201,169,110,0.1);
+    padding-top: 0.75rem;
+    margin-top: auto;
+    font-weight: 500;
+  }
+
+  .evidence-bar {
+    max-width: 1100px;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1.2rem 1.8rem;
+    background: rgba(42,74,140,0.15);
+    border: 1px solid rgba(42,74,140,0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .evidence-icon { font-size: 1.5rem; }
+  .evidence-text { font-size: 0.8rem; color: var(--white); line-height: 1.5; }
+  .evidence-text strong { color: #7BA3E0; }
+
+  /* ─── SLIDE 7: DEPLOYMENT ─── */
+  #s7 {
+    background: var(--dark);
+    flex-direction: column;
+    padding: 3rem 5rem;
+  }
+
+  .deploy-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 2rem;
+  }
+
+  .deploy-card {
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .deploy-card.lite {
+    background: var(--dark-3);
+    border: 2px solid var(--gold);
+  }
+
+  .deploy-card.full {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+
+  .deploy-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .deploy-badge.recommended {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  .deploy-badge.standard {
+    background: rgba(201,169,110,0.15);
+    color: var(--gold);
+    border: 1px solid rgba(201,169,110,0.3);
+  }
+
+  .deploy-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .deploy-subtitle {
+    font-size: 0.75rem;
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+  }
+
+  .deploy-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .deploy-spec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.75rem;
+  }
+
+  .deploy-spec-label { color: var(--gray); }
+  .deploy-spec-value { color: var(--white); font-weight: 600; }
+  .deploy-spec-value.gold { color: var(--gold); }
+
+  .deploy-cost {
+    padding: 1rem 1.5rem;
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .deploy-cost-label {
+    font-size: 0.6rem;
+    color: var(--gray);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .deploy-cost-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .deploy-advantage {
+    margin-top: 1.5rem;
+    font-size: 0.7rem;
+    color: rgba(201,169,110,0.8);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ─── SLIDE 8: TAKEDA ALIGNMENT ─── */
+  #s8 {
+    background: var(--dark-2);
+    flex-direction: column;
+    padding: 3rem 5rem;
+  }
+
+  .alignment-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 2rem;
+    align-items: start;
+  }
+
+  .alignment-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .alignment-point {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding: 1.2rem 1.5rem;
+    background: var(--dark-3);
+    border-radius: 8px;
+    border: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .alignment-point-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .alignment-point-content { flex: 1; }
+  .alignment-point-title {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .alignment-point-desc {
+    font-size: 0.75rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  .sponsor-rules {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .sponsor-rules-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+  }
+
+  .sponsor-rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.73rem;
+    line-height: 1.5;
+  }
+
+  .sr-icon { flex-shrink: 0; font-size: 0.8rem; }
+  .sr-text-ok { color: var(--white); }
+  .sr-text-no { color: var(--gray); text-decoration: line-through; opacity: 0.6; }
+
+  /* ─── SLIDE 9: TIMELINE ─── */
+  #s9 {
+    background: var(--dark);
+    flex-direction: column;
+    padding: 3rem 5rem;
+  }
+
+  .timeline {
+    display: flex;
+    gap: 0;
+    width: 100%;
+    max-width: 1050px;
+    margin-top: 2rem;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    right: 24px;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), rgba(201,169,110,0.2));
+  }
+
+  .tl-phase {
+    flex: 1;
+    padding: 0 0.75rem;
+    position: relative;
+  }
+
+  .tl-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin: 18px auto 1.5rem;
+    position: relative;
+    z-index: 1;
+    border: 2px solid var(--dark);
+    box-shadow: 0 0 0 4px rgba(201,169,110,0.2);
+  }
+
+  .tl-weeks {
+    font-size: 0.6rem;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .tl-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .tl-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .tl-task {
+    background: var(--dark-3);
+    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.63rem;
+    color: var(--gray);
+    line-height: 1.3;
+    border-left: 2px solid rgba(201,169,110,0.2);
+  }
+
+  /* ─── SLIDE 10: THE ASK ─── */
+  #s10 {
+    background: var(--dark-2);
+    flex-direction: column;
+    text-align: center;
+    padding: 3rem 8rem;
+  }
+
+  #s10::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(201,169,110,0.06) 0%, transparent 60%);
+  }
+
+  .ask-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--white);
+    max-width: 700px;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 3rem;
+  }
+
+  .ask-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ask-card {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    transition: all 0.3s;
+    text-align: left;
+  }
+
+  .ask-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+
+  .ask-card-type {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .ask-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .ask-card-desc {
+    font-size: 0.72rem;
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+
+  .ask-includes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .ask-include-item {
+    font-size: 0.68rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ask-include-item::before {
+    content: '→';
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  .closing-quote {
+    max-width: 700px;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 1;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--gold-light);
+    line-height: 1.6;
+  }
+
+  /* ─── SLIDE 11: CIERRE ─── */
+  #s11 {
+    background: var(--dark);
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #s11::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 100%, rgba(201,169,110,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 0%, rgba(42,74,140,0.1) 0%, transparent 50%);
+  }
+
+  .close-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 0.9;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .close-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    color: var(--gold-light);
+    max-width: 500px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 3rem;
+  }
+
+  .close-contact {
+    display: flex;
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .close-contact-item {
+    text-align: center;
+  }
+
+  .close-contact-label {
+    font-size: 0.6rem;
+    color: var(--gray);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+
+  .close-contact-value {
+    font-size: 0.85rem;
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .door-line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 40%;
+    background: linear-gradient(to top, rgba(201,169,110,0.4), transparent);
+  }
+
+  /* TRANSITIONS */
+  .slide-label, .slide-number, .slide > * {
+    animation: none !important;
+  }
+
+  .slide.active .enter-up {
+    animation: enterUp 0.6s ease forwards;
+  }
+
+  @keyframes enterUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.1s !important; opacity: 0; }
+  .delay-2 { animation-delay: 0.2s !important; opacity: 0; }
+  .delay-3 { animation-delay: 0.3s !important; opacity: 0; }
+  .delay-4 { animation-delay: 0.4s !important; opacity: 0; }
+
+  /* Keyboard hint */
+  #hint {
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 0.6rem;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<div id="hint">← → NAVEGAR · F PANTALLA COMPLETA</div>
+
+<div id="slides-container">
+
+  <!-- SLIDE 1: COVER -->
+  <div class="slide active" id="s1">
+    <div class="slide-number">01 / 11</div>
+    <p class="cover-eyebrow enter-up delay-1">InnovaSalud · Meta Quest 3 · Buenos Aires · 2026</p>
+    <div class="cover-title enter-up delay-2">37 Días</div>
+    <p class="cover-subtitle enter-up delay-3">Una experiencia inmersiva sobre Inmunodeficiencia Primaria</p>
+    <div class="cover-divider enter-up delay-4"></div>
+    <div class="cover-meta enter-up delay-4">
+      <div>Duración <span>27 minutos</span></div>
+      <div>Escenas <span>11</span></div>
+      <div>Audiencia <span>500 HCPs</span></div>
+      <div>POV <span>Bautista</span></div>
+    </div>
+    <div class="cover-logos">
+      <div class="logo-pill">InnovaSalud</div>
+      <div class="logo-pill">IPOPI · LASID</div>
+      <div class="logo-pill">Takeda</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: HOOK QUOTE -->
+  <div class="slide" id="s2">
+    <div class="slide-label">La Historia</div>
+    <div class="slide-number">02 / 11</div>
+    <div class="quote-mega enter-up">
+      <div class="quote-mark">"</div>
+      El primer grito fue suficiente para saber que estaba vivo. No fue suficiente para saber que iba a seguir estando.
+    </div>
+    <div class="quote-attribution enter-up delay-2">
+      <div class="quote-attribution-line"></div>
+      <div class="quote-author">Juanma · Padre de Bautista · Buenos Aires</div>
+    </div>
+    <div class="quote-context enter-up delay-3">
+      Bautista nació prematuro. 37 días en terapia intensiva neonatal. Sin diagnóstico inmunológico durante cinco años. Dos años de infusiones intravenosas que su propio padre define como "las torturas." Hoy tiene 17 años, juega al fútbol, y está cerca de terminar el colegio. Esta es esa historia — contada desde dentro. Desde los ojos del niño. Con la voz del padre.
+    </div>
+  </div>
+
+  <!-- SLIDE 3: EL PROBLEMA -->
+  <div class="slide" id="s3">
+    <div class="slide-label">El Problema</div>
+    <div class="slide-number">03 / 11</div>
+    <div class="slide-heading enter-up">El <span class="slide-heading-gold">costo real</span> de la IDP</div>
+    <p class="slide-subheading enter-up delay-1">Por qué los médicos necesitan sentir esto, no solo saberlo</p>
+    <div class="stats-grid enter-up delay-2">
+      <div class="stat-card">
+        <div class="stat-number">5</div>
+        <div class="stat-label"><strong>Años de odisea diagnóstica</strong>Tiempo promedio en LATAM desde síntomas hasta diagnóstico correcto de IDP</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">+550</div>
+        <div class="stat-label"><strong>Entidades genéticas</strong>Bajo el paraguas de IDP — la mayoría subreconocidas en la práctica clínica</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">85%</div>
+        <div class="stat-label"><strong>Sin diagnóstico correcto</strong>Estimación de pacientes con IDP que no tienen diagnóstico o están mal diagnosticados globalmente</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10h</div>
+        <div class="stat-label"><strong>Por infusión de IVIG</strong>Duración de cada sesión — cada 28-30 días — para un niño de 4 años</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2</div>
+        <div class="stat-label"><strong>Hermanos impactados</strong>Por cada paciente pediátrico — invisibles en el sistema de salud</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">8 kg</div>
+        <div class="stat-label"><strong>Bajó Juanma</strong>En los 37 días de NICU. Lo que el miedo le hace al cuerpo de un padre que no puede hacer nada más</div>
+      </div>
+    </div>
+    <div class="problem-quote enter-up delay-3">
+      "Lo más grave estaba en la puerta de mi casa." — Juanma, describiendo las complicaciones cardiopulmonares que nadie había conectado con el sistema inmune durante cinco años.
+    </div>
+  </div>
+
+  <!-- SLIDE 4: LA EXPERIENCIA -->
+  <div class="slide" id="s4">
+    <div class="slide-label">La Experiencia</div>
+    <div class="slide-number">04 / 11</div>
+    <div class="exp-left">
+      <div class="tag enter-up">● Experiencia VR Inmersiva</div>
+      <div class="exp-title enter-up delay-1">Sentir lo que una familia vive durante 18 años</div>
+      <p class="exp-desc enter-up delay-2">
+        Los HCPs no observan la historia de Bautista — la viven desde adentro. A través de una arquitectura POV única (Bauti-primario, Juanma-voz), el público ve el mundo con los ojos del niño y escucha con la voz del padre. Una disonancia deliberada que hace imposible ver esta familia y seguir igual.
+      </p>
+      <div class="exp-specs enter-up delay-3">
+        <div class="spec-row">
+          <div class="spec-icon">🥽</div>
+          <div><div class="spec-label">Hardware</div><div class="spec-value">Meta Quest 3 + OVR ION 3</div></div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-icon">⏱</div>
+          <div><div class="spec-label">Duración</div><div class="spec-value">27 minutos core + 2 min CTA</div></div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-icon">👥</div>
+          <div><div class="spec-label">Capacidad</div><div class="spec-value">25 participantes simultáneos</div></div>
+        </div>
+        <div class="spec-row">
+          <div class="spec-icon">📊</div>
+          <div><div class="spec-label">Target</div><div class="spec-value">500 HCPs por congreso</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="exp-right enter-up delay-2">
+      <div class="scene-list">
+        <div class="scene-item"><div class="scene-num">01</div><div class="scene-title-small">El Primer Grito</div><div class="scene-time">1:30</div></div>
+        <div class="scene-item"><div class="scene-num">02</div><div class="scene-title-small">37 Días — NICU</div><div class="scene-time">3:00</div></div>
+        <div class="scene-item"><div class="scene-num">03</div><div class="scene-title-small">La Tormenta en Casa</div><div class="scene-time">3:00</div></div>
+        <div class="scene-item"><div class="scene-num">04</div><div class="scene-title-small">Los Que Se Quedaron Afuera</div><div class="scene-time">2:00</div></div>
+        <div class="scene-item"><div class="scene-num">05A</div><div class="scene-title-small">Adentro — Viaje Molecular</div><div class="scene-time">3:30</div></div>
+        <div class="scene-item"><div class="scene-num">05B</div><div class="scene-title-small">El Nombre — El Diagnóstico</div><div class="scene-time">2:30</div></div>
+        <div class="scene-item"><div class="scene-num">06</div><div class="scene-title-small">Vos Sos Malo</div><div class="scene-time">3:30</div></div>
+        <div class="scene-item"><div class="scene-num">07</div><div class="scene-title-small">Las Manos de Carolina</div><div class="scene-time">3:00</div></div>
+        <div class="scene-item"><div class="scene-num">08</div><div class="scene-title-small">Detrás del Vidrio</div><div class="scene-time">2:00</div></div>
+        <div class="scene-item"><div class="scene-num">09</div><div class="scene-title-small">La Cancha</div><div class="scene-time">2:00</div></div>
+        <div class="scene-item"><div class="scene-num">10</div><div class="scene-title-small">La Puerta</div><div class="scene-time">1:30</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: ARQUITECTURA POV -->
+  <div class="slide" id="s5">
+    <div class="slide-label">Diseño Cinematográfico</div>
+    <div class="slide-number">05 / 11</div>
+    <div class="slide-heading enter-up">Arquitectura <span class="slide-heading-gold">POV</span></div>
+    <p class="slide-subheading enter-up delay-1">El público crece con Bautista — 30cm a 180cm en 27 minutos</p>
+    <p class="pov-desc enter-up delay-2">
+      La cámara sigue el crecimiento físico de Bauti escena por escena. El público ve a sus padres envejecer desde abajo — primero como gigantes borrosos, después al nivel del pecho, finalmente face-to-face. El momento en que los padres se hacen pequeños es el momento más poderoso de la experiencia: el padre se empequeñeció porque el hijo creció.
+    </p>
+    <div class="pov-cards enter-up delay-3">
+      <div class="pov-card">
+        <div class="pov-card-age">30cm</div>
+        <div class="pov-card-label">Recién nacido</div>
+        <div class="pov-card-height">Dentro de la incubadora</div>
+        <div class="pov-card-scene">Escenas 1–2 · Visión borrosa</div>
+      </div>
+      <div class="pov-card">
+        <div class="pov-card-age">60–90cm</div>
+        <div class="pov-card-label">Niño, 2–5 años</div>
+        <div class="pov-card-height">Al nivel de las rodillas</div>
+        <div class="pov-card-scene">Escenas 3–6 · Los padres son gigantes</div>
+      </div>
+      <div class="pov-card">
+        <div class="pov-card-age">110cm</div>
+        <div class="pov-card-label">Niño, 7–8 años</div>
+        <div class="pov-card-height">Al nivel de la cintura</div>
+        <div class="pov-card-scene">Escena 7 · Las manos de Carolina</div>
+      </div>
+      <div class="pov-card" style="border-color:rgba(201,169,110,0.3)">
+        <div class="pov-card-age">175–180cm</div>
+        <div class="pov-card-label">Adolescente, 17 años</div>
+        <div class="pov-card-height">Eye-to-eye con sus padres</div>
+        <div class="pov-card-scene">Escenas 9–10 · El hijo creció</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: OBJETIVOS CONDUCTUALES -->
+  <div class="slide" id="s6">
+    <div class="slide-label">Objetivos Médicos</div>
+    <div class="slide-number">06 / 11</div>
+    <div class="slide-heading enter-up"><span class="slide-heading-gold">5</span> cambios de conducta medibles</div>
+    <p class="slide-subheading enter-up delay-1">El lunes siguiente al congreso, el HCP hace algo diferente</p>
+    <div class="objectives-grid enter-up delay-2">
+      <div class="obj-card">
+        <div class="obj-icon">🔍</div>
+        <div class="obj-number">Objetivo 01</div>
+        <div class="obj-title">Derivación Temprana</div>
+        <div class="obj-desc">Referir a inmunología ante ≥2 infecciones severas/año — antes de cinco años de odisea diagnóstica</div>
+        <div class="obj-measure">Encuesta pre/post + reporte 30 días</div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-icon">💉</div>
+        <div class="obj-number">Objetivo 02</div>
+        <div class="obj-title">Ruta de Tratamiento</div>
+        <div class="obj-desc">Proponer opciones de Ig subcutánea a familias que actualmente reciben IVIG</div>
+        <div class="obj-measure">Tarjeta de compromiso</div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-icon">👦</div>
+        <div class="obj-number">Objetivo 03</div>
+        <div class="obj-title">Hermanos en Foco</div>
+        <div class="obj-desc">Incluir a los hermanos en la evaluación psicosocial de familias con IDP</div>
+        <div class="obj-measure">Auto-reporte 7 y 30 días</div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-icon">🔄</div>
+        <div class="obj-number">Objetivo 04</div>
+        <div class="obj-title">Transición Pediátrica</div>
+        <div class="obj-desc">Iniciar conversaciones de transición pediátrica-adulta antes de los 16 años</div>
+        <div class="obj-measure">Encuesta de intención clínica</div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-icon">👨‍👩‍👦</div>
+        <div class="obj-number">Objetivo 05</div>
+        <div class="obj-title">Cuidado Familiar</div>
+        <div class="obj-desc">Agregar preguntas sobre carga del cuidador en consultas de IDP</div>
+        <div class="obj-measure">Tarjeta de compromiso</div>
+      </div>
+    </div>
+    <div class="evidence-bar enter-up delay-3">
+      <div class="evidence-icon">📐</div>
+      <div class="evidence-text">
+        <strong>Modelo COM-B aplicado a diseño de experiencia:</strong> Cada escena conecta a un objetivo conductual específico. La evaluación usa pre/post survey en tablet + tarjeta de compromiso física + seguimiento digital a 7 y 30 días.
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: DEPLOYMENT -->
+  <div class="slide" id="s7">
+    <div class="slide-label">Configuración de Despliegue</div>
+    <div class="slide-number">07 / 11</div>
+    <div class="slide-heading enter-up">Dos configuraciones, <span class="slide-heading-gold">una historia</span></div>
+    <p class="slide-subheading enter-up delay-1">El Lite Deployment supera al Full en múltiples dimensiones sensoriales</p>
+    <div class="deploy-cols enter-up delay-2">
+      <div class="deploy-card lite">
+        <div class="deploy-badge recommended">★ Recomendado</div>
+        <div class="deploy-name">Lite Deployment</div>
+        <div class="deploy-subtitle">Props táctiles + chair-based haptics + OVR ION 3</div>
+        <div class="deploy-specs">
+          <div class="deploy-spec"><span class="deploy-spec-label">Hardware</span><span class="deploy-spec-value">Quest 3 + Props físicos + Olfato</span></div>
+          <div class="deploy-spec"><span class="deploy-spec-label">Throughput</span><span class="deploy-spec-value gold">~35 HCPs/hora</span></div>
+          <div class="deploy-spec"><span class="deploy-spec-label">Setup total</span><span class="deploy-spec-value">40 min/batch</span></div>
+          <div class="deploy-spec"><span class="deploy-spec-label">Capacidad</span><span class="deploy-spec-value">25 simultáneos</span></div>
+          <div class="deploy-spec"><span class="deploy-spec-label">Ventaja táctil</span><span class="deploy-spec-value gold">Superior en 8 dimensiones</span></div>
+        </div>
+        <div class="deploy-cost">
+          <div class="deploy-cost-label">Inversión en hardware</div>
+          <div class="deploy-cost-num">USD 35,148</div>
+        </div>
+        <div class="deploy-advantage">Frío real en el brazo. Calor real reemplazando el frío. Tejido pulmonar en las manos. Aire que cuesta respirar. Cascade de complemento bloqueada — y desbloqueada.</div>
+      </div>
+      <div class="deploy-card full">
+        <div class="deploy-badge standard">Alternativo</div>
+        <div class="deploy-name">Full Deployment</div>
+        <div class="deploy-subtitle">bHaptics TactSuit X40 + TactGloves + OVR ION 3</div>
+        <div class="deploy-specs">
+          <div class="deploy-spec"><span class="deploy-spec-label">Hardware</span><span class="deploy-spec-value">Quest 3 + Chaleco + Guantes</span></div>
+          <div class="deploy-spec"><span class="deploy-spec-label">Throughput</span><span class="deploy-spec-value">~30 HCPs/hora</span></div>
+          <div class="deploy-spec"><span class="deploy-spec-label">Setup total</span><span class="deploy-spec-value">43 min/batch</span></div>
+          <div class="deploy-spec"><span class="deploy-spec-label">Capacidad</span><span class="deploy-spec-value">25 simultáneos</span></div>
+          <div class="deploy-spec"><span class="deploy-spec-label">Ventaja táctil</span><span class="deploy-spec-value">Cobertura corporal completa</span></div>
+        </div>
+        <div class="deploy-cost">
+          <div class="deploy-cost-label">Inversión en hardware</div>
+          <div class="deploy-cost-num">USD 45–60K</div>
+        </div>
+        <div class="deploy-advantage">Mayor cobertura vibrotáctil (TactSuit X40 = 40 motores). Menor impacto emocional que el Lite en temperatura, inmunología y ambiente.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: TAKEDA ALIGNMENT -->
+  <div class="slide" id="s8">
+    <div class="slide-label">Alineación con Patrocinadores</div>
+    <div class="slide-number">08 / 11</div>
+    <div class="slide-heading enter-up">Por qué <span class="slide-heading-gold">Takeda</span></div>
+    <p class="slide-subheading enter-up delay-1">Esta experiencia es el testimonio de un paciente en tratamiento Takeda</p>
+    <div class="alignment-grid enter-up delay-2">
+      <div class="alignment-points">
+        <div class="alignment-point">
+          <div class="alignment-point-icon">💊</div>
+          <div class="alignment-point-content">
+            <div class="alignment-point-title">Paciente Real, Tratamiento Real</div>
+            <div class="alignment-point-desc">Bautista recibe SCIG facilitada mensual con bomba y programa de soporte de pacientes — estructura que corresponde a HyQvia (Takeda). La experiencia no es publicidad — es testimonio de un paciente real en medicina real.</div>
+          </div>
+        </div>
+        <div class="alignment-point">
+          <div class="alignment-point-icon">🎯</div>
+          <div class="alignment-point-content">
+            <div class="alignment-point-title">Objetivo 02 Totalmente Alineado</div>
+            <div class="alignment-point-desc">El objetivo conductual #2 — proponer SCIG a familias en IVIG — es el posicionamiento exacto de HyQvia. La Escena 6 (IVIG = tortura) y la Escena 7 (SCIG = liberación) hacen ese cambio emocionalmente inevitable.</div>
+          </div>
+        </div>
+        <div class="alignment-point">
+          <div class="alignment-point-icon">🏥</div>
+          <div class="alignment-point-content">
+            <div class="alignment-point-title">500 HCPs de Alta Influencia</div>
+            <div class="alignment-point-desc">Inmunólogos, pediatras, alergistas y médicos de cabecera — exactamente la audiencia que toma decisiones de tratamiento en IDP. 27 minutos de experiencia corporal supera 27 diapositivas de congreso.</div>
+          </div>
+        </div>
+        <div class="alignment-point">
+          <div class="alignment-point-icon">🌎</div>
+          <div class="alignment-point-content">
+            <div class="alignment-point-title">Despliegue Modular LATAM</div>
+            <div class="alignment-point-desc">Diseñado para Argentina, escalable a México, Colombia, Brasil, Chile. Adaptaciones lingüísticas (ES-AR, ES-LATAM, PT-BR, EN) incluidas en el blueprint de producción.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sponsor-rules">
+        <div class="sponsor-rules-title">Protocolo de Presencia de Sponsor</div>
+        <div class="sponsor-rule"><div class="sr-icon">✅</div><div class="sr-text-ok">Logos en zonas de entrada y salida</div></div>
+        <div class="sponsor-rule"><div class="sr-icon">✅</div><div class="sr-text-ok">Reconocimiento en materiales pre/post</div></div>
+        <div class="sponsor-rule"><div class="sr-icon">✅</div><div class="sr-text-ok">Acceso a datos de commitment cards</div></div>
+        <div class="sponsor-rule"><div class="sr-icon">✅</div><div class="sr-text-ok">Oportunidad de foto en debrief zone</div></div>
+        <div class="sponsor-rule"><div class="sr-icon">✅</div><div class="sr-text-ok">Clinical advisor on-site (immunólogo)</div></div>
+        <div class="sponsor-rule"><div class="sr-icon">🚫</div><div class="sr-text-no">Logos en escenas emocionales</div></div>
+        <div class="sponsor-rule"><div class="sr-icon">🚫</div><div class="sr-text-no">Nombres de producto en la experiencia</div></div>
+        <div class="sponsor-rule"><div class="sr-icon">🚫</div><div class="sr-text-no">Content de marketing durante VR</div></div>
+        <div style="margin-top:1.2rem; font-size:0.7rem; color:var(--gray); line-height:1.5; font-style:italic;">La experiencia protege su credibilidad emocional dejando la presencia de marca fuera del espacio emocional. Eso la hace más efectiva, no menos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: TIMELINE -->
+  <div class="slide" id="s9">
+    <div class="slide-label">Plan de Producción</div>
+    <div class="slide-number">09 / 11</div>
+    <div class="slide-heading enter-up">De aprobación a <span class="slide-heading-gold">congreso</span></div>
+    <p class="slide-subheading enter-up delay-1">14 semanas · 4 fases · 1 experiencia lista para 500 HCPs</p>
+    <div class="timeline enter-up delay-2">
+      <div class="tl-phase">
+        <div class="tl-dot"></div>
+        <div class="tl-weeks">Semanas 1–3</div>
+        <div class="tl-name">Preproducción</div>
+        <div class="tl-tasks">
+          <div class="tl-task">Grabación de voces BsAs</div>
+          <div class="tl-task">Diseño 3D de personajes</div>
+          <div class="tl-task">Diseño sonoro + foley</div>
+          <div class="tl-task">Fabricación de props táctiles</div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-dot"></div>
+        <div class="tl-weeks">Semanas 4–7</div>
+        <div class="tl-name">Desarrollo VR</div>
+        <div class="tl-tasks">
+          <div class="tl-task">Unity — escenas 1-5 (bloque NICU)</div>
+          <div class="tl-task">Unity — escenas 6-10 (bloque hospital-cancha)</div>
+          <div class="tl-task">Molecular journey (pre-render)</div>
+          <div class="tl-task">Integración OVR ION 3</div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-dot"></div>
+        <div class="tl-weeks">Semanas 8–10</div>
+        <div class="tl-name">QA & Pilots</div>
+        <div class="tl-tasks">
+          <div class="tl-task">Alpha interno (equipo)</div>
+          <div class="tl-task">Beta con HCPs (n=10)</div>
+          <div class="tl-task">Calibración de props + mouthpiece</div>
+          <div class="tl-task">Entrenamiento facilitadores</div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-dot"></div>
+        <div class="tl-weeks">Semanas 11–12</div>
+        <div class="tl-name">Pre-Lanzamiento</div>
+        <div class="tl-tasks">
+          <div class="tl-task">Ajustes post-beta</div>
+          <div class="tl-task">Carga en 37 Quest 3</div>
+          <div class="tl-task">Sign-off pulmonólogo (mouthpiece)</div>
+          <div class="tl-task">Sign-off ético / IRB</div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-dot"></div>
+        <div class="tl-weeks">Semanas 13–14</div>
+        <div class="tl-name">Despliegue</div>
+        <div class="tl-tasks">
+          <div class="tl-task">Setup logístico en congreso</div>
+          <div class="tl-task">Briefing de staff (12 personas)</div>
+          <div class="tl-task">500 HCPs en 2 días</div>
+          <div class="tl-task">Recolección de datos + informe</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: THE ASK -->
+  <div class="slide" id="s10">
+    <div class="slide-label">La Propuesta</div>
+    <div class="slide-number">10 / 11</div>
+    <div class="ask-title enter-up">¿Cómo querés entrar en esta historia?</div>
+    <div class="ask-options enter-up delay-2">
+      <div class="ask-card">
+        <div class="ask-card-type">Sponsor Principal</div>
+        <div class="ask-card-name">Patrocinador Fundacional</div>
+        <div class="ask-card-desc">Inversión integral que cubre producción, hardware y despliegue completo en el congreso objetivo.</div>
+        <div class="ask-includes">
+          <div class="ask-include-item">100% del presupuesto de producción</div>
+          <div class="ask-include-item">Hardware Lite Deployment (USD 35K)</div>
+          <div class="ask-include-item">Operaciones y staff completos</div>
+          <div class="ask-include-item">Datos exclusivos de 500 HCPs</div>
+          <div class="ask-include-item">Derechos de uso para 3 congresos LATAM</div>
+        </div>
+      </div>
+      <div class="ask-card" style="border-color:rgba(201,169,110,0.35)">
+        <div class="ask-card-type">Co-Sponsor</div>
+        <div class="ask-card-name">Alianza Institucional</div>
+        <div class="ask-card-desc">Partnership con IPOPI-LASID como ancla institucional y Takeda como sponsor de marca en zonas de entrada/salida.</div>
+        <div class="ask-includes">
+          <div class="ask-include-item">Producción compartida con IPOPI-LASID</div>
+          <div class="ask-include-item">Presencia en zonas E/S y debrief</div>
+          <div class="ask-include-item">Acceso a datos compartidos</div>
+          <div class="ask-include-item">Reconocimiento en todos los materiales</div>
+          <div class="ask-include-item">Opción de expansión LATAM</div>
+        </div>
+      </div>
+      <div class="ask-card">
+        <div class="ask-card-type">Piloto</div>
+        <div class="ask-card-name">Experiencia de Validación</div>
+        <div class="ask-card-desc">Un piloto reducido (n=50-100 HCPs) para validar impacto conductual antes de inversión completa.</div>
+        <div class="ask-includes">
+          <div class="ask-include-item">5 Quest 3 + hardware básico</div>
+          <div class="ask-include-item">Experiencia completa (27 min)</div>
+          <div class="ask-include-item">Protocolo de medición completo</div>
+          <div class="ask-include-item">Informe de impacto conductual</div>
+          <div class="ask-include-item">Decisión informada para escalar</div>
+        </div>
+      </div>
+    </div>
+    <div class="closing-quote enter-up delay-3">
+      "No tengo palabras para describir cómo nos cambió a todos la vida. Las torturas se terminaron."<br>
+      <span style="font-size:0.75rem; color:var(--gray); font-style:normal; letter-spacing:0.1em;">— JUANMA</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: CIERRE -->
+  <div class="slide" id="s11">
+    <div class="slide-number" style="color:var(--gray)">11 / 11</div>
+    <div class="door-line"></div>
+    <div class="close-title enter-up">37<br>Días</div>
+    <div class="close-subtitle enter-up delay-2">
+      Y la puerta sigue ahí.<br>Para Bautista. Para las familias que todavía no tienen un nombre.
+    </div>
+    <div class="close-contact enter-up delay-3">
+      <div class="close-contact-item">
+        <div class="close-contact-label">Proyecto</div>
+        <div class="close-contact-value">InnovaSalud · 37 Días</div>
+      </div>
+      <div class="close-contact-item">
+        <div class="close-contact-label">Plataforma</div>
+        <div class="close-contact-value">Meta Quest 3 · LATAM</div>
+      </div>
+      <div class="close-contact-item">
+        <div class="close-contact-label">Año</div>
+        <div class="close-contact-value">2026</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAVIGATION -->
+<nav id="nav">
+  <button id="prev-btn" onclick="changeSlide(-1)" disabled>‹</button>
+  <div id="dots"></div>
+  <div id="slide-counter">1 / 11</div>
+  <button id="next-btn" onclick="changeSlide(1)">›</button>
+</nav>
+
+<script>
+  const totalSlides = 11;
+  let current = 1;
+
+  const dotsContainer = document.getElementById('dots');
+  for (let i = 1; i <= totalSlides; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 1 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsContainer.appendChild(d);
+  }
+
+  function goTo(n) {
+    if (n < 1 || n > totalSlides) return;
+    document.getElementById('s' + current).classList.remove('active');
+    current = n;
+    const slide = document.getElementById('s' + current);
+    slide.classList.add('active');
+
+    // Re-trigger animations
+    const animated = slide.querySelectorAll('.enter-up');
+    animated.forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = '';
+    });
+
+    document.getElementById('slide-counter').textContent = current + ' / ' + totalSlides;
+    document.getElementById('prev-btn').disabled = current === 1;
+    document.getElementById('next-btn').disabled = current === totalSlides;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current - 1);
+    });
+  }
+
+  function changeSlide(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+    if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+
+  // Touch swipe
+  let touchX = 0;
+  document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const diff = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+  });
+</script>
+</body>
+</html>

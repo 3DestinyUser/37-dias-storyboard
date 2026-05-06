@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>37 DÍAS — Animatic Flow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --accent: #c8a96e;
+      --cold:   #4a7fa5;
+      --warm:   #c4793a;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      user-select: none;
+    }
+
+    /* ══════════════════════════════
+       PLAYER CONTAINER
+    ══════════════════════════════ */
+    #player {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #000;
+    }
+
+    /* ══════════════════════════════
+       SCENE IMAGE (KEN BURNS)
+    ══════════════════════════════ */
+    .scene-slide {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      opacity: 0;
+      z-index: 1;
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .scene-slide.active {
+      opacity: 1;
+      z-index: 2;
+    }
+    .scene-slide.exiting {
+      opacity: 0;
+      z-index: 3;
+    }
+
+    .scene-slide img {
+      position: absolute;
+      width: 110%;
+      height: 110%;
+      object-fit: cover;
+      object-position: center center;
+      transform-origin: center center;
+      will-change: transform;
+    }
+
+    /* Ken Burns keyframes per scene */
+    @keyframes kb-zoom-in       { from { transform: scale(1.0) translate(0,0); }  to { transform: scale(1.12) translate(-2%, -2%); } }
+    @keyframes kb-zoom-out      { from { transform: scale(1.12) translate(0,0); } to { transform: scale(1.0)  translate(2%, 2%); } }
+    @keyframes kb-pan-right     { from { transform: scale(1.08) translateX(-4%); } to { transform: scale(1.08) translateX(2%); } }
+    @keyframes kb-pan-left      { from { transform: scale(1.08) translateX(4%); }  to { transform: scale(1.08) translateX(-2%); } }
+    @keyframes kb-tilt-up       { from { transform: scale(1.1) translateY(4%); }   to { transform: scale(1.06) translateY(-2%); } }
+    @keyframes kb-slow-push-in  { from { transform: scale(1.0); }                  to { transform: scale(1.08); } }
+    @keyframes kb-slow-pull-out { from { transform: scale(1.08); }                 to { transform: scale(1.0); } }
+
+    /* Scene-specific Ken Burns assignments */
+    #s1  img { animation: kb-zoom-in      var(--dur,8s) ease-in-out forwards; object-position: center 30%; }
+    #s2  img { animation: kb-tilt-up      var(--dur,8s) ease-in-out forwards; object-position: center top; }
+    #s3  img { animation: kb-pan-right    var(--dur,8s) ease-in-out forwards; object-position: center 40%; }
+    #s4  img { animation: kb-pan-left     var(--dur,8s) ease-in-out forwards; object-position: center 55%; }
+    #s5a img { animation: kb-slow-push-in var(--dur,8s) ease-in-out forwards; object-position: center center; }
+    #s5b img { animation: kb-zoom-in      var(--dur,8s) ease-in-out forwards; object-position: center 40%; }
+    #s6  img { animation: kb-slow-push-in var(--dur,8s) ease-in-out forwards; object-position: center 20%; }
+    #s7  img { animation: kb-pan-right    var(--dur,8s) ease-in-out forwards; object-position: center 50%; }
+    #s8  img { animation: kb-pan-left     var(--dur,8s) ease-in-out forwards; object-position: center 35%; }
+    #s9  img { animation: kb-slow-pull-out var(--dur,8s) ease-in-out forwards; object-position: center 55%; }
+    #s10 img { animation: kb-slow-push-in  var(--dur,8s) ease-in-out forwards; object-position: center 60%; }
+
+    /* Per-scene color grade overlays */
+    .scene-slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+    #s1  ::before, #s2  ::before, #s6  ::before {
+      background: linear-gradient(135deg, rgba(176,196,222,0.18) 0%, rgba(0,0,30,0.25) 100%);
+    }
+    #s3  ::before { background: linear-gradient(180deg, rgba(10,22,40,0.3) 0%, rgba(180,100,0,0.08) 100%); }
+    #s4  ::before { background: rgba(180,180,180,0.12); }
+    #s5a ::before { background: linear-gradient(135deg, rgba(139,0,0,0.2) 0%, rgba(30,58,95,0.2) 100%); }
+    #s5b ::before { background: linear-gradient(180deg, rgba(200,160,70,0.1) 0%, rgba(200,220,240,0.08) 100%); }
+    #s7  ::before { background: linear-gradient(180deg, rgba(244,164,96,0.15) 0%, rgba(240,200,100,0.05) 100%); }
+    #s8  ::before { background: rgba(112,128,144,0.2); }
+    #s9  ::before { background: linear-gradient(180deg, rgba(34,139,34,0.12) 0%, rgba(255,220,100,0.06) 100%); }
+    #s10 ::before { background: rgba(0,0,0,0.35); }
+
+    /* Vignette on all scenes */
+    .scene-slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* Bottom gradient for text legibility */
+    .scene-gradient {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 55%;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 40%, transparent 100%);
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    /* ══════════════════════════════
+       SCENE TEXT OVERLAY
+    ══════════════════════════════ */
+    .scene-text {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 72px 72px;
+      z-index: 7;
+      transform: translateY(12px);
+      opacity: 0;
+      transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+    }
+    .scene-slide.active .scene-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scene-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .scene-label::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+
+    .scene-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 62px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.8);
+    }
+
+    .scene-quote {
+      font-size: clamp(13px, 1.5vw, 16px);
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.65;
+      max-width: 640px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .scene-duration-badge {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 4px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.06em;
+    }
+
+    /* ══════════════════════════════
+       TOP BAR
+    ══════════════════════════════ */
+    #topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 20;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+    }
+
+    .topbar-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      opacity: 0.9;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    #scene-counter {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.05em;
+    }
+
+    /* ══════════════════════════════
+       TIMELINE / PROGRESS BAR
+    ══════════════════════════════ */
+    #timeline {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 20;
+      padding: 0 40px 28px;
+    }
+
+    .timeline-track {
+      position: relative;
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    #progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), rgba(200,169,110,0.7));
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .timeline-scenes {
+      display: flex;
+      gap: 0;
+      justify-content: stretch;
+    }
+
+    .tl-scene {
+      flex: 1;
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      text-align: center;
+      cursor: pointer;
+      transition: color 0.25s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 2px;
+    }
+    .tl-scene.active-scene { color: var(--accent); }
+    .tl-scene:hover { color: rgba(255,255,255,0.7); }
+
+    /* Scene tick marks */
+    .timeline-ticks {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      pointer-events: none;
+    }
+    .tick {
+      position: absolute;
+      top: -2px;
+      width: 1px;
+      height: 7px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ══════════════════════════════
+       CONTROLS
+    ══════════════════════════════ */
+    #controls {
+      position: fixed;
+      right: 40px;
+      bottom: 80px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ctrl-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      backdrop-filter: blur(8px);
+    }
+    .ctrl-btn:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(200,169,110,0.5);
+      transform: scale(1.08);
+    }
+    .ctrl-btn:active { transform: scale(0.95); }
+
+    /* ══════════════════════════════
+       PLAY BUTTON (Center)
+    ══════════════════════════════ */
+    #play-btn {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 30;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(200,169,110,0.15);
+      border: 2px solid rgba(200,169,110,0.5);
+      color: var(--accent);
+      font-size: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s;
+    }
+    #play-btn:hover {
+      background: rgba(200,169,110,0.25);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+    #play-btn.hidden { opacity: 0; pointer-events: none; }
+
+    /* ══════════════════════════════
+       SLIDE-IN SCENE NUMBER
+    ══════════════════════════════ */
+    .scene-number-overlay {
+      position: absolute;
+      top: 50%;
+      right: 60px;
+      transform: translateY(-50%);
+      z-index: 6;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(80px, 12vw, 160px);
+      font-weight: 700;
+      color: rgba(255,255,255,0.04);
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    /* ══════════════════════════════
+       INTRO SCREEN
+    ══════════════════════════════ */
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      transition: opacity 1.2s ease;
+    }
+    #intro.fade-out { opacity: 0; pointer-events: none; }
+
+    .intro-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .intro-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(64px, 12vw, 128px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      text-align: center;
+    }
+    .intro-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.04em;
+    }
+    .intro-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    .intro-meta span {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .intro-play {
+      margin-top: 24px;
+      padding: 14px 40px;
+      border-radius: 100px;
+      background: rgba(200,169,110,0.1);
+      border: 1px solid rgba(200,169,110,0.4);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-family: 'Inter', sans-serif;
+    }
+    .intro-play:hover {
+      background: rgba(200,169,110,0.2);
+      border-color: rgba(200,169,110,0.7);
+    }
+
+    /* Line decoration */
+    .intro-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, rgba(200,169,110,0.5), transparent);
+      margin: -12px 0;
+    }
+
+    /* ══════════════════════════════
+       KEYBOARD HINT
+    ══════════════════════════════ */
+    #kbd-hint {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 25;
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.08em;
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    #kbd-hint.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ══ INTRO ══ -->
+<div id="intro">
+  <p class="intro-eyebrow">InnovaSalud · Meta Quest 3 · Buenos Aires · 2026</p>
+  <div class="intro-line"></div>
+  <h1 class="intro-title">37 Días</h1>
+  <p class="intro-sub">Una experiencia inmersiva sobre inmunodeficiencia primaria</p>
+  <div class="intro-meta">
+    <span>27 minutos</span>
+    <span>·</span>
+    <span>11 escenas</span>
+    <span>·</span>
+    <span>POV: Bautista</span>
+    <span>·</span>
+    <span>Voz: Juanma</span>
+  </div>
+  <div class="intro-line"></div>
+  <button class="intro-play" onclick="startFlow()">▶ &nbsp; Iniciar Flow</button>
+</div>
+
+<!-- ══ PLAYER ══ -->
+<div id="player">
+
+  <!-- Scene 1 -->
+  <div class="scene-slide" id="s1">
+    <img src="scene1_primer_grito_1776088204377.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">01</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 01 · Apertura</p>
+      <h2 class="scene-title">El Primer Grito</h2>
+      <p class="scene-quote">"El primer grito… fue suficiente para saber que estaba vivo. No fue suficiente para saber que iba a seguir estando."</p>
+      <span class="scene-duration-badge">1:30 · POV 30cm · Recién nacido</span>
+    </div>
+  </div>
+
+  <!-- Scene 2 -->
+  <div class="scene-slide" id="s2">
+    <img src="scene2_37dias_nicu_1776088290124.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">02</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 02 · NICU</p>
+      <h2 class="scene-title">37 Días</h2>
+      <p class="scene-quote">"Estuvo 37 días internado en cuidados intensivos, con asistencia respiratoria mecánica. La fragilidad era palpable."</p>
+      <span class="scene-duration-badge">3:00 · POV 30cm · Dentro de la incubadora</span>
+    </div>
+  </div>
+
+  <!-- Scene 3 -->
+  <div class="scene-slide" id="s3">
+    <img src="scene3_v2_tormenta_casa.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">03</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 03 · Casa / Hospital</p>
+      <h2 class="scene-title">La Tormenta en Casa</h2>
+      <p class="scene-quote">"La tos era lo que antecedía la tormenta. Yo saltaba de la cama literalmente."</p>
+      <span class="scene-duration-badge">3:00 · POV 60cm · Hipervigilancia</span>
+    </div>
+  </div>
+
+  <!-- Scene 4 -->
+  <div class="scene-slide" id="s4">
+    <img src="scene4_quedaron_afuera_1776088330419.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">04</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 04 · Silencio</p>
+      <h2 class="scene-title">Los Que Se Quedaron Afuera</h2>
+      <p class="scene-quote">"Había otro hermano… que se lo dejó congelado al margen."</p>
+      <span class="scene-duration-badge">2:00 · POV 70cm · El hermano desplazado</span>
+    </div>
+  </div>
+
+  <!-- Scene 5A -->
+  <div class="scene-slide" id="s5a">
+    <img src="scene5a_adentro_molecular_1776088345391.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">5A</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 05A · Molecular Journey</p>
+      <h2 class="scene-title">Adentro</h2>
+      <p class="scene-quote">"Los pulmones y el corazón trabajan en sincronía. Si los pulmones trabajan mal, el corazón tiene que hacer el trabajo que hacen ellos."</p>
+      <span class="scene-duration-badge">3:30 · Escala molecular · Anticuerpos ausentes</span>
+    </div>
+  </div>
+
+  <!-- Scene 5B -->
+  <div class="scene-slide" id="s5b">
+    <img src="scene5b_v2_el_nombre.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">5B</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 05B · Diagnóstico</p>
+      <h2 class="scene-title">El Nombre</h2>
+      <p class="scene-quote">"Dra. Bezrodnik le dio un nombre a lo que le pasaba. El fin de la odisea."</p>
+      <span class="scene-duration-badge">2:30 · POV 90cm · Alivio que no tiene dónde ir</span>
+    </div>
+  </div>
+
+  <!-- Scene 6 -->
+  <div class="scene-slide" id="s6">
+    <img src="scene6_v2_vos_sos_malo.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">06</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 06 · El Núcleo Emocional</p>
+      <h2 class="scene-title">Vos Sos Malo</h2>
+      <p class="scene-quote">"Vos sos malo. Esto — yo soy malo — esto lo decido yo que soy tu papá. Se terminó."</p>
+      <span class="scene-duration-badge">3:30 · POV 90cm LOCKED · Daño moral</span>
+    </div>
+  </div>
+
+  <!-- Scene 7 -->
+  <div class="scene-slide" id="s7">
+    <img src="scene7_v2_manos_carolina.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">07</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 07 · Liberación</p>
+      <h2 class="scene-title">Las Manos de Carolina</h2>
+      <p class="scene-quote">"No tengo palabras para describir cómo nos cambió a todos la vida. Las torturas se terminaron."</p>
+      <span class="scene-duration-badge">3:00 · POV 110cm · SCIG en casa</span>
+    </div>
+  </div>
+
+  <!-- Scene 8 -->
+  <div class="scene-slide" id="s8">
+    <img src="scene8_detras_vidrio_1776088259949.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">08</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 08 · Pandemia</p>
+      <h2 class="scene-title">Detrás del Vidrio</h2>
+      <p class="scene-quote">"Los hermanos son las víctimas silenciosas, porque les quitamos foco y los limitamos con algo que ellos tampoco lo eligieron."</p>
+      <span class="scene-duration-badge">2:00 · POV 165cm · 2020</span>
+    </div>
+  </div>
+
+  <!-- Scene 9 -->
+  <div class="scene-slide" id="s9">
+    <img src="scene9_v2_la_cancha.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">09</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 09 · El Pago Ganado</p>
+      <h2 class="scene-title">La Cancha</h2>
+      <p class="scene-quote">"Es muy habilidoso, la verdad que sí. Y loco, muy reverado, de pocas pulgas."</p>
+      <span class="scene-duration-badge">2:00 · POV 175cm · Juanma a 40m en las tribunas</span>
+    </div>
+  </div>
+
+  <!-- Scene 10 -->
+  <div class="scene-slide" id="s10">
+    <img src="scene10_la_puerta_1776088440757.png" alt="">
+    <div class="scene-gradient"></div>
+    <div class="scene-number-overlay">10</div>
+    <div class="scene-text">
+      <p class="scene-label">Scene 10 · La Coda</p>
+      <h2 class="scene-title">La Puerta</h2>
+      <p class="scene-quote">"¿Será que soy tan cauto, tan desconfiado? No quiero decirle eso a Bautista y que en un año y medio le digan: no, me equivoqué."</p>
+      <span class="scene-duration-badge">1:30 · POV 180cm · Esperanza ambigua</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ TOP BAR ══ -->
+<div id="topbar">
+  <span class="topbar-title">37 Días</span>
+  <div class="topbar-right">
+    <span id="scene-counter">1 / 11</span>
+  </div>
+</div>
+
+<!-- ══ KEYBOARD HINT ══ -->
+<div id="kbd-hint">← → Navegar &nbsp;·&nbsp; Space Pausar &nbsp;·&nbsp; F Pantalla completa</div>
+
+<!-- ══ CONTROLS ══ -->
+<div id="controls">
+  <button class="ctrl-btn" id="btn-fs" title="Pantalla completa" onclick="toggleFS()">⛶</button>
+  <button class="ctrl-btn" id="btn-prev" title="Anterior" onclick="prevScene()">‹</button>
+  <button class="ctrl-btn" id="btn-play" title="Play/Pause" onclick="togglePlay()">⏸</button>
+  <button class="ctrl-btn" id="btn-next" title="Siguiente" onclick="nextScene()">›</button>
+</div>
+
+<!-- ══ TIMELINE ══ -->
+<div id="timeline">
+  <div class="timeline-track" onclick="seekTimeline(event)">
+    <div id="progress-bar"></div>
+    <div class="timeline-ticks" id="ticks"></div>
+  </div>
+  <div class="timeline-scenes" id="tl-scenes"></div>
+</div>
+
+<script>
+  // ─────────────────────────────────────────────
+  // SCENE DATA
+  // ─────────────────────────────────────────────
+  const SCENES = [
+    { id: 's1',  label: 'El Primer Grito',       duration: 90,  color: '#4a7fa5' },
+    { id: 's2',  label: '37 Días',                duration: 180, color: '#1a3a5a' },
+    { id: 's3',  label: 'La Tormenta',            duration: 180, color: '#0a1628' },
+    { id: 's4',  label: 'Los Que Se Quedaron',    duration: 120, color: '#6b7280' },
+    { id: 's5a', label: 'Adentro',                duration: 210, color: '#8B0000' },
+    { id: 's5b', label: 'El Nombre',              duration: 150, color: '#c8a44a' },
+    { id: 's6',  label: 'Vos Sos Malo',           duration: 210, color: '#1a1a2e' },
+    { id: 's7',  label: 'Las Manos de Carolina',  duration: 180, color: '#c4793a' },
+    { id: 's8',  label: 'Detrás del Vidrio',      duration: 120, color: '#708090' },
+    { id: 's9',  label: 'La Cancha',              duration: 120, color: '#228B22' },
+    { id: 's10', label: 'La Puerta',              duration: 90,  color: '#1a1200' },
+  ];
+
+  const TOTAL_DURATION = SCENES.reduce((a, s) => a + s.duration, 0); // 1650s
+
+  // For demo: each scene shown for 7 seconds in the animatic
+  const SLIDE_DURATION = 7000; // ms
+  const TRANSITION_DURATION = 1200; // ms
+
+  // ─────────────────────────────────────────────
+  // STATE
+  // ─────────────────────────────────────────────
+  let currentIdx = 0;
+  let isPlaying = false;
+  let timer = null;
+  let elapsed = 0; // ms elapsed in current scene
+  let globalElapsed = 0; // total ms elapsed
+  let lastTick = null;
+
+  // ─────────────────────────────────────────────
+  // INIT
+  // ─────────────────────────────────────────────
+  function init() {
+    buildTimeline();
+    goTo(0, false);
+  }
+
+  function buildTimeline() {
+    const tl = document.getElementById('tl-scenes');
+    const ticks = document.getElementById('ticks');
+
+    SCENES.forEach((s, i) => {
+      // Label
+      const el = document.createElement('div');
+      el.className = 'tl-scene';
+      el.id = 'tl-' + i;
+      el.textContent = s.label;
+      el.onclick = () => { goTo(i); if (!isPlaying) startPlaying(); };
+      tl.appendChild(el);
+
+      // Tick mark
+      const pct = SCENES.slice(0, i).reduce((a, x) => a + x.duration, 0) / TOTAL_DURATION * 100;
+      if (i > 0) {
+        const tick = document.createElement('div');
+        tick.className = 'tick';
+        tick.style.left = pct + '%';
+        ticks.appendChild(tick);
+      }
+    });
+  }
+
+  // ─────────────────────────────────────────────
+  // NAVIGATION
+  // ─────────────────────────────────────────────
+  function goTo(idx, animate = true) {
+    const slides = document.querySelectorAll('.scene-slide');
+
+    // Exit current
+    if (animate && slides[currentIdx]) {
+      slides[currentIdx].classList.add('exiting');
+      slides[currentIdx].classList.remove('active');
+      setTimeout(() => slides[currentIdx]?.classList.remove('exiting'), TRANSITION_DURATION + 100);
+    } else if (slides[currentIdx]) {
+      slides[currentIdx].classList.remove('active', 'exiting');
+    }
+
+    currentIdx = Math.max(0, Math.min(idx, SCENES.length - 1));
+    elapsed = 0;
+
+    // Activate new
+    const slide = slides[currentIdx];
+    if (slide) {
+      slide.classList.add('active');
+      // Reset Ken Burns
+      const img = slide.querySelector('img');
+      if (img) {
+        img.style.animation = 'none';
+        void img.offsetHeight;
+        img.style.animation = '';
+        img.style.setProperty('--dur', SLIDE_DURATION + 'ms');
+      }
+    }
+
+    updateUI();
+  }
+
+  function nextScene() {
+    if (currentIdx < SCENES.length - 1) {
+      goTo(currentIdx + 1);
+    } else {
+      pausePlaying();
+    }
+  }
+
+  function prevScene() {
+    goTo(currentIdx - 1);
+  }
+
+  // ─────────────────────────────────────────────
+  // PLAYBACK
+  // ─────────────────────────────────────────────
+  function startPlaying() {
+    if (isPlaying) return;
+    isPlaying = true;
+    lastTick = performance.now();
+    document.getElementById('btn-play').textContent = '⏸';
+    tick();
+  }
+
+  function pausePlaying() {
+    isPlaying = false;
+    if (timer) { cancelAnimationFrame(timer); timer = null; }
+    document.getElementById('btn-play').textContent = '▶';
+  }
+
+  function togglePlay() {
+    if (isPlaying) pausePlaying();
+    else startPlaying();
+  }
+
+  function tick() {
+    if (!isPlaying) return;
+    const now = performance.now();
+    const delta = now - lastTick;
+    lastTick = now;
+    elapsed += delta;
+
+    // Update global elapsed (proportional)
+    const sceneOffset = SCENES.slice(0, currentIdx).reduce((a, s) => a + s.duration, 0);
+    const scenePct = Math.min(elapsed / SLIDE_DURATION, 1);
+    globalElapsed = (sceneOffset + scenePct * SCENES[currentIdx].duration) / TOTAL_DURATION;
+
+    updateProgress();
+
+    if (elapsed >= SLIDE_DURATION) {
+      if (currentIdx < SCENES.length - 1) {
+        goTo(currentIdx + 1);
+      } else {
+        pausePlaying();
+        return;
+      }
+    }
+
+    timer = requestAnimationFrame(tick);
+  }
+
+  function seekTimeline(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    const targetTime = pct * TOTAL_DURATION;
+    let acc = 0;
+    for (let i = 0; i < SCENES.length; i++) {
+      acc += SCENES[i].duration;
+      if (acc / TOTAL_DURATION >= pct) {
+        goTo(i);
+        break;
+      }
+    }
+    if (!isPlaying) startPlaying();
+  }
+
+  // ─────────────────────────────────────────────
+  // UI UPDATES
+  // ─────────────────────────────────────────────
+  function updateUI() {
+    // Counter
+    document.getElementById('scene-counter').textContent = `${currentIdx + 1} / ${SCENES.length}`;
+
+    // Timeline scene labels
+    document.querySelectorAll('.tl-scene').forEach((el, i) => {
+      el.classList.toggle('active-scene', i === currentIdx);
+    });
+
+    // Scroll timeline to active
+    const activeTl = document.getElementById('tl-' + currentIdx);
+    if (activeTl) activeTl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const sceneOffset = SCENES.slice(0, currentIdx).reduce((a, s) => a + s.duration, 0);
+    const scenePct = Math.min(elapsed / SLIDE_DURATION, 1);
+    const global = (sceneOffset + scenePct * SCENES[currentIdx].duration) / TOTAL_DURATION;
+    document.getElementById('progress-bar').style.width = (global * 100) + '%';
+  }
+
+  // ─────────────────────────────────────────────
+  // INTRO & START
+  // ─────────────────────────────────────────────
+  function startFlow() {
+    const intro = document.getElementById('intro');
+    intro.classList.add('fade-out');
+    setTimeout(() => { intro.style.display = 'none'; }, 1200);
+
+    setTimeout(() => {
+      goTo(0);
+      startPlaying();
+      showKbdHint();
+    }, 600);
+  }
+
+  function showKbdHint() {
+    const hint = document.getElementById('kbd-hint');
+    hint.classList.add('show');
+    setTimeout(() => hint.classList.remove('show'), 4000);
+  }
+
+  // ─────────────────────────────────────────────
+  // FULLSCREEN
+  // ─────────────────────────────────────────────
+  function toggleFS() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  // ─────────────────────────────────────────────
+  // KEYBOARD
+  // ─────────────────────────────────────────────
+  document.addEventListener('keydown', e => {
+    switch(e.key) {
+      case 'ArrowRight': nextScene(); break;
+      case 'ArrowLeft':  prevScene(); break;
+      case ' ':          e.preventDefault(); togglePlay(); break;
+      case 'f':
+      case 'F':          toggleFS(); break;
+    }
+  });
+
+  // ─────────────────────────────────────────────
+  // TOUCH SWIPE
+  // ─────────────────────────────────────────────
+  let touchStartX = null;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 60) {
+      if (dx < 0) nextScene();
+      else prevScene();
+    }
+    touchStartX = null;
+  });
+
+  // ─────────────────────────────────────────────
+  // START
+  // ─────────────────────────────────────────────
+  init();
+</script>
+</body>
+</html>

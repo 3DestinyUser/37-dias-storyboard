@@ -59,6 +59,13 @@ nav{padding:26px 60px;display:flex;align-items:center;justify-content:space-betw
 .cmeta{font-size:10px;color:rgba(255,255,255,0.22);letter-spacing:0.07em;text-transform:uppercase}
 .ccta{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:6px;transition:gap 0.2s}
 .card:hover .ccta{gap:10px}
+.cv-real{background:linear-gradient(135deg,#0a0d08,#1a2a14,#0d1a0a);position:relative}
+.cv-real::after{content:"📸";font-size:80px;position:absolute;bottom:-5px;right:20px;opacity:0.12}
+.card-real{border-color:rgba(200,169,110,0.15)}
+.card-real:hover{border-color:rgba(200,169,110,0.4);box-shadow:0 20px 50px rgba(200,169,110,0.1)}
+.card-real .ctype{color:#c8a96e}
+.card-real .ccta{color:#c8a96e}
+.badge-new{position:absolute;top:12px;right:12px;background:rgba(200,169,110,0.9);color:#000;font-size:9px;font-weight:700;letter-spacing:0.12em;padding:3px 10px;border-radius:100px;text-transform:uppercase;z-index:2}
 footer{padding:36px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between}
 .fl{font-size:12px;color:rgba(255,255,255,0.22)}.fr{font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase}
 </style>
@@ -91,7 +98,7 @@ footer{padding:36px 60px;border-top:1px solid rgba(255,255,255,0.05);display:fle
 </div>
 <div class="highlights">
   <div class="hb"><div class="hn">37</div><div class="hl">Dias en NICU que cambiaron todo</div></div>
-  <div class="hb"><div class="hn">11</div><div class="hl">Escenas del animatic</div></div>
+  <div class="hb"><div class="hn">18</div><div class="hl">Planos de produccion real</div></div>
   <div class="hb"><div class="hn">PID</div><div class="hl">Inmunodeficiencia primaria</div></div>
   <div class="hb"><div class="hn">27 min</div><div class="hl">Experiencia VR inmersiva</div></div>
   <div class="hb"><div class="hn">4D</div><div class="hl">Audio espacial · Haptica</div></div>
@@ -101,6 +108,15 @@ footer{padding:36px 60px;border-top:1px solid rgba(255,255,255,0.05);display:fle
   <p class="sl">Materiales de Produccion</p>
   <div class="sd"></div>
   <div class="grid-2">
+    <a class="card card-hero card-real" href="/bauty-storyboard">
+      <div class="cv cv-real"><span class="badge-new">Nuevo · Fotos reales</span></div>
+      <div class="cb">
+        <p class="ctype">📸 Storyboard de Produccion</p>
+        <h2 class="ctitle">BAUTY — 18 Planos con Fotografía Real</h2>
+        <p class="cdesc">Storyboard de produccion con 18 fotografias reales de Bautista organizadas en 3 actos: La Vida Antes (River, futbol, alegria), La Clinica (internacion, cateter, soledad) y El Presente (recuperacion, la mirada a camara).</p>
+        <div class="cfoot"><span class="cmeta">18 planos · 3 actos · Material real</span><span class="ccta">Ver Storyboard →</span></div>
+      </div>
+    </a>
     <a class="card card-hero" href="/flow">
       <div class="cv cv-flow"><div class="pls-card"></div></div>
       <div class="cb">
@@ -114,9 +130,9 @@ footer{padding:36px 60px;border-top:1px solid rgba(255,255,255,0.05);display:fle
       <div class="cv cv-sb"></div>
       <div class="cb">
         <p class="ctype">Visual</p>
-        <h2 class="ctitle">Storyboard · 11 Escenas</h2>
-        <p class="cdesc">Storyboard visual completo con las 11 escenas e imagenes generadas. Referencia visual para equipo creativo y tecnico.</p>
-        <div class="cfoot"><span class="cmeta">11 escenas · Imagenes</span><span class="ccta">Ver →</span></div>
+        <h2 class="ctitle">Storyboard Ilustrado · 11 Escenas</h2>
+        <p class="cdesc">Storyboard visual con las 11 escenas e imagenes generadas por IA. Referencia visual para equipo creativo y tecnico.</p>
+        <div class="cfoot"><span class="cmeta">11 escenas · Ilustraciones IA</span><span class="ccta">Ver →</span></div>
       </div>
     </a>
     <a class="card" href="/pitch-deck">

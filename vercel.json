@@ -36,6 +36,8 @@
 
     { "source": "/email-simulacion/ThyroSense",   "destination": "/email-simulacion/ThyroSense/index.html" },
     { "source": "/email-simulacion/liminasense",   "destination": "/email-simulacion/liminasense/index.html" },
-    { "source": "/email-simulacion/igneasense",    "destination": "/email-simulacion/igneasense/index.html" }
+    { "source": "/email-simulacion/igneasense",    "destination": "/email-simulacion/igneasense/index.html" },
+
+    { "source": "/bauty-storyboard",              "destination": "/bauty-storyboard.html" }
   ]
 }

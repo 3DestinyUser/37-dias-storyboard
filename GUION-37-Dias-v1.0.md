@@ -1,4 +1,4 @@
-# 37 DÍAS
+    # 37 DÍAS
 ## Guión Completo de Narración — Versión 1.0 para Estudio de Grabación
 ### Experiencia VR Inmersiva · InnovaSalud · Meta Quest 3
 

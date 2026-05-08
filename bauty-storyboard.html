@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAUTY — Storyboard de Producción · 37 Días</title>
+<meta name="description" content="Storyboard visual con fotografías reales de producción — La Vida de Bauty · 37 Días · InnovaSalud">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060810;--surface:#0d1117;--border:rgba(255,255,255,0.06);--text:#e8e8f0;--muted:#6b7280;--accent:#4a90c4;--warm:#c87a3a;--gold:#c8a96e;--red:#c41e3a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
+
+/* HEADER */
+header{text-align:center;padding:80px 40px 60px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#0a0d1a 0%,var(--bg) 100%);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(74,144,196,0.07) 0%,transparent 70%);pointer-events:none}
+.nav-back{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;margin-bottom:32px;letter-spacing:0.08em;transition:color 0.2s}
+.nav-back:hover{color:rgba(255,255,255,0.7)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,96px);font-weight:700;letter-spacing:-0.02em;color:#fff;line-height:1;margin-bottom:16px}
+.subtitle{font-size:16px;color:var(--muted);max-width:620px;margin:0 auto 12px}
+.badge-real{display:inline-block;margin-top:16px;padding:6px 18px;border-radius:100px;border:1px solid rgba(200,169,110,0.35);background:rgba(200,169,110,0.08);font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold)}
+.meta-pills{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.pill{background:rgba(255,255,255,0.04);border:1px solid var(--border);padding:6px 16px;border-radius:100px;font-size:12px;color:var(--muted);letter-spacing:0.05em}
+
+/* ACT SECTION */
+.act{padding:60px 40px 20px;max-width:1200px;margin:0 auto}
+.act-header{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+.act-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--accent);line-height:1;opacity:0.4}
+.act-info h2{font-family:'Playfair Display',serif;font-size:28px;color:#fff;margin-bottom:4px}
+.act-info p{font-size:13px;color:var(--muted);letter-spacing:0.04em}
+.act-divider{height:1px;background:linear-gradient(90deg,rgba(74,144,196,0.25),transparent);margin-bottom:40px}
+
+/* PANEL GRID */
+.panels{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;padding:0 40px 80px;max-width:1200px;margin:0 auto}
+.panel{border-radius:14px;overflow:hidden;background:rgba(255,255,255,0.02);border:1px solid var(--border);transition:all 0.35s ease;cursor:default}
+.panel:hover{border-color:rgba(74,144,196,0.3);transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,0.5)}
+.panel-img{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0a0a14}
+.panel-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)}
+.panel:hover .panel-img img{transform:scale(1.04)}
+.panel-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.5) 0%,transparent 50%);pointer-events:none}
+.panel-badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);padding:4px 12px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--accent);z-index:2;text-transform:uppercase}
+.panel-body{padding:16px 18px 18px}
+.panel-title{font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:6px;line-height:1.25}
+.panel-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.panel-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{padding:3px 10px;border-radius:6px;font-size:10px;font-weight:500;border:1px solid var(--border);color:var(--muted)}
+.tag-pov{background:rgba(74,144,196,0.08);border-color:rgba(74,144,196,0.25);color:var(--accent)}
+.tag-emotion{background:rgba(200,122,58,0.08);border-color:rgba(200,122,58,0.25);color:var(--warm)}
+
+/* FULL WIDTH PANEL */
+.panel-full{grid-column:1/-1}
+.panel-full .panel-img{aspect-ratio:21/9}
+
+/* QUOTE CARD */
+.quote-card{grid-column:1/-1;padding:48px 40px;text-align:center;border-radius:14px;background:rgba(74,144,196,0.03);border:1px solid rgba(74,144,196,0.12)}
+.quote-card blockquote{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,36px);font-style:italic;color:rgba(255,255,255,0.7);line-height:1.4;max-width:700px;margin:0 auto 16px}
+.quote-card cite{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);font-style:normal}
+
+/* FINAL CARD */
+.final-section{padding:80px 40px;text-align:center;max-width:900px;margin:0 auto}
+.final-title{font-family:'Playfair Display',serif;font-size:clamp(64px,10vw,120px);font-weight:700;color:#fff;letter-spacing:0.02em;margin-bottom:8px;text-shadow:0 4px 40px rgba(74,144,196,0.15)}
+.final-line{width:120px;height:3px;background:var(--red);margin:0 auto 32px;border-radius:2px}
+.final-quote{font-family:'Playfair Display',serif;font-size:clamp(18px,2.5vw,28px);font-style:italic;color:rgba(255,255,255,0.6);line-height:1.5;max-width:600px;margin:0 auto}
+
+/* FOOTER */
+footer{text-align:center;padding:48px 40px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;letter-spacing:0.08em}
+footer span{color:var(--accent)}
+
+@media(max-width:900px){
+  header{padding:50px 24px 40px}
+  .panels{padding:0 24px 60px;grid-template-columns:1fr}
+  .act{padding:40px 24px 16px}
+  .panel-full .panel-img{aspect-ratio:16/9}
+  .final-section{padding:60px 24px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="nav-back" href="/37dias">← 37 Días Hub</a>
+  <p class="eyebrow">InnovaSalud · Takeda / IPOPI-LASID · 2026</p>
+  <h1>BAUTY</h1>
+  <p class="subtitle">Storyboard de Producción — 18 planos con fotografías reales</p>
+  <span class="badge-real">📸 Material Real de Producción</span>
+  <div class="meta-pills">
+    <span class="pill">18 planos</span>
+    <span class="pill">3 actos + cierre</span>
+    <span class="pill">Fotografía real</span>
+    <span class="pill">Buenos Aires, Argentina</span>
+  </div>
+</header>
+
+<!-- ═══════════ ACTO I ═══════════ -->
+<div class="act">
+  <div class="act-header">
+    <span class="act-num">I</span>
+    <div class="act-info">
+      <h2>La Vida Antes</h2>
+      <p>Bauty chico — River, fútbol, dibujos, la calle · Planos 1–4</p>
+    </div>
+  </div>
+  <div class="act-divider"></div>
+</div>
+
+<div class="panels">
+  <div class="panel panel-full">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 1</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_01.png" alt="Bauty chico sonriendo con la capa" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Bauty chico sonriendo con la capa</h3>
+      <p class="panel-desc">Primer plano. La sonrisa de Bautista antes de que la enfermedad definiera su historia. Capa de superhéroe, remera de Avengers — un chico que todavía cree que es invencible.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Primer plano</span>
+        <span class="tag tag-emotion">Alegría · Inocencia</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 2</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_02.png" alt="Dibujando escudos de River" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Dibujando escudos de River</h3>
+      <p class="panel-desc">Plano medio cenital. Las manos de Bauty dibujando el escudo de River Plate — su pasión, su identidad, lo que nunca le pudieron sacar.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Cenital</span>
+        <span class="tag tag-emotion">Concentración</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 3</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_03.png" alt="Detalle camiseta de River" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Camiseta de River / Selección</h3>
+      <p class="panel-desc">Plano detalle. La camiseta como símbolo de normalidad — lo que cualquier chico argentino tiene. Lo que Bauty nunca dejó de ser.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Detalle</span>
+        <span class="tag tag-emotion">Identidad</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 4</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_04.png" alt="Jugando con pelota en la calle" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Jugando en la calle</h3>
+      <p class="panel-desc">Plano abierto. Bauty con la camiseta de River dominando la pelota en la vereda. La vida normal de un chico argentino. La vida que casi no fue.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Plano abierto</span>
+        <span class="tag tag-emotion">Libertad · Juego</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-card">
+    <blockquote>"El primer grito fue suficiente para saber que estaba vivo. No fue suficiente para saber que iba a seguir estando."</blockquote>
+    <cite>Juanma — [REAL]</cite>
+  </div>
+</div>
+
+<!-- ═══════════ ACTO II ═══════════ -->
+<div class="act">
+  <div class="act-header">
+    <span class="act-num">II</span>
+    <div class="act-info">
+      <h2>La Clínica</h2>
+      <p>Internación, catéter, techo hospitalario, soledad · Planos 5–10</p>
+    </div>
+  </div>
+  <div class="act-divider"></div>
+</div>
+
+<div class="panels">
+  <div class="panel panel-full">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 5</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_05.png" alt="Habitación de clínica vacía" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Habitación de clínica</h3>
+      <p class="panel-desc">Plano general. La cama vacía que espera. La habitación de hospital que Bauty conocía mejor que su propia pieza. Cada dos meses, el mismo lugar.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Plano general</span>
+        <span class="tag tag-emotion">Anticipación · Miedo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 6</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_06.png" alt="Detalle de vía o catéter" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Vía / Catéter</h3>
+      <p class="panel-desc">Plano detalle. La vía intravenosa — 10 a 14 horas de infusión. Las venas que reventaban. "Eso fue de lo peor que nos pasó después del temor a la muerte."</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Detalle</span>
+        <span class="tag tag-emotion">Dolor · IVIG</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 7</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_07.png" alt="Bauty acostado mirando hacia arriba" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Mirando hacia arriba</h3>
+      <p class="panel-desc">Plano medio. Bauty acostado en la cama de hospital, mirando al techo. La mirada de un chico que sabe que tiene que esperar. Camiseta celeste, no la de River.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Plano medio</span>
+        <span class="tag tag-emotion">Resignación · Espera</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 8</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_08.png" alt="Techo y luz hospitalaria" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Techo / Luz hospitalaria</h3>
+      <p class="panel-desc">Plano subjetivo. Lo que Bauty ve acostado durante 14 horas. El techo fluorescente, el soporte de suero. El POV de la inmovilización.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">POV subjetivo</span>
+        <span class="tag tag-emotion">Indefensión</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 9</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_09.png" alt="Bauty usando tablet en la cama" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Tablet en la cama</h3>
+      <p class="panel-desc">Plano medio. Bauty con la tablet — el escape digital durante las internaciones. La normalidad improvisada dentro del hospital.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Plano medio</span>
+        <span class="tag tag-emotion">Adaptación</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 10</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_10.png" alt="Bandeja con comida y notebook" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Bandeja con comida + notebook</h3>
+      <p class="panel-desc">Plano cenital. La vida hospitalaria condensada: la bandeja de comida institucional al lado de la notebook. Los días que se acumulan sin que nadie te diga cuándo te vas.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Cenital</span>
+        <span class="tag tag-emotion">Rutina · Aislamiento</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-card">
+    <blockquote>"Vos sos malo."</blockquote>
+    <cite>Bautista, 4 años — a su papá durante el IVIG · [REAL]</cite>
+  </div>
+</div>
+
+<!-- ═══════════ ACTO III ═══════════ -->
+<div class="act">
+  <div class="act-header">
+    <span class="act-num">III</span>
+    <div class="act-info">
+      <h2>El Presente</h2>
+      <p>Recuperación, concentración, fútbol, la mirada a cámara · Planos 11–16</p>
+    </div>
+  </div>
+  <div class="act-divider"></div>
+</div>
+
+<div class="panels">
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 11</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_11.png" alt="Rostro concentrado" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Rostro concentrado</h3>
+      <p class="panel-desc">Primer plano. La cara de Bauty actual — concentrado, presente. Ya no mira al techo de un hospital. Mira hacia adelante.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Primer plano</span>
+        <span class="tag tag-emotion">Determinación</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 12</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_12.png" alt="Mano dibujando" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Mano dibujando</h3>
+      <p class="panel-desc">Plano detalle. La mano que antes tenía vías intravenosas ahora dibuja. La misma mano, otro contexto. La creatividad como resistencia.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Detalle</span>
+        <span class="tag tag-emotion">Creación · Resiliencia</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 13</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_13.png" alt="Bauty mirando fútbol" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Mirando fútbol</h3>
+      <p class="panel-desc">Plano medio. Bauty mirando un partido de fútbol en la tele. Lo que no pudo hacer durante años de internaciones. La normalidad reconquistada.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Plano medio</span>
+        <span class="tag tag-emotion">Normalidad</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-full">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 14 · Clave del corto</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_14.png" alt="Bauty actual mirando a cámara" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Bauty actual mirando a cámara</h3>
+      <p class="panel-desc">Primer plano — EL plano clave del corto. Bauty mira directamente a la cámara. Ya no es el nene que miraba al techo del hospital. Es el adolescente que sobrevivió. La mirada que dice: "Estoy acá."</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Primer plano · Clave</span>
+        <span class="tag tag-emotion">Presencia · Fuerza</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 15</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_15.png" alt="Mano sobre la camiseta de River" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Mano sobre la camiseta</h3>
+      <p class="panel-desc">Plano detalle. La mano de Bauty sobre el escudo de River. La identidad que lo atravesó todo — hospital, pandemia, IVIG. River siempre estuvo.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Detalle</span>
+        <span class="tag tag-emotion">Identidad · Pertenencia</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-img">
+      <span class="panel-badge">Plano 16</span>
+      <img src="bauty_escenas_panels_con_texto/bauty_escena_16.png" alt="Sentado tranquilo y presente" loading="lazy">
+    </div>
+    <div class="panel-body">
+      <h3 class="panel-title">Sentado, tranquilo, presente</h3>
+      <p class="panel-desc">Plano medio. Bauty sentado en su casa con la camiseta de River. Tranquilo. Presente. Sin máquinas, sin sueros, sin techo de hospital. Solo un chico en su casa.</p>
+      <div class="panel-tags">
+        <span class="tag tag-pov">Plano medio</span>
+        <span class="tag tag-emotion">Paz · Presente</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-card">
+    <blockquote>"No tengo palabras para describir cómo nos cambió a todos la vida. Las torturas se terminaron."</blockquote>
+    <cite>Juanma — [REAL]</cite>
+  </div>
+</div>
+
+<!-- ═══════════ CIERRE ═══════════ -->
+<div class="final-section">
+  <h2 class="final-title">BAUTY</h2>
+  <div class="final-line"></div>
+  <p class="final-quote">"No se trata de cuántas veces te caés... sino de cuántas veces elegís seguir jugando."</p>
+</div>
+
+<footer>
+  <p><span>37 DÍAS</span> · La Vida de Bauty · Storyboard de Producción · InnovaSalud · Buenos Aires · 2026</p>
+  <p style="margin-top:8px">Takeda · IPOPI-LASID · Fotografía real de producción · 18 planos</p>
+</footer>
+
+</body>
+</html>
